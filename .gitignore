@@ -1,0 +1,6 @@
+*.o
+.DS_Store
+asm
+corewar
+test*
+libft.a
