@@ -1,6 +1,6 @@
 # Corewar
 
-Subject in [french](http://https://cdn.intra.42.fr/pdf/pdf/30/corewar.fr.pdf) or in [english](https://cdn.intra.42.fr/pdf/pdf/963/corewar.en.pdf)
+Subject in [french](https://cdn.intra.42.fr/pdf/pdf/30/corewar.fr.pdf) or in [english](https://cdn.intra.42.fr/pdf/pdf/963/corewar.en.pdf)
 
 ##### TL;DR
 Corewar is a ~~nerdish~~ game where two players confront themselves in a virtual arena.
