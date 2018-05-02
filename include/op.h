@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/04/30 20:02:26 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/02 13:04:50 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
 
-# define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
+# define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789"
 
 # define NAME_CMD_STRING		".name"
 # define COMMENT_CMD_STRING		".comment"
@@ -48,6 +48,9 @@
 # define CYCLE_DELTA			50
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
+
+# define INSTRUCTION_SIZE		256
+# define DESC_SIZE				1024
 
 /*
 ** Type of arguments
@@ -78,12 +81,12 @@ typedef struct					s_header
 
 typedef struct					s_op
 {
-	char						*name;
+	char						name[INSTRUCTION_SIZE];
 	int							nb_param;
-	t_arg_type					arg_type[3];
+	t_arg_type					arg_type[MAX_ARGS_NUMBER];
 	char						op_code;
 	int							cycle_cost;
-	char						*desc;
+	char						desc[DESC_SIZE];
 	int							coding_byte;
 	int							index;
 }								t_op;
