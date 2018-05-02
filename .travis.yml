@@ -1,0 +1,32 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    .travis.yml                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ctrouill <clement@trosa.io>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/12/17 17:35:10 by ctrouill          #+#    #+#              #
+#    Updated: 2018/05/02 11:01:15 by ctrouill         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+os: osx
+script: make
+notifications:
+  email:
+    recipients:
+      - ctrouill@student.42.fr
+    on_success: never # default: change
+    on_failure: always # default: always
+  slack:
+    on_success: always
+  irc:
+    template:
+      - "%{repository_slug}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+      - "Change view : %{compare_url}"
+      - "Build details : %{build_url}"
+    channels:
+      - "irc.freenode.net#42born2code"
+    on_success: never # default: always
+    on_failure: always # default: always
+    use_notice: true

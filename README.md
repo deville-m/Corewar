@@ -1,4 +1,10 @@
-# Corewar
+<p align="center">
+  <img src="https://github.com/iomonad/corewar/raw/master/resources/.github/banner.gif"/><br>
+<br>
+<br>
+</p>
+
+# Corewar [![HitCount](http://hits.dwyl.io/iomonad/corewar.svg)](http://hits.dwyl.io/iomonad/corewar) [![Build Status](https://travis-ci.org/iomonad/corewar.svg?branch=master)](https://travis-ci.org/iomonad/corewar)
 
 Subject in [french](https://cdn.intra.42.fr/pdf/pdf/30/corewar.fr.pdf) or in [english](https://cdn.intra.42.fr/pdf/pdf/963/corewar.en.pdf)
 
@@ -6,10 +12,6 @@ Subject in [french](https://cdn.intra.42.fr/pdf/pdf/30/corewar.fr.pdf) or in [en
 Corewar is a ~~nerdish~~ game where two players confront themselves in a virtual arena.
 The players are programs written in assembly with a specific set of instructions.
 You have to create an assembler, a virtual machine, and a player according to the rules of Corewar.
-
-
-
-
 
 ## ASM
 
