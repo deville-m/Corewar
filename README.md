@@ -7,10 +7,6 @@ Corewar is a ~~nerdish~~ game where two players confront themselves in a virtual
 The players are programs written in assembly with a specific set of instructions.
 You have to create an assembler, a virtual machine, and a player according to the rules of Corewar.
 
-
-
-
-
 ## ASM
 
 The assembler has to:
