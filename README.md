@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://github.com/iomonad/corewar/raw/master/resources/.github/banner.gif"/><br>
+  <img src="https://github.com/deville-m/corewar/raw/master/resources/.github/banner.gif"/><br>
 <br>
 <br>
 </p>
 
-# Corewar [![HitCount](http://hits.dwyl.io/iomonad/corewar.svg)](http://hits.dwyl.io/iomonad/corewar) [![Build Status](https://travis-ci.org/iomonad/corewar.svg?branch=master)](https://travis-ci.org/iomonad/corewar)
+# Corewar [![HitCount](http://hits.dwyl.io/deville-m/corewar.svg)](http://hits.dwyl.io/deville-m/corewar) [![Build Status](https://travis-ci.org/deville-m/corewar.svg?branch=master)](https://travis-ci.org/deville-m/corewar)
 
 Subject in [french](https://cdn.intra.42.fr/pdf/pdf/30/corewar.fr.pdf) or in [english](https://cdn.intra.42.fr/pdf/pdf/963/corewar.en.pdf)
 
