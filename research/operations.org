@@ -1,3 +1,20 @@
-|---------------------|
-| Tableau ASM CoreWar |
-|---------------------|
+|--------+-------+-----------------------------------------------------+----------+------+----------------------------------+-------+-------+--------+----------|
+| Opcode | Name  | Arguments                                           |   Binary |  Hex | Description                      | Carry | Octal | Cycles | DIR Size |
+|--------+-------+-----------------------------------------------------+----------+------+----------------------------------+-------+-------+--------+----------|
+|      1 | live  | T_DIR                                               | 00000001 | 0x01 | alive                            | Non   |     0 |     10 |        4 |
+|      2 | ld    | T_DIR - T_IND, T_REG                                | 00000010 | 0x02 | load                             | Oui   |     1 |      5 |        4 |
+|      3 | st    | T_REG, T_IND - T_REG                                | 00000011 | 0x03 | store                            | Non   |     1 |      5 |        - |
+|      4 | add   | T_REG, T_REG, T_REG                                 | 00000100 | 0x04 | addition                         | Oui   |     1 |     10 |          |
+|      5 | sub   | T_REG, T_REG, T_REG                                 | 00000101 | 0x05 | substraction                     | Oui   |     1 |     10 |        - |
+|      6 | and   | T_REG - T_DIR - T_IND, T_REG - T_IND - T_DIR, T_REG | 00000110 | 0x06 | and   r1, r2, r3   r1 & r2 -> r3 | Oui   |     1 |      6 |        4 |
+|      7 | or    | T_REG - T_IND - T_DIR, T_REG - T_IND - T_DIR, T_REG | 00000111 | 0x07 | or   r1, r2, r3   r1 - r2 -> r3  | Oui   |     1 |      6 |        4 |
+|      8 | xor   | T_REG - T_IND - T_DIR, T_REG - T_IND - T_DIR, T_REG | 00001000 | 0x08 | xor  r1, r2, r3   r1 ^ r2 -> r3  | Oui   |     1 |      6 |        4 |
+|      9 | zjmp  | T_DIR                                               | 00001001 | 0x09 | jump if carry == 1               | Non   |     0 |     20 |        2 |
+|     10 | ldi   | T_REG - T_DIR - T_IND, T_DIR - T_REG, T_REG         | 00001010 | 0x0A | load index                       | Non   |     1 |     25 |        2 |
+|     11 | sti   | T_REG, T_REG - T_DIR - T_IND, T_DIR - T_REG         | 00001011 | 0x0B | store index                      | Non   |     1 |     25 |        2 |
+|     12 | fork  | T_DIR                                               | 00001100 | 0x0C | fork                             | Non   |     0 |    800 |        2 |
+|     13 | lld   | T_DIR - T_IND, T_REG                                | 00001101 | 0x0D | long load                        | Oui   |     1 |     10 |        4 |
+|     14 | lldi  | T_REG - T_DIR - T_IND, T_DIR - T_REG, T_REG         | 00001110 | 0x0E | long load index                  | Oui   |     1 |     50 |        2 |
+|     15 | lfork | T_DIR                                               | 00001111 | 0x0F | long fork                        | Non   |     0 |   1000 |        2 |
+|     16 | aff   | T_REG                                               | 00010000 | 0x10 | aff                              | Non   |     1 |      2 |        - |
+|--------+-------+-----------------------------------------------------+----------+------+----------------------------------+-------+-------+--------+----------|
