@@ -1,0 +1,10 @@
+#+AUTHOR: ButterBot
+#+TITLE: Encoding parameters
+
+|--------+----------------+-------------------------------------------------------|
+| Binary | Parameter type | Comment                                               |
+|--------+----------------+-------------------------------------------------------|
+| 01     | Register       | followed by a byte (the register number)              |
+| 10     | Direct         | followed by DIR_BYTE bytes (the direct value)         |
+| 11     | Indirect       | followed by IND_SIZE bytes (the value of indirection) |
+|--------+----------------+-------------------------------------------------------|
