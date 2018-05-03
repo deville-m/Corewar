@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 19:32:25 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/03 19:44:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/03 19:46:48 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ inline void swap_endian(void *data, size_t size)
 		return ;
 	tmp = (char *)data;
 	i = 0;
+	--size;
 	while (i < size)
 	{
 		tmpdata = tmp[i];
