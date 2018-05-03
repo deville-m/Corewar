@@ -1,0 +1,16 @@
+#+AUTHOR: Clement
+#+TITLE: Memo radare2 
+
+|--------------+-------------------------------------------------------------------------------------------------------------------------|
+| Keybinding   | Description de la commande                                                                                              |
+|              |                                                                                                                         |
+|--------------+-------------------------------------------------------------------------------------------------------------------------|
+| -            | Ouvre l'editeur pointe par $EDITOR, puis laisse l'utilisateur entrer une liste de commande a executer (ligne par ligne) |
+| iI           | Donne des informations sur le binaire                                                                                   |
+| ii           | Liste les imports                                                                                                       |
+| V            | Entre en mode analyse visuel (comme le hexl-mode)                                                                       |
+| iM           | Recupere l'adresse du main                                                                                              |
+| xx           | Affiche le dump de l'adresse                                                                                            |
+| pdf@<adress> | Disassemble a l'adresse                                                                                                 |
+| fs           | Manage les flags                                                                                                        |
+|--------------+-------------------------------------------------------------------------------------------------------------------------|

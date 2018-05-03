@@ -1,8 +1,0 @@
-instruction code, description of the types of the parameters, parameters
-
-zjmp
-ldi
-sti
-fork
-lldi
-lfork

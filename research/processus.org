@@ -1,0 +1,10 @@
+#+AUTHOR: Clement
+#+TITLE: Table de processus
+
+|-----------+-----+------------------------------------------------------|
+| Name      | Qty | Description                                          |
+|-----------+-----+------------------------------------------------------|
+| Carry     |   1 | Use by some operations                               |
+| PC        |   1 | adresse de la tete de lecture                        |
+| Registres |  16 | 1 à REG_NUMBER registres qui sont des tableaux d'int |
+|-----------+-----+------------------------------------------------------|

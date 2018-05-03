@@ -1,0 +1,13 @@
+#+AUTHOR: Clement
+#+TITLE: Tableau des instructions
+
+|------------------+----------------------------------+------------|
+| Instruction Code | Description of the Typeof Params | Parameters |
+|------------------+----------------------------------+------------|
+| zjmp             |                                  |            |
+| ldi              |                                  |            |
+| sti              |                                  |            |
+| fork             |                                  |            |
+| lldi             |                                  |            |
+| lfork            |                                  |            |
+|------------------+----------------------------------+------------|
