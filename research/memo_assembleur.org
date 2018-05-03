@@ -1,0 +1,62 @@
+#+AUTHOR: Clement
+#+TITLE: Memo Assembleur
+
+* The data Section
+** An assembly program can be divided into three sections
+   * The *data* section
+	- Used for declaring initialized data or constants.
+    - This data does not change at runtime.
+   * The *bss* section
+	- The bss section is used for declaring variables.
+   * The *text* section
+	- The text section is used for keeping the actual code.
+	- This section must begin with the declaration global *_start*
+	- *_start* tells the kernel where the program execution begins.
+
+* Assembly Language Statements
+** Assembly language programs consist of three types of statements
+   - Executable instructions or instructions
+   - Assembler directives or pseudo-ops, and macros
+** Syntax of Assembly Language Statements
+ ~[label]  mnemonic  [operands]  [;comment]~
+* Registers
+Reading data from and storing data into memory *slows* down the processor.
+To speed up the processor operations, the processor includes some internal memory storage locations, called registers.
+The registers store data elements for processing without having to access the memory.
+A limited number of registers are built into the processor chip.
+** Processor Registers
+*** The registers are grouped into three categories
+  - General registers:
+	- Data registers
+    - Pointer registers
+	- Index registers
+  - Control registers
+  - Segment registers
+** 1 - Data Registers
+Four 32-bit data registers are used for arithmetic, logical, and other operations.
+These 32-bit registers can be used in three ways:
+|-----------------+--------------------------------------------------------------------------------+-----------|
+| Complete 32bits | Lower halves of the 32-bit registers can be used as four 16-bit data registers | > 16 -> 8 |
+|-----------------+--------------------------------------------------------------------------------+-----------|
+| EAX             | AX                                                                             | AH        |
+| EBX             | BX                                                                             | AL        |
+| ECX             | CX                                                                             | BH        |
+| EDX             | DX                                                                             | BL        |
+|                 |                                                                                | CH        |
+|                 |                                                                                | CL        |
+|                 |                                                                                | DH        |
+|                 |                                                                                | DL        |
+|-----------------+--------------------------------------------------------------------------------+-----------|
+
+**** AX is the primary accumulator
+  - Used in input/output and most arithmetic instructions.
+**** BX is known as the base register
+  - Used in indexed addressing 
+**** CX is known as the count register
+  - Store the loop count in iterative operations (like ECX)
+**** DX is known as the data register
+  - It is also used in input/output operations
+** 2 - Pointer Registers
+** 3 - Index Registers
+** 4 - Control Registers
+** 5 - Segment Registers
