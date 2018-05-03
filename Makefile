@@ -10,7 +10,8 @@ COREWARDIR=		corewar_src/
 
 COMMONSRC=		
 
-ASMSRC=			
+ASMSRC=			asm.c \
+				stupid_assembler.c
 
 COREWARSRC=		
 
