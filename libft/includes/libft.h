@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 13:16:17 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 13:20:01 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 14:21:10 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "avltree.h"
 # include "conversion.h"
 # include "dlst.h"
-# include "ft_ctype.h"
 # include "ft_getopt.h"
 # include "ft_io.h"
 # include "ft_printf.h"
@@ -26,5 +25,6 @@
 # include "lst.h"
 # include "memory.h"
 # include "path.h"
+# include "ft_ctype.h"
 
 #endif

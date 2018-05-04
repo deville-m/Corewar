@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 13:35:03 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 14:16:59 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 ** @return Success[Char != 0] | Failure[0]
 */
 
-char		is_instruct(const char *line)
+char			is_instruct(const char *line)
 {
-	uint8_t	i;
+	uint8_t		i;
 
 	i = 0;
 	while (i <= REG_NUMBER)
@@ -34,6 +34,29 @@ char		is_instruct(const char *line)
 		i++;
 	}
 	return (0);
+}
+
+/*
+** @desc predicate to check if
+**       the line is strictly
+**       composed of space/tabs
+**       nor empty.
+** @params line to test
+** @return bolean :: t_bool
+*/
+
+t_bool			is_empty(const char *line)
+{
+	uint32_t	i;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (!ft_isspace(line[i]))
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }
 
 /*
@@ -47,12 +70,12 @@ char		is_instruct(const char *line)
 **         | None[0 | status false]
 */
 
-char		is_params_ok(const char opcode,
-						 const char *params,
-						 t_bool *status)
+char			is_params_ok(const char opcode,
+							const char *params,
+							t_bool *status)
 {
-	char	**split;
-	char	ret;
+	char		**split;
+	char		ret;
 
 	if (P_OUTRANGE(opcode))
 		return (!((*status = FALSE) || 1));
