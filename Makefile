@@ -8,6 +8,7 @@
 # -------~-------~--~------------------~------
 ASM=			asm
 COREWAR=		corewar
+LIB=			libft/libft.a
 AARCH:=         $(shell uname -s)
 ifeq ($(AARCH), Linux)
 	CC = gcc
@@ -65,11 +66,14 @@ all: $(ASM) $(COREWAR)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
 	@printf "$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
-$(ASM): $(ASMOBJ)
+$(LIB):
+	$(MAKE) -C libft/
+
+$(ASM): $(ASMOBJ) $(LIB)
 	@echo "\tLinking $@"
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
-$(COREWAR): $(COREWAROBJ)
+$(COREWAR): $(COREWAROBJ) $(LIB)
 	@echo "\tLinking $@"
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
