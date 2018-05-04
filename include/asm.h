@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/03 18:13:50 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/04 13:11:30 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "op.h"
 
+# define P_OUTRANGE(x) (x < 1 || x > REG_NUMBER)
+
 void	stupid_asm(char *in_name);
+
+/*
+** @predicate.c
+*/
+
+char	is_instruct(const char *line);
 
 #endif
