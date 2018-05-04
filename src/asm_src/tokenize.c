@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/04 21:04:15 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/05 01:30:30 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static t_bool	multiline_string(const char *line)
 {
 	t_bool state;
 
+	if (!line)
+		return (FALSE);
 	state = FALSE;
 	while (*line)
 	{
@@ -35,10 +37,23 @@ static t_bool	multiline_string(const char *line)
 	return (state);
 }
 
-static int		parse_line(t_dlist **res, const char *line, int line_nbr)
+static int		parse_line(int fd, t_dlist **res, char *line, int line_nbr)
 {
-	char *tmp;
+	char	**split;
+	char	*concat;
+	char	*tmp;
 
+	concat = line;
+	while (multiline_string(concat) && get_next_line(fd, &line) > 0)
+	{
+		free(concat);
+		free(line);
+		concat = tmp;
+	}
+	free(line);
+	if (!concat || !(split = ft_strsplit_str(concat, WHITESPACE)))
+		exit(42); // allocation error
+	
 }
 
 t_dlist		*tokenize(int fd)
@@ -48,12 +63,14 @@ t_dlist		*tokenize(int fd)
 	char		*tmp;
 	int			line_nbr;
 
+	line = NULL;
 	res = NULL;
 	line_nbr = 1;
 	while (get_next_line(fd, &line) > 0)
 	{
-		line_nbr += parse_line(&res, line, line_nbr);
+		line_nbr += parse_line(fd, &res, line, line_nbr);
 		free(line);
 	}
+	free(line);
 	return (res);
 }
