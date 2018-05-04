@@ -25,7 +25,8 @@ COREWARDIR=		corewar_src/
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			asm.c stupid_assembler.c predicate.c
+ASMSRC=			asm.c \
+				stupid_assembler.c
 
 COREWARSRC=		main.c
 
@@ -59,7 +60,7 @@ WARN_C   := \x1b[33;01m
 SILENT_C := \x1b[30;01m
 # -------~-------~--~------------------~------
 all: $(ASM) $(COREWAR)
-	@printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n" $(ASM) $(COREWAR)
+	@echo "\tDONE !!"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
@@ -70,20 +71,17 @@ $(LIB):
 
 $(ASM): $(ASMOBJ) $(LIB)
 	@echo "\tLinking $@"
-	@printf "$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 $(COREWAR): $(COREWAROBJ) $(LIB)
-	@printf "$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
+	@echo "\tLinking $@"
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 clean:
-	@rm -f $(ASMOBJ) $(COREWAROBJ)
-	@printf "$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up objects$(SILENT_C)\n"
+	@rm -f $(ASMOBJ) $(COREWAROBJ) && echo "Removed object files."
 
 fclean: clean
-	@printf "$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up targets:$(SILENT_C)%s %s\n" $(ASM) $(COREWAR)
-	@rm -f $(ASM) $(COREWAR)
+	@rm -f $(ASM) $(COREWAR) && echo "Removed target(s)."
 
 re: fclean
 	@$(MAKE)
