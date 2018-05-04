@@ -18,8 +18,8 @@ CFLAGS=			#-Wall -Wextra -Werror
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/
-ASMDIR=			asm/
-COREWARDIR=		corewar/
+ASMDIR=			asm_src/
+COREWARDIR=		corewar_src/
 
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
