@@ -7,4 +7,4 @@ test*
 libft.a
 ressources
 .syntastic_c_config
-corewar
+libft/.obj
