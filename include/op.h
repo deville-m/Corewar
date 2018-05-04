@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/04 16:45:51 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:12:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,6 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-# define INSTRUCTION_SIZE		256 /* taille max instructions */
-# define DESC_SIZE				1024 /* ??? */
-
 /*
 ** Type of arguments
 */
@@ -77,10 +74,6 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH			(2048) // maximum comment length
 # define COREWAR_EXEC_MAGIC		0xea83f3 //needs to be translate into big endian and put into header
 
-/*
-** | ------------------------------------------------------- |
-*/
-
 typedef struct					s_header
 {
 	unsigned int				magic;
@@ -88,6 +81,22 @@ typedef struct					s_header
 	unsigned int				prog_size;
 	char						comment[COMMENT_LENGTH + 1];
 }								t_header;
+
+/*
+** Perso
+*/
+
+# define TOKEN(x) ((t_token *)x->content)
+
+# define EOL "\n"
+# define WHITESPACE "\t "
+# define MINUS "-"
+# define REGISTER_CHAR "r"
+# define BASE "0123456789"
+# define STRING_CHAR "\""
+
+# define INSTRUCTION_SIZE		256 /* taille max instructions */
+# define DESC_SIZE				1024 /* ??? */
 
 typedef struct					s_op
 {
@@ -102,12 +111,5 @@ typedef struct					s_op
 }								t_op;
 
 extern t_op						g_op_tab[17];
-
-# define EOL "\n"
-# define WHITESPACE "\t "
-# define MINUS "-"
-# define REGISTER_CHAR "r"
-# define BASE "0123456789"
-# define STRING_CHAR "\""
 
 #endif
