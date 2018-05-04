@@ -6,3 +6,5 @@ test*
 libft.a
 ressources
 .syntastic_c_config
+asm
+corewar
