@@ -6,12 +6,20 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 16:50:31 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 20:15:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <asm.h>
-#include <libft.h>
+#include "asm.h"
+#include "libft.h"
+
+t_bool		is_separator(const char *arg)
+{
+	if (*arg != SEPARATOR_CHAR)
+		return (FALSE);
+	++arg;
+	return (!*arg);
+}
 
 /*
 ** @desc predicate to detect
@@ -22,16 +30,12 @@
 
 t_bool		is_direct(const char *arg)
 {
-	size_t	i;
-
-	i = 0;
-	if (arg[i] == DIRECT_CHAR)
-	{
-		i++;
-		while (arg[i] != '\0' && ft_isalnum(arg[i]))
-			i++;
-	}
-	return (i == ft_strlen(arg));
+	if (*arg != DIRECT_CHAR)
+		return (FALSE);
+	++arg;
+	while (*arg && ft_strchr(BASE, *arg))
+		++arg;
+	return (!*arg);
 }
 
 /*
@@ -43,24 +47,9 @@ t_bool		is_direct(const char *arg)
 
 t_bool		is_indirect(const char *arg)
 {
-	size_t	i;
-	size_t	j;
-	char	*base;
-
-	i = 0;
-	base = (char*)BASE;
-	while (arg[i] != '\0')
-	{
-		j = 0;
-		while (base[j] != '\0')
-		{
-			if (arg[i] != base[j])
-				return (FALSE);
-			j++;
-		}
-		i++;
-	}
-	return (i == ft_strlen(arg));
+	while (*arg && ft_strchr(BASE, *arg))
+		++arg;
+	return (!*arg);
 }
 
 /*
@@ -72,17 +61,12 @@ t_bool		is_indirect(const char *arg)
 
 t_bool		is_label(const char *arg)
 {
-	size_t	i;
-
-	i = 0;
-	while (arg[i] != '\0')
-	{
-		if (arg[i + 1] == '\0')
-			if (arg[i] != LABEL_CHAR)
-				return (FALSE);
-		i++;
-	}
-	return (TRUE);
+	while (*arg && ft_strchr(LABEL_CHARS, *arg))
+		++arg;
+	if (*arg != LABEL_CHAR)
+		return (FALSE);
+	++arg;
+	return (!*arg);
 }
 
 /*
@@ -94,9 +78,10 @@ t_bool		is_label(const char *arg)
 
 t_bool		is_register(const char *arg)
 {
-	if (is_label(arg) || is_direct(arg))
+	if (*arg != REGISTER_CHAR)
 		return (FALSE);
-	if (arg[0] != 'r')
-		return (FALSE);
-	return (TRUE);
+	++arg;
+	while (*arg && ft_strchr(BASE, *arg))
+		++arg;
+	return (!*arg);
 }

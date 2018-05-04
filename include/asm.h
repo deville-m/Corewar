@@ -6,15 +6,16 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/04 17:21:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 20:29:09 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 
+# include <stdint.h>
 # include "op.h"
-# include <libft.h>
+# include "ft_ctype.h"
 
 # define P_OUTRANGE(x, y) (x < 1 || x > y)
 
@@ -35,18 +36,26 @@ char			is_params_ok(const char opcode,
 ** detemine param type
 */
 
-typedef enum	e_tok
+enum	e_type
 {
-	REG = 1,
-	DIR = 2,
-	IND = 3,
-	LAB = 4,
-	SENTINEL
-}				t_tok;
+	COMMAND_COMMENT = 0,
+	COMMAND_NAME,
+	STRING,
+	LABEL,
+	REGISTER,
+	DIRECT,
+	INDIRECT,
+	DIRECT_LABEL,
+	INDIRECT_LABEL,
+	SEPARATOR,
+	INSTRUCTION,
+	ENDLINE,
+	END
+};
 
 typedef struct	s_token
 {
-	enum e_tok	type;
+	enum e_type	type;
 	int			line;
 	int			column;
 	char		*data;
