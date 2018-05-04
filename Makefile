@@ -1,18 +1,32 @@
+#    ______
+#   / ____/___  ________ _      ______ ______
+#  / /   / __ \/ ___/ _ \ | /| / / __ `/ ___/
+# / /___/ /_/ / /  /  __/ |/ |/ / /_/ / /
+# \____/\____/_/   \___/|__/|__/\__,_/_/
+#
+
+# -------~-------~--~------------------~------
 ASM=			asm
 COREWAR=		corewar
-CC=				clang
-CFLAGS=			-Wall -Wextra -Werror
-INCLUDES=		include/
+AARCH:=         $(shell uname -s)
+ifeq ($(AARCH), Linux)
+	CC = gcc
+else
+	CC = clang
+endif
+CFLAGS=			#-Wall -Wextra -Werror
+INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/
-ASMDIR=			asm_src/
-COREWARDIR=		corewar_src/
+ASMDIR=			asm/
+COREWARDIR=		corewar/
 
-COMMONSRC=		
+# -------~-------~--~------------------~------
+COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			
+ASMSRC=			main.c
 
-COREWARSRC=		
+COREWARSRC=		main.c
 
 COMMONDIR:= $(addprefix $(SRCDIR), $(COMMONDIR))
 ASMDIR:= $(addprefix $(SRCDIR), $(ASMDIR))
@@ -28,14 +42,27 @@ ASMOBJ:= $(ASMSRC:.c=.o)
 COREWARSRC:= $(addprefix $(COREWARDIR), $(COREWARSRC))
 COREWARSRC:= $(COREWARSRC) $(COMMONSRC)
 COREWAROBJ:= $(COREWARSRC:.c=.o)
-
+# -------~-------~--~------------------~------
+vpath %.c $(SRCS)
+vpath %.h $(INCLDIRS)
+# -------~-------~--~------------------~------
+_CC_ = `echo $(CC) | tr a-z A-Z`
+_LD_ = `echo $(LD) | tr a-z A-Z`
+# -------~-------~--~------------------~------
+LOG_C    = \033[2J
+LOG_U    = \033[A
+NO_C     := \x1b[0m
+OK_C     := \033[0;32m
+ERROR_C  := \x1b[31;01m
+WARN_C   := \x1b[33;01m
+SILENT_C := \x1b[30;01m
+# -------~-------~--~------------------~------
 all: $(ASM) $(COREWAR)
 	@echo "\tDONE !!"
 
 %.o: %.c
-	@zsh -c "echo -n '\tCompiling $<'"
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
-	@zsh -c 'echo -e "\r\t\033[32mCompiled $@\033[0m "'
+	@$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
+	@printf "$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
 $(ASM): $(ASMOBJ)
 	@echo "\tLinking $@"
@@ -54,6 +81,6 @@ fclean: clean
 re: fclean
 	@$(MAKE)
 
+# -------~-------~--~------------------~------
 .PHONY: all clean fclean re pretty
-
 .IGNORE: pretty
