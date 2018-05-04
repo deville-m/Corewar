@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/04 17:12:27 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:26:33 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,12 @@ typedef struct					s_header
 
 # define TOKEN(x) ((t_token *)x->content)
 
-# define EOL "\n"
+# define EOL '\n'
 # define WHITESPACE "\t "
-# define MINUS "-"
-# define REGISTER_CHAR "r"
+# define MINUS '-'
+# define REGISTER_CHAR 'r'
 # define BASE "0123456789"
-# define STRING_CHAR "\""
+# define STRING_CHAR '"'
 
 # define INSTRUCTION_SIZE		256 /* taille max instructions */
 # define DESC_SIZE				1024 /* ??? */

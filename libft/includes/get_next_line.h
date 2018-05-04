@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:24:11 by mdeville          #+#    #+#             */
-/*   Updated: 2017/11/27 16:01:02 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:29:01 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <unistd.h>
 # define BUFF_SIZE 32
+# ifndef EOL
+#  define EOL '\n'
+# endif
 
 typedef struct		s_clist
 {
