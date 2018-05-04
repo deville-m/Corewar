@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/04 13:29:29 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 15:01:21 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ typedef struct					s_op
 	int							index;
 }								t_op;
 
-extern t_op						g_op_tab[REG_NUMBER + 1];
+extern t_op						g_op_tab[17];
 
 #endif
