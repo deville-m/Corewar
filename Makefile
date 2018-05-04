@@ -15,7 +15,7 @@ ifeq ($(AARCH), Linux)
 else
 	CC = clang
 endif
-CFLAGS=			#-Wall -Wextra -Werror
+CFLAGS=			-Wall -Wextra -Werror
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/
@@ -74,11 +74,7 @@ $(ASM): $(ASMOBJ) $(LIB)
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 $(COREWAR): $(COREWAROBJ) $(LIB)
-<<<<<<< HEAD
 	@printf "$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
-=======
-	@echo "\tLinking $@"
->>>>>>> 1719769ff33f0dfa2352754e04d97cf576b71b55
 	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 clean:
