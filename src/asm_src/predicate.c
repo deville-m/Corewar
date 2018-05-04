@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 16:49:43 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:23:09 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,23 @@ static t_tok	tokenize(const char *occur)
 */
 
 static t_bool	check_rules(const char opcode,
-							const char **split)
+							const char **split,
+							uint8_t i)
 {
-	(void)opcode;
-	(void)split;
-	(void)tokenize;
+	t_tok		transpose[MAX_ARGS_NUMBER];
+
+	while (i < MAX_ARGS_NUMBER)
+	{
+		transpose[i] = tokenize(split[i]);
+		i++;
+	}
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		if (g_op_tab[(int)opcode].arg_type[i] != transpose[i])
+			return (FALSE);
+		i++;
+	}
 	return (TRUE);
 }
 
@@ -121,6 +133,8 @@ char			is_params_ok(const char opcode,
 		|| (sp = ft_strsplit(params, SEPARATOR_CHAR)) == NULL
 		|| arguments_size((const char**)sp) != g_op_tab[(int)opcode].nb_param)
 		return (!((*status = FALSE) || 1));
-	(void)check_rules;
+	if (check_rules(opcode, (const char**)sp, 0) == FALSE) /* Check rules */
+		return (!((*status = FALSE) || 1));
+	/* TODO: Craft octet */
 	return (ret);
 }
