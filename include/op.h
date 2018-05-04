@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/04 15:01:21 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 16:45:51 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6) // Maximum size of a champion. (?) Might be verified by
 											   // verified by VM and/or ASM, for now, we don't know which
 											   // one does it.
-
 # define COMMENT_CHAR			'#' // char indicating start of comments
 # define LABEL_CHAR				':' // char indicating param is a label (i.e. "%:label_name")
 # define DIRECT_CHAR			'%' // char indicating param is direct, without it, it's indirect
@@ -56,8 +55,8 @@
 # define NBR_LIVE				21
 # define MAX_CHECKS				10
 
-# define INSTRUCTION_SIZE		256 //taille max instruction (?)
-# define DESC_SIZE				1024 // ???
+# define INSTRUCTION_SIZE		256 /* taille max instructions */
+# define DESC_SIZE				1024 /* ??? */
 
 /*
 ** Type of arguments
@@ -65,10 +64,10 @@
 
 typedef char	t_arg_type;
 
-# define T_REG					1 // ???
-# define T_DIR					2 // ???
-# define T_IND					4 // ???
-# define T_LAB					8 // ???
+# define T_REG					1 /* r1 */
+# define T_DIR					2 /* %4 where % is DIRECT_CHAR */
+# define T_IND					4 /* 4 */
+# define T_LAB					8 /* <value>`:` */
 
 /*
 ** Headers
@@ -77,6 +76,10 @@ typedef char	t_arg_type;
 # define PROG_NAME_LENGTH		(128) // maximum name length
 # define COMMENT_LENGTH			(2048) // maximum comment length
 # define COREWAR_EXEC_MAGIC		0xea83f3 //needs to be translate into big endian and put into header
+
+/*
+** | ------------------------------------------------------- |
+*/
 
 typedef struct					s_header
 {
@@ -99,5 +102,12 @@ typedef struct					s_op
 }								t_op;
 
 extern t_op						g_op_tab[17];
+
+# define EOL "\n"
+# define WHITESPACE "\t "
+# define MINUS "-"
+# define REGISTER_CHAR "r"
+# define BASE "0123456789"
+# define STRING_CHAR "\""
 
 #endif
