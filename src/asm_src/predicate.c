@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 14:16:59 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 15:02:45 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@
 char			is_instruct(const char *line)
 {
 	uint8_t		i;
+	uint16_t	j;
 
 	i = 0;
-	while (i <= REG_NUMBER)
+	j = operator_tsize();
+	while (i <= j)
 	{
 		if (ft_strequ(line, g_op_tab[i].name))
 			return (g_op_tab[i].op_code);
@@ -52,7 +54,7 @@ t_bool			is_empty(const char *line)
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (!ft_isspace(line[i]))
+		if (!ft_isblank(line[i]))
 			return (FALSE);
 		i++;
 	}
@@ -74,13 +76,12 @@ char			is_params_ok(const char opcode,
 							const char *params,
 							t_bool *status)
 {
-	char		**split;
-	char		ret;
+	char		**sp;
+	char		ret = 0;
 
-	if (P_OUTRANGE(opcode))
+	if (P_OUTRANGE(opcode, operator_tsize()) || params == NULL
+		|| (sp = ft_strsplit(params, SEPARATOR_CHAR)) == NULL
+		|| arguments_size((const char**)sp) != g_op_tab[(int)opcode].nb_param)
 		return (!((*status = FALSE) || 1));
-	(void)split;
-	(void)ret;
-	(void)params;
-	return (2);
+	return (ret);
 }
