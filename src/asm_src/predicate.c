@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 17:23:09 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:33:13 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,17 @@ static t_bool	check_rules(const char opcode,
 							const char **split,
 							uint8_t i)
 {
-	t_tok		transpose[MAX_ARGS_NUMBER];
+	t_tok		transpose[g_op_tab[(int)opcode].nb_param];
 
-	while (i < MAX_ARGS_NUMBER)
+	while (i < g_op_tab[(int)opcode].nb_param)
 	{
 		transpose[i] = tokenize(split[i]);
 		i++;
 	}
 	i = 0;
-	while (i < MAX_ARGS_NUMBER)
+	while (i < g_op_tab[(int)opcode].nb_param)
 	{
-		if (g_op_tab[(int)opcode].arg_type[i] != transpose[i])
+		if (g_op_tab[(int)opcode].arg_type[i] & transpose[i])
 			return (FALSE);
 		i++;
 	}
