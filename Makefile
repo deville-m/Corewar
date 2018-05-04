@@ -6,10 +6,11 @@
 #
 
 # -------~-------~--~------------------~------
-ASM=			asm
-COREWAR=		corewar
-LIB=			libft/libft.a
-AARCH:=         $(shell uname -s)
+ASM        = asm
+COREWAR    = corewar
+LIB        = libft/libft.a
+MAKEFLAGS += --silent
+AARCH     := $(shell uname -s)
 ifeq ($(AARCH), Linux)
 	CC = gcc
 else
@@ -59,35 +60,36 @@ WARN_C   := \x1b[33;01m
 SILENT_C := \x1b[30;01m
 # -------~-------~--~------------------~------
 all: $(ASM) $(COREWAR)
-	@printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n" $(ASM) $(COREWAR)
+	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n" $(ASM) $(COREWAR)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
-	@printf "$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
+	$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
+	printf "\n$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
 $(LIB):
+	printf "\n$(LOG_U)$(OK_C)[MAKE]$(NO_C) Checking library: $(SILENT_C) %s\n" $@
 	$(MAKE) -C libft/
 
 $(ASM): $(ASMOBJ) $(LIB)
-	@echo "\tLinking $@"
-	@printf "$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
+	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
+	$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 $(COREWAR): $(COREWAROBJ) $(LIB)
-	@printf "$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
+	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
+	$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 clean:
-	@rm -f $(ASMOBJ) $(COREWAROBJ)
-	@printf "$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up objects$(SILENT_C)\n"
+	rm -f $(ASMOBJ) $(COREWAROBJ)
+	$(MAKE) -C libft/ clean
+	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up objects$(SILENT_C)\n"
 
 fclean: clean
-	@printf "$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up targets:$(SILENT_C)%s %s\n" $(ASM) $(COREWAR)
-	@rm -f $(ASM) $(COREWAR)
+	rm -f $(ASM) $(COREWAR)
+	$(MAKE) -C libft/ fclean
+	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up targets:$(SILENT_C)%s %s\n" $(ASM) $(COREWAR)
 
 re: fclean
-	@$(MAKE)
+	$(MAKE)
 
 # -------~-------~--~------------------~------
-.PHONY: all clean fclean re pretty
-.IGNORE: pretty
+.PHONY: all clean fclean re $(LIB)
