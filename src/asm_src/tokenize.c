@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/05 01:30:30 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/05 13:50:15 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "op.h"
 #include "ft_ctype.h"
 #include "dlst.h"
+#include "asm.h"
 #include "ft_string.h"
 #include "get_next_line.h"
 
@@ -37,23 +38,32 @@ static t_bool	multiline_string(const char *line)
 	return (state);
 }
 
+static int		parse_tokens(t_dlist **res, char *concat, int line_nbr)
+{
+	t_token	tmp;
+
+	while (*concat)
+	{
+		
+	}
+}
+
 static int		parse_line(int fd, t_dlist **res, char *line, int line_nbr)
 {
 	char	**split;
 	char	*concat;
 	char	*tmp;
+	int		ret;
 
 	concat = line;
 	while (multiline_string(concat) && get_next_line(fd, &line) > 0)
 	{
+		tmp = ft_strnjoin(3, concat, "\n", line);
 		free(concat);
 		free(line);
 		concat = tmp;
 	}
-	free(line);
-	if (!concat || !(split = ft_strsplit_str(concat, WHITESPACE)))
-		exit(42); // allocation error
-	
+	return (parse_tokens(res, concat, line_nbr));
 }
 
 t_dlist		*tokenize(int fd)
@@ -71,6 +81,5 @@ t_dlist		*tokenize(int fd)
 		line_nbr += parse_line(fd, &res, line, line_nbr);
 		free(line);
 	}
-	free(line);
 	return (res);
 }
