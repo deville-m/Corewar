@@ -6,14 +6,14 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 17:58:48 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 18:48:35 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "libft.h"
 
-t_bool		is_separator(const char *arg)
+int		is_separator(const char *arg)
 {
 	return (*arg == SEPARATOR_CHAR);
 }
@@ -25,14 +25,19 @@ t_bool		is_separator(const char *arg)
 ** @return boolean
 */
 
-t_bool		is_direct(const char *arg)
+int		is_direct(const char *arg)
 {
-	if (*arg != DIRECT_CHAR)
-		return (FALSE);
-	++arg;
-	while (*arg && ft_strchr(BASE, *arg))
-		++arg;
-	return (!*arg);
+	int i;
+
+	i = 0;
+	if (arg[i] != DIRECT_CHAR)
+		return (0);
+	++i;
+	while (arg[i] && ft_strchr(BASE, arg[i]))
+		++i;
+	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
+		return (i);
+	return (0);
 }
 
 /*
@@ -44,9 +49,14 @@ t_bool		is_direct(const char *arg)
 
 t_bool		is_indirect(const char *arg)
 {
-	while (*arg && ft_strchr(BASE, *arg))
-		++arg;
-	return (!*arg);
+	int i;
+
+	i = 0;
+	while (arg[i] && ft_strchr(BASE, arg[i]))
+		++i;
+	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
+		return (i);
+	return (0);
 }
 
 /*

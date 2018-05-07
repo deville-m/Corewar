@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/07 17:47:25 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 20:27:33 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "dlst.h"
 #include "asm.h"
 #include "ft_string.h"
+#include "ft_printf.h"
 #include "get_next_line.h"
 
 static t_bool	multiline_string(const char *line)
@@ -57,16 +58,41 @@ static int	get_next_lines(int fd, char **line)
 	return (ret);
 }
 
-static char	*parse_token(t_dlist **res, char *input, t_asm_token *token)
+static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 {
-	if (is_separator(input))
-	{
-		token.type = SEPARATOR;
-		token.data = ft_strdup(",");
-		++input;
-	}
-	else if (is_direct(input))
+	int ret;
 
+	if ((ret = is_string(input)))
+		token->type = STRING;
+	else if ((ret = is_direct(input)))
+		token->type = DIRECT;
+	else if ((ret = is_indirect(input)))
+		token->type = INDIRECT;
+	else if ((ret = is_label(input)))
+		token->type = LABEL;
+	else if ((ret = is_register(input)))
+		token->type = REGISTER;
+	else if ((ret = is_comment(input)))
+		token->type = COMMAND_COMMENT;
+	else if ((ret = is_name(input)))
+		token->type = COMMAND_NAME;
+	else if ((ret = is_indirect_label(input)))
+		token->type = INDIRECT_LABEL;
+	else if ((ret = is_direct_label(input)))
+		token->type = DIRECT_LABEL;
+	else if ((ret = is_separator(input)))
+		token->type = SEPARATOR;
+	else if ((ret = is_instruction(input)))
+		token->type = INSTRUCTION;
+	else
+	{
+		ft_fprintf(2, "Lexical error at [%d, %d]", token->line, token->column);
+		exit(42);
+	}
+	token->data = ft_strndup(input, ret);
+	ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
+	token->column += ret;
+	return (input + ret);
 }
 
 static void	process_input(t_dlist **res, char *input, t_asm_token *token)
@@ -79,13 +105,13 @@ static void	process_input(t_dlist **res, char *input, t_asm_token *token)
 			while (*input && *input != EOL)
 				++input;
 			token->type = ENDLINE;
-			ft_dlstprepend(res, ft_dlstnew(token, sizeof(*token)));
+			ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
 			++token->line;
 			token->column = 1;
 			++input;
 		}
 		else if (!ft_strchr(WHITESPACE, *input))
-			input = parse_token(res, input, token);
+			input = parse_asm_token(res, input, token);
 		else
 		{
 			++token->column;
