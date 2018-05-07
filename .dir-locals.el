@@ -2,9 +2,9 @@
 ;; Project customisation
 
 ((nil . ((company-clang-arguments .
-   ("-I/Users/ctrouill/Projects/Corewar/includes"
+   ("-I/Users/ctrouill/Projects/Corewar/include"
 	"-I/Users/ctrouill/Projects/Corewar/libft/includes"
-	"-I/home/iomonad/projects/corewar/includes"
+	"-I/home/iomonad/projects/corewar/include"
 	"-I/home/iomonad/projects/corewar/libft/includes"
 	)))))
 

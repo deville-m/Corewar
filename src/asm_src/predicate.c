@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 17:33:13 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 12:18:57 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,9 @@ static t_tok	tokenize(const char *occur)
 
 static t_bool	check_rules(const char opcode,
 							const char **split,
+							t_tok *transpose,
 							uint8_t i)
 {
-	t_tok		transpose[g_op_tab[(int)opcode].nb_param];
-
 	while (i < g_op_tab[(int)opcode].nb_param)
 	{
 		transpose[i] = tokenize(split[i]);
@@ -127,14 +126,27 @@ char			is_params_ok(const char opcode,
 							t_bool *status)
 {
 	char		**sp;
-	char		ret = 0;
+	char		byte;
+	t_tok		trans[g_op_tab[(int)opcode].nb_param];
+	int			i;
 
+	byte = 0x0;
+	i = 0;
 	if (P_OUTRANGE(opcode, operator_tsize()) || params == NULL
 		|| (sp = ft_strsplit(params, SEPARATOR_CHAR)) == NULL
 		|| arguments_size((const char**)sp) != g_op_tab[(int)opcode].nb_param)
 		return (!((*status = FALSE) || 1));
-	if (check_rules(opcode, (const char**)sp, 0) == FALSE) /* Check rules */
+	if (check_rules(opcode, (const char**)sp, trans, 0) == FALSE)
 		return (!((*status = FALSE) || 1));
-	/* TODO: Craft octet */
-	return (ret);
+	while (i < g_op_tab[(int)opcode].nb_param)
+	{
+		(trans[i] == REG) ? (byte += 0x1) : (0x0);
+		(trans[i] == DIR) ? (byte += 0x2) : (0x0);
+		(trans[i] == IND) ? (byte += 0x3) : (0x0);
+		byte <<= 0x2;
+		i++;
+	}
+	while (++i <= 4)
+		byte <<= 0x2;
+	return (byte);
 }

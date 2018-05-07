@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/04 17:21:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:46:03 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <libft.h>
 
 # define P_OUTRANGE(x, y) (x < 1 || x > y)
+# define ASSERT(x) (if (!(x)) ft_prinf("Assertion \"%s\" at l%d.", x, __LINE__))
 
 void			stupid_asm(char *in_name);
 
@@ -44,13 +45,13 @@ typedef enum	e_tok
 	SENTINEL
 }				t_tok;
 
-typedef struct	s_token
+typedef struct	s_ltoken
 {
 	enum e_tok	type;
 	int			line;
 	int			column;
 	char		*data;
-}				t_token;
+}				t_ltoken;
 
 /*
 ** @utils.c
