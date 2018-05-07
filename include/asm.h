@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 09:49:22 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:46:03 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <libft.h>
 
 # define P_OUTRANGE(x, y) (x < 1 || x > y)
+# define ASSERT(x) (if (!(x)) ft_prinf("Assertion \"%s\" at l%d.", x, __LINE__))
 
 void			stupid_asm(char *in_name);
 
