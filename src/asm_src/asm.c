@@ -6,14 +6,16 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/03 17:21:36 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/07 13:46:15 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include <asm.h>
 
 int	main(int ac, char **av)
 {
+	t_bool s;
+	printf("%x %d\n", is_params_ok(1, "r2", &s), s);
 	if (ac != 2)
 		return (1);
 	else

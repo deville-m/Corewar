@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 11:46:03 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 14:03:38 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,13 @@
 # include "op.h"
 # include <libft.h>
 
-# define P_OUTRANGE(x, y) (x < 1 || x > y)
-# define ASSERT(x) (if (!(x)) ft_prinf("Assertion \"%s\" at l%d.", x, __LINE__))
-
-void			stupid_asm(char *in_name);
-
-/*
-** @predicate.c
-*/
-
-char			is_instruct(const char *line);
-t_bool			is_empty(const char *line);
-char			is_params_ok(const char opcode,
-							const char *params,
-							t_bool *status);
+/* debugging purpose */
+# define ASSERT(x, y) (if (!(x)) ft_prinf("Assertion \"%s\" at %s:%d: %s\n", x, __FILE__ ,__LINE__, y))
 
 /*
 ** Pseudo tokenizer type
 ** detemine param type
+** Meta[Nil]
 */
 
 typedef enum	e_tok
@@ -45,6 +34,12 @@ typedef enum	e_tok
 	SENTINEL
 }				t_tok;
 
+/*
+** Literal token lexer structure
+** for word an syntax processing.
+** Meta[t_dlst*]
+*/
+
 typedef struct	s_ltoken
 {
 	enum e_tok	type;
@@ -52,6 +47,34 @@ typedef struct	s_ltoken
 	int			column;
 	char		*data;
 }				t_ltoken;
+
+/*
+** @stupid_asm.c
+*/
+
+void			stupid_asm(char *in_name);
+
+/*
+** @predicate.c
+*/
+
+char			is_instruct(const char *line);
+t_bool			is_empty(const char *line);
+char			is_params_ok(const char opcode,
+							 const char *params,
+							 t_bool *status);
+/*
+** @rules.c
+*/
+
+void			transpose(t_tok *transpose,
+						  const char **split,
+						  char opcode,
+						  uint8_t i);
+t_tok			tokenize(const char *occur);
+t_bool			check_rules(const char opcode,
+							t_tok *transpose,
+							uint8_t i);
 
 /*
 ** @utils.c
@@ -64,9 +87,9 @@ uint16_t		operator_tsize(void);
 ** @lexer.c
 */
 
-t_bool	is_direct(const char *arg);
-t_bool	is_indirect(const char *arg);
-t_bool	is_label(const char *arg);
-t_bool	is_register(const char *arg);
+t_bool			is_direct(const char *arg);
+t_bool			is_indirect(const char *arg);
+t_bool			is_label(const char *arg);
+t_bool			is_register(const char *arg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 12:18:57 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 14:01:41 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,55 +62,6 @@ t_bool			is_empty(const char *line)
 }
 
 /*
-** @desc tokenize params types
-** @params occur current args cursor
-** @return Maybe[Token] | Some[Sentinel]
-*/
-
-static t_tok	tokenize(const char *occur)
-{
-	if (is_direct(occur))
-		return (DIR);
-	else if (is_indirect(occur))
-		return (IND);
-	else if (is_register(occur))
-		return (REG);
-	else if (is_label(occur))
-		return (LAB);
-	else
-		return (SENTINEL);
-}
-
-/*
-** @desc Verify type rules from
-**       the params `arg_type`
-** @params opcode opcode cursor
-** @params split splited list
-**         of the arguments
-** @return boolean/success
-*/
-
-static t_bool	check_rules(const char opcode,
-							const char **split,
-							t_tok *transpose,
-							uint8_t i)
-{
-	while (i < g_op_tab[(int)opcode].nb_param)
-	{
-		transpose[i] = tokenize(split[i]);
-		i++;
-	}
-	i = 0;
-	while (i < g_op_tab[(int)opcode].nb_param)
-	{
-		if (g_op_tab[(int)opcode].arg_type[i] & transpose[i])
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
-/*
 ** @desc Return encoded byte and
 **       implicitly status code.
 ** @params opcode cursor
@@ -132,11 +83,12 @@ char			is_params_ok(const char opcode,
 
 	byte = 0x0;
 	i = 0;
-	if (P_OUTRANGE(opcode, operator_tsize()) || params == NULL
+	if ((opcode < 1 || opcode > operator_tsize()) || params == NULL
 		|| (sp = ft_strsplit(params, SEPARATOR_CHAR)) == NULL
 		|| arguments_size((const char**)sp) != g_op_tab[(int)opcode].nb_param)
 		return (!((*status = FALSE) || 1));
-	if (check_rules(opcode, (const char**)sp, trans, 0) == FALSE)
+	transpose(trans, (const char**)sp, opcode, 0);
+	if (check_rules(opcode, trans, 0) == FALSE)
 		return (!((*status = FALSE) || 1));
 	while (i < g_op_tab[(int)opcode].nb_param)
 	{
