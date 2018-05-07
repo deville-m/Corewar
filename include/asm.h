@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/04 17:21:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 09:49:22 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ typedef enum	e_tok
 	SENTINEL
 }				t_tok;
 
-typedef struct	s_token
+typedef struct	s_ltoken
 {
 	enum e_tok	type;
 	int			line;
 	int			column;
 	char		*data;
-}				t_token;
+}				t_ltoken;
 
 /*
 ** @utils.c
