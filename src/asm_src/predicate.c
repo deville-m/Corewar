@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 15:55:01 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 16:51:51 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ t_bool			is_empty(const char *line)
 **         | None[0 | status false]
 */
 
-char			is_params_ok(const char opcode,
-							const char *params,
-							t_bool *status)
+unsigned char	craft_op_byte(const char opcode,
+							  const char *params,
+							  t_bool *status)
 {
 	char		**sp;
 	char		byte;
@@ -100,6 +100,5 @@ char			is_params_ok(const char opcode,
 	while (++i < 4)
 		byte <<= 0x2;
 	*status = TRUE;
-	/* ft_printf("%.8b\n", byte); */
 	return (byte);
 }

@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 14:03:38 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 16:51:00 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "op.h"
 # include <libft.h>
-
-/* debugging purpose */
-# define ASSERT(x, y) (if (!(x)) ft_prinf("Assertion \"%s\" at %s:%d: %s\n", x, __FILE__ ,__LINE__, y))
 
 /*
 ** Pseudo tokenizer type
@@ -60,9 +57,9 @@ void			stupid_asm(char *in_name);
 
 char			is_instruct(const char *line);
 t_bool			is_empty(const char *line);
-char			is_params_ok(const char opcode,
-							 const char *params,
-							 t_bool *status);
+unsigned char	craft_op_byte(const char opcode,
+							  const char *params,
+							  t_bool *status);
 /*
 ** @rules.c
 */
