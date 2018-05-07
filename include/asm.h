@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 18:27:15 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/07 19:09:32 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ enum    e_type
 
 typedef struct	s_env
 {
-	t_list	*tok_head;
-	char	*input_name; //Corresponds to the .s filename, in order to craft the .cor
+	t_header	*header;
+	t_list		*tok_head;
+	char		*input_name; //Corresponds to the .s filename, in order to craft the .cor
 }				t_env;
 
 typedef struct	s_ltoken
@@ -123,5 +124,10 @@ int		create_token(t_env *env, enum e_type type, int line, int column, char *raw)
 */
 int		craft_directs(t_env *env, int fd);
 int		oh_a_comment_pass_it(int fd);
+
+/*
+** @output.c
+*/
+int		craft_file(t_env *env);
 
 #endif

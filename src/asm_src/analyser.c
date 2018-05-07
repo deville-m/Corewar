@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 17:16:53 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 18:14:25 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/07 18:54:19 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	craft_directs(t_env *env, int fd)
 	char	buf;
 	int		ret;
 	int		offset;
+	char	*result;
 
 	if (!env)
 		return (0);
@@ -33,7 +34,12 @@ int	craft_directs(t_env *env, int fd)
 			offset += ret;
 			if (ret == 0 || !ft_strchr(LABEL_CHARS, buf))
 			{
-				ft_printf("direct label offset = %d\n", offset);
+				if (!(result = ft_strnew(offset)))
+					return (0);
+				offset += 1;
+				lseek(fd, -offset, SEEK_CUR);
+				read(fd, result, offset - 1);
+				ft_printf("%s\n", result);
 				return (1);
 			}
 

@@ -3,18 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 10:42:40 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/03 17:33:54 by mdeville          #+#    #+#             */
+/*   Updated: 2018/05/04 12:18:22 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VM_H
-# define VM_H
+#include "op.h"
 
-/*
-** VM related header file
-*/
+typedef enum		e_bool
+{
+	FALSE = 0,
+	TRUE = 1
+}					t_bool;
 
-#endif
+typedef struct		s_proc
+{
+	int				player_id;
+	char			PC[REG_SIZE];
+	t_bool			carry;
+	char			reg[REG_NUMBER][REG_SIZE];
+}					t_proc;
