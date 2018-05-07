@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/04 20:29:09 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 16:04:21 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,8 @@
 # include <stdint.h>
 # include "op.h"
 # include "ft_ctype.h"
+# include "dlst.h"
 
-# define P_OUTRANGE(x, y) (x < 1 || x > y)
-
-void			stupid_asm(char *in_name);
-
-/*
-** @predicate.c
-*/
-
-char			is_instruct(const char *line);
-t_bool			is_empty(const char *line);
-char			is_params_ok(const char opcode,
-							const char *params,
-							t_bool *status);
 
 /*
 ** Pseudo tokenizer type
@@ -53,28 +41,14 @@ enum	e_type
 	END
 };
 
-typedef struct	s_token
+typedef struct	s_asm_token
 {
 	enum e_type	type;
 	int			line;
 	int			column;
 	char		*data;
-}				t_token;
+}				t_asm_token;
 
-/*
-** @utils.c
-*/
-
-uint8_t			arguments_size(const char **args);
-uint16_t		operator_tsize(void);
-
-/*
-** @lexer.c
-*/
-
-t_bool	is_direct(const char *arg);
-t_bool	is_indirect(const char *arg);
-t_bool	is_label(const char *arg);
-t_bool	is_register(const char *arg);
+t_dlist *tokenize(int fd);
 
 #endif

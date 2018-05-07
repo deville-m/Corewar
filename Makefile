@@ -16,7 +16,7 @@ ifeq ($(AARCH), Linux)
 else
 	CC = clang
 endif
-CFLAGS=			-Wall -Wextra -Werror
+CFLAGS=			-Wall -Wextra
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/
@@ -26,7 +26,7 @@ COREWARDIR=		corewar_src/
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			main.c
+ASMSRC=			main.c tokenize.c
 
 COREWARSRC=		main.c
 

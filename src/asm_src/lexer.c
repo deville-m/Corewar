@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 20:15:31 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:58:48 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 
 t_bool		is_separator(const char *arg)
 {
-	if (*arg != SEPARATOR_CHAR)
-		return (FALSE);
-	++arg;
-	return (!*arg);
+	return (*arg == SEPARATOR_CHAR);
 }
 
 /*

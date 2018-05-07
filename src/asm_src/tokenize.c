@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/05 13:50:15 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:47:25 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,48 +38,80 @@ static t_bool	multiline_string(const char *line)
 	return (state);
 }
 
-static int		parse_tokens(t_dlist **res, char *concat, int line_nbr)
+static int	get_next_lines(int fd, char **line)
 {
-	t_token	tmp;
-
-	while (*concat)
-	{
-		
-	}
-}
-
-static int		parse_line(int fd, t_dlist **res, char *line, int line_nbr)
-{
-	char	**split;
+	int		ret;
 	char	*concat;
 	char	*tmp;
-	int		ret;
+	char	eol[2];
 
-	concat = line;
-	while (multiline_string(concat) && get_next_line(fd, &line) > 0)
+	eol[0] = EOL;
+	eol[1] = '\0';
+	concat = NULL;
+	while (multiline_string(concat) && (ret = get_next_line(fd, &tmp)) > 0)
 	{
-		tmp = ft_strnjoin(3, concat, "\n", line);
-		free(concat);
-		free(line);
-		concat = tmp;
+		concat = ft_strnjoin(3, concat, eol, tmp);
+		free(tmp);
 	}
-	return (parse_tokens(res, concat, line_nbr));
+	*line = concat;
+	return (ret);
+}
+
+static char	*parse_token(t_dlist **res, char *input, t_asm_token *token)
+{
+	if (is_separator(input))
+	{
+		token.type = SEPARATOR;
+		token.data = ft_strdup(",");
+		++input;
+	}
+	else if (is_direct(input))
+
+}
+
+static void	process_input(t_dlist **res, char *input, t_asm_token *token)
+{
+	token->column = 1;
+	while (*input)
+	{
+		if (*input == EOL || *input == COMMENT_CHAR)
+		{
+			while (*input && *input != EOL)
+				++input;
+			token->type = ENDLINE;
+			ft_dlstprepend(res, ft_dlstnew(token, sizeof(*token)));
+			++token->line;
+			token->column = 1;
+			++input;
+		}
+		else if (!ft_strchr(WHITESPACE, *input))
+			input = parse_token(res, input, token);
+		else
+		{
+			++token->column;
+			++input;
+		}
+	}
 }
 
 t_dlist		*tokenize(int fd)
 {
 	t_dlist		*res;
-	char		*line;
+	char		*input;
 	char		*tmp;
-	int			line_nbr;
+	t_asm_token	token;
 
-	line = NULL;
+	input = NULL;
 	res = NULL;
-	line_nbr = 1;
-	while (get_next_line(fd, &line) > 0)
+	token.line = 1;
+	while (get_next_lines(fd, &input) > 0)
 	{
-		line_nbr += parse_line(fd, &res, line, line_nbr);
-		free(line);
+		process_input(&res, input, &token);
+		token.type = ENDLINE;
+		token.column = 1;
+		++token.line;
+		ft_dlstprepend(&res, ft_dlstnew(&token, sizeof(token)));
+		free(input);
 	}
 	return (res);
 }
