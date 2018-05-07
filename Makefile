@@ -16,7 +16,7 @@ ifeq ($(AARCH), Linux)
 else
 	CC = clang
 endif
-CFLAGS=			-Wall -Wextra -Werror
+CFLAGS=			-Wall -Wextra -Werror -g
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/

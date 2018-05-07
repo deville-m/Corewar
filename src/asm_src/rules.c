@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:38:11 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 13:58:10 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 15:54:30 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@ void		transpose(t_tok *transpose,
 					  char opcode,
 					  uint8_t i)
 {
-	while (i < g_op_tab[(int)opcode].nb_param)
+	if (split == NULL || *split == NULL)
+		return ;
+	while (i <= g_op_tab[(int)opcode].nb_param)
 	{
+		if (split[i] == NULL)
+			return ;
+		/* dprintf(2, "DEBUG: %s - %d\n", split[i], tokenize(split[i])); */
 		transpose[i] = tokenize(split[i]);
 		i++;
 	}
@@ -65,8 +70,10 @@ t_bool		check_rules(const char opcode,
 {
 	while (i < g_op_tab[(int)opcode].nb_param)
 	{
-		if (g_op_tab[(int)opcode].arg_type[i] & transpose[i])
+		if (transpose[i] == SENTINEL)
 			return (FALSE);
+		/* if (g_op_tab[(int)opcode].arg_type[i] & transpose[i]) */
+		/* 	return (TRUE); */
 		i++;
 	}
 	return (TRUE);

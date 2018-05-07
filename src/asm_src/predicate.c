@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 14:01:41 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 15:55:01 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,12 @@ char			is_params_ok(const char opcode,
 	byte = 0x0;
 	i = 0;
 	if ((opcode < 1 || opcode > operator_tsize()) || params == NULL
-		|| (sp = ft_strsplit(params, SEPARATOR_CHAR)) == NULL
-		|| arguments_size((const char**)sp) != g_op_tab[(int)opcode].nb_param)
+		|| (sp = ft_strsplit(params, SEPARATOR_CHAR)) == NULL)
 		return (!((*status = FALSE) || 1));
 	transpose(trans, (const char**)sp, opcode, 0);
 	if (check_rules(opcode, trans, 0) == FALSE)
 		return (!((*status = FALSE) || 1));
-	while (i < g_op_tab[(int)opcode].nb_param)
+	while (i <= g_op_tab[(int)opcode].nb_param)
 	{
 		(trans[i] == REG) ? (byte += 0x1) : (0x0);
 		(trans[i] == DIR) ? (byte += 0x2) : (0x0);
@@ -98,7 +97,9 @@ char			is_params_ok(const char opcode,
 		byte <<= 0x2;
 		i++;
 	}
-	while (++i <= 4)
+	while (++i < 4)
 		byte <<= 0x2;
+	*status = TRUE;
+	/* ft_printf("%.8b\n", byte); */
 	return (byte);
 }
