@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 17:49:43 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/07 18:27:15 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,7 @@
 # define ASM_H
 
 # include "op.h"
-# include <libft.h>
-
-# define P_OUTRANGE(x, y) (x < 1 || x > y)
-# define ASSERT(x) (if (!(x)) ft_prinf("Assertion \"%s\" at l%d.", x, __LINE__))
-
-
-typedef struct	s_env
-{
-	t_list	*tok_head;
-	char	*input_name; //Corresponds to the .s filename, in order to craft the .cor
-}				t_env;
-
-void			stupid_asm(t_env *env, char *in_name);
-void			bug_err(char *mess);
-/*
-** @predicate.c
-*/
-
-char			is_instruct(const char *line);
-t_bool			is_empty(const char *line);
-char			is_params_ok(const char opcode,
-		const char *params,
-		t_bool *status);
-
-/*
- ** Pseudo tokenizer type
- ** detemine param type
- */
+# include "libft.h"
 
 typedef enum	e_tok
 {
@@ -68,6 +41,17 @@ enum    e_type
 	ENDLINE,
 	END
 };
+/*
+** Literal token lexer structure
+** for word an syntax processing.
+** Meta[t_dlst*]
+*/
+
+typedef struct	s_env
+{
+	t_list	*tok_head;
+	char	*input_name; //Corresponds to the .s filename, in order to craft the .cor
+}				t_env;
 
 typedef struct	s_ltoken
 {
@@ -77,6 +61,35 @@ typedef struct	s_ltoken
 	char		*raw;
 	int			data;
 }				t_ltoken;
+
+/*
+** @stupid_asm.c
+*/
+
+void			stupid_asm(t_env *env, char *in_name);
+void			bug_err(char *mess);
+
+/*
+** @predicate.c
+*/
+
+char			is_instruct(const char *line);
+t_bool			is_empty(const char *line);
+unsigned char	craft_op_byte(const char opcode,
+							  const char *params,
+							  t_bool *status);
+/*
+** @rules.c
+*/
+
+void			transpose(t_tok *transpose,
+						  const char **split,
+						  char opcode,
+						  uint8_t i);
+t_tok			tokenize(const char *occur);
+t_bool			check_rules(const char opcode,
+							t_tok *transpose,
+							uint8_t i);
 
 /*
 ** @utils.c
@@ -89,10 +102,16 @@ uint16_t		operator_tsize(void);
 ** @lexer.c
 */
 
-t_bool	is_direct(const char *arg);
-t_bool	is_indirect(const char *arg);
-t_bool	is_label(const char *arg);
-t_bool	is_register(const char *arg);
+t_bool			is_direct(const char *arg);
+t_bool			is_indirect(const char *arg);
+t_bool			is_label(const char *arg);
+t_bool			is_register(const char *arg);
+
+/*
+** @collision.c
+*/
+
+t_bool			check_collisions(uint_fast32_t i);
 
 /*
 ** @stupid_analyser.c

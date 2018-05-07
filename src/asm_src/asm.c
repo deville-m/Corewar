@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 15:39:38 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/07 18:22:20 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int ac, char **av)
 {
 	t_env	env;
 
-	if (ac != 2)
+	if (check_collisions(0) == FALSE || ac != 2)
 		return (1);
 	else
 	{
