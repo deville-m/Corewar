@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 12:02:05 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 16:51:51 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:46:33 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ t_bool			is_empty(const char *line)
 */
 
 unsigned char	craft_op_byte(const char opcode,
-							  const char *params,
-							  t_bool *status)
+					const char *params,
+					t_bool *status)
 {
 	char		**sp;
 	char		byte;

@@ -26,7 +26,7 @@ COREWARDIR=		corewar_src/
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 ASMSRC=			asm.c stupid_assembler.c predicate.c \
-				utils.c lexer.c lexer2.c rules.c
+				utils.c lexer.c lexer2.c rules.c collision.c
 COREWARSRC=		main.c
 
 COMMONDIR:= $(addprefix $(SRCDIR), $(COMMONDIR))

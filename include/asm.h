@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 16:51:00 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:35:48 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,11 @@ t_bool			is_direct(const char *arg);
 t_bool			is_indirect(const char *arg);
 t_bool			is_label(const char *arg);
 t_bool			is_register(const char *arg);
+
+/*
+** @collision.c
+*/
+
+t_bool			check_collisions(uint_fast32_t i);
 
 #endif

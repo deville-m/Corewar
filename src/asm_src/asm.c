@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 16:54:38 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/07 17:43:00 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
+	if (check_collisions(0) == FALSE || ac != 2)
 		return (1);
 	else
 		stupid_asm(av[1]);
