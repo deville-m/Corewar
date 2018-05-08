@@ -25,8 +25,11 @@ COREWARDIR=		corewar_src/
 
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
+
 ASMSRC=			asm.c stupid_assembler.c predicate.c \
-				utils.c lexer.c lexer2.c rules.c collision.c
+				utils.c lexer.c lexer2.c rules.c collision.c \
+				analyser.c
+
 COREWARSRC=		main.c
 
 COMMONDIR:= $(addprefix $(SRCDIR), $(COMMONDIR))
@@ -59,7 +62,7 @@ WARN_C   := \x1b[33;01m
 SILENT_C := \x1b[30;01m
 # -------~-------~--~------------------~------
 all: $(ASM) $(COREWAR)
-	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n" $(ASM) $(COREWAR)
+	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n$(NO_C)" $(ASM) $(COREWAR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@

@@ -6,13 +6,14 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 20:24:11 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/04 17:29:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 18:35:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# include "../../include/op.h"
 # include <unistd.h>
 # define BUFF_SIZE 32
 # ifndef EOL

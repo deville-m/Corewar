@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/08 09:47:48 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/08 09:59:19 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 # define ASM_H
 
 # include "op.h"
-# include <libft.h>
-
-/*
-** Pseudo tokenizer type
-** detemine param type
-** Meta[Nil]
-*/
+# include "libft.h"
 
 typedef enum	e_tok
 {
@@ -31,25 +25,49 @@ typedef enum	e_tok
 	SENTINEL
 }				t_tok;
 
+enum    e_type
+{
+	COMMAND_COMMENT = 0,
+	COMMAND_NAME,
+	STRING,
+	LABEL,
+	REGISTER,
+	DIRECT,
+	INDIRECT,
+	DIRECT_LABEL,
+	INDIRECT_LABEL,
+	SEPARATOR,
+	INSTRUCTION,
+	ENDLINE,
+	END
+};
 /*
 ** Literal token lexer structure
 ** for word an syntax processing.
 ** Meta[t_dlst*]
 */
 
+typedef struct	s_env
+{
+	t_list	*tok_head;
+	char	*input_name; //Corresponds to the .s filename, in order to craft the .cor
+}				t_env;
+
 typedef struct	s_ltoken
 {
-	enum e_tok	type;
+	enum e_type	type;
 	int			line;
 	int			column;
-	char		*data;
+	char		*raw;
+	int			data;
 }				t_ltoken;
 
 /*
 ** @stupid_asm.c
 */
 
-void			stupid_asm(char *in_name);
+void			stupid_asm(t_env *env, char *in_name);
+void			bug_err(char *mess);
 
 /*
 ** @predicate.c
@@ -97,5 +115,18 @@ t_bool			check_collisions(const char	*base,
 								const char	*labels,
 								const char  *n_cmd,
 								const char  *c_cmd);
+
+/*
+** @stupid_analyser.c
+*/
+
+int		create_token(t_env *env, enum e_type type, int line,
+				int column, char *raw);
+
+/*
+** @analyser.c
+*/
+int		craft_directs(t_env *env, int fd);
+int		oh_a_comment_pass_it(int fd);
 
 #endif

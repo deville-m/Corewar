@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/08 09:47:47 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/08 09:56:50 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ typedef struct					s_header
 ** Perso
 */
 
-# define TOKEN(x) ((t_token *)x->content)
-
 # define EOL '\n'
 # define WHITESPACE "\t "
 # define MINUS '-'
@@ -97,6 +95,32 @@ typedef struct					s_header
 
 # define INSTRUCTION_SIZE		256 /* taille max instructions */
 # define DESC_SIZE				1024 /* ??? */
+
+/*
+No_token: COMMENT_CHAR -> EOL
+
++ STRING (")
++ SEPARATOR (,)
++ ENDLINE (\n)
+
++ DIRECT (%)
++ DIRECT_LABEL (%:)
++ REGISTER (REGISTER_CHAR + number inside BASE)
+
++ INDIRECT (suite chiffres appartenant a BASE)
+
++ INDIRECT_LABEL (':' puis label_name)
+
++ COMMAND_COMMENT (.comment)
++ COMMAND_NAME (.name)
+
++ LABEL (LABEL_CHARS termine par :)
+
+
+INSTRUCTION (chaine de LABEL_CHARS)
+
+END ((null)) serait juste une erreur ? Ou NULL representera end... PFFFF
+*/
 
 typedef struct					s_op
 {

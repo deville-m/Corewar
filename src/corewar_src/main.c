@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:04:07 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 18:01:45 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 18:35:58 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define EOL 'q'
 #include "get_next_line.h"
 /*
 ** Coreware virtual machine
