@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 17:43:00 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/08 09:54:43 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	main(int ac, char **av)
 {
-	if (check_collisions(0) == FALSE || ac != 2)
+	if (!check_collisions((const char*)BASE, (const char*)LABEL_CHARS,
+				(const char*)NAME_CMD_STRING,
+				(const char *)COMMENT_CMD_STRING)
+		|| ac != 2)
 		return (1);
 	else
 		stupid_asm(av[1]);
