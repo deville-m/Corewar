@@ -6,11 +6,24 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/02 13:09:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 14:01:01 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
+/*
+typedef struct	s_op
+{
+	char		name[INSTRUCTION_SIZE];
+	int			nb_param;
+	t_arg_type	arg_type[MAX_ARGS_NUMBER];
+	char		op_code;
+	int			cycle_cost;
+	char		desc[DESC_SIZE];
+	int			coding_byte;
+	int			index;
+}				t_op;
+*/
 
 t_op	g_op_tab[17] =
 {
@@ -36,5 +49,5 @@ t_op	g_op_tab[17] =
 		"long load index", 1, 1},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
 	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{0}
+	{}
 };

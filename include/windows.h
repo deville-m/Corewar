@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.h                                               :+:      :+:    :+:   */
+/*   windows.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 17:33:54 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/04 12:18:22 by mdeville         ###   ########.fr       */
+/*   Created: 2018/05/07 17:18:33 by rbaraud           #+#    #+#             */
+/*   Updated: 2018/05/07 19:48:30 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#ifndef WINDOWS_H
 
-typedef enum		e_bool
-{
-	FALSE = 0,
-	TRUE = 1
-}					t_bool;
+#define WINDOWS_H
 
-typedef struct		s_proc
-{
-	int				player_id;
-	char			PC[REG_SIZE];
-	t_bool			carry;
-	char			reg[REG_NUMBER][REG_SIZE];
-}					t_proc;
+#include "asm.h"
+#include "ft_string.h"
+#include "get_next_line.h"
+#include "lst.h"
+#include "ft_printf.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+#endif

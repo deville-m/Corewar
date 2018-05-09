@@ -1,4 +1,7 @@
 *.o
+*.swp
+a.out
+.cor
 .DS_Store
 asm
 corewar

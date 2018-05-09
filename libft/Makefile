@@ -6,7 +6,7 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2018/04/23 15:26:21 by mdeville         ###   ########.fr        #
+#    Updated: 2018/05/04 18:29:30 by mdeville         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ INCDIR          = includes/
 RM              = rm
 AR              = ar
 ARFLAGS         = -rcs
+MAKEFLAGS       += --silent
 
 # set the suffix list explicitly
 .SUFFIXES:

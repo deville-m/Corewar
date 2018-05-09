@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 14:09:17 by mdeville          #+#    #+#             */
-/*   Updated: 2018/01/17 22:04:48 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/04 17:27:11 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ static char		*copy(char *dest, char *str, int *offset)
 	char	*res;
 
 	i = *offset;
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != EOL)
 		i++;
 	if (!(res = (char *)malloc(sizeof(char) * (ft_strlen(dest) + i + 1))))
 		return (NULL);
 	ft_strcpy(res, dest);
 	i = *offset;
 	j = ft_strlen(res);
-	while (str[i] && str[i] != '\n')
+	while (str[i] && str[i] != EOL)
 		res[j++] = str[i++];
 	res[j] = '\0';
-	*offset = (str[i] == '\n') ? i + 1 : 0;
+	*offset = (str[i] == EOL) ? i + 1 : 0;
 	free(dest);
 	return (res);
 }
