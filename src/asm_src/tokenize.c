@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/07 20:27:33 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 10:51:43 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	get_next_lines(int fd, char **line)
 
 static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 {
-	int ret;
+	size_t ret;
 
 	if ((ret = is_string(input)))
 		token->type = STRING;

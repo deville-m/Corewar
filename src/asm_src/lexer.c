@@ -6,14 +6,14 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 18:48:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 10:52:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "libft.h"
 
-int		is_separator(const char *arg)
+size_t	is_separator(const char *arg)
 {
 	return (*arg == SEPARATOR_CHAR);
 }
@@ -25,9 +25,9 @@ int		is_separator(const char *arg)
 ** @return boolean
 */
 
-int		is_direct(const char *arg)
+size_t	is_direct(const char *arg)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	if (arg[i] != DIRECT_CHAR)
