@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 16:45:37 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:39:50 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,16 @@ typedef struct		s_arena
 {
 	unsigned char	arena[MEM_SIZE];
 	t_dlist			*processes;
-	unsigned int	players[MAX_PLAYERS];
+	t_player		players[MAX_PLAYERS];
 	unsigned int	clock;
 }					t_arena;
+
+typedef struct		s_player
+{
+	unsigned int	id;
+	t_header		header;
+	unsigned int	last_live;
+}					t_player;
 
 /*
 ** --------------------
