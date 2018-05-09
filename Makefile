@@ -48,7 +48,7 @@ COREWARSRC:= $(COREWARSRC) $(COMMONSRC)
 COREWAROBJ:= $(COREWARSRC:.c=.o)
 # -------~-------~--~------------------~------
 vpath %.c $(SRCS)
-vpath %.h $(INCLDIRS)
+vpath %.h $(INCLUDES)
 # -------~-------~--~------------------~------
 _CC_ = `echo $(CC) | tr a-z A-Z`
 _LD_ = `echo $(LD) | tr a-z A-Z`
