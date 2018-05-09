@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 12:10:29 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:05:01 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,14 @@ size_t		is_string(const char *arg)
 ** @return boolean
 */
 
+#include "ft_printf.h"
+
 size_t		is_instruction(const char *arg)
 {
 	size_t i;
 
 	i = 0;
-	while (!arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
+	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 		++i;
 	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
 		return (i);

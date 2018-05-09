@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/08 09:56:50 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:01:07 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define DIRECT_CHAR			'%' // char indicating param is direct, without it, it's indirect
 # define SEPARATOR_CHAR			',' // separation char of parameters.
 
-# define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789" // list of char allowed for label names
+# define LABEL_CHARS			"abcdefghijklmnopqrstuvwxyz_0123456789" // list of char allowed for label names and instructions
 
 # define NAME_CMD_STRING		".name" // should be the first part of file, indicating next quoted string is name
 											// of max length PROG_NAME_LENGTH
