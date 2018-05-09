@@ -17,7 +17,7 @@ else
 	CC = clang
 endif
 
-CFLAGS=			-Wall -Wextra
+CFLAGS=			-Wall -Wextra -fsanitize=address
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/

@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 11:35:24 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 12:10:29 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,12 @@ size_t		is_comment(const char *arg)
 
 size_t		is_name(const char *arg)
 {
-	if (!ft_strequ(NAME_CMD_STRING, arg))
+	size_t len;
+
+	len = ft_strlen((char*)NAME_CMD_STRING);
+	if (!ft_strnequ(NAME_CMD_STRING, arg, len))
 		return (0);
-	return (ft_strlen(arg));
+	return (len);
 }
 
 /*
@@ -56,13 +59,10 @@ size_t		is_indirect_label(const char *arg)
 
 	i = 0;
 	if (arg[i] != LABEL_CHAR)
-		return (FALSE);
+		return (0);
 	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 		++i;
-	if (!arg[i])
-		return (0);
-	else
-		return (i);
+	return (i);
 }
 
 /*
@@ -75,7 +75,7 @@ size_t		is_direct_label(const char *arg)
 {
 	if (*arg != DIRECT_CHAR)
 		return (0);
-	return (is_indirect_label(arg + 1));
+	return (is_indirect_label(arg + 1) + 1);
 }
 
 /*
@@ -90,13 +90,13 @@ size_t		is_string(const char *arg)
 
 	i = 0;
 	if (arg[i] != STRING_CHAR)
-		return (FALSE);
+		return (0);
 	++i;
 	while (arg[i] && arg[i] != STRING_CHAR)
 		++i;
-	if (!(arg[i] == STRING_CHAR))
+	if (arg[i] != STRING_CHAR)
 		return (0);
-	return (i);
+	return (i + 1);
 }
 
 /*
@@ -107,6 +107,12 @@ size_t		is_string(const char *arg)
 
 size_t		is_instruction(const char *arg)
 {
-	(void)arg;
+	size_t i;
+
+	i = 0;
+	while (!arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
+		++i;
+	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
+		return (i);
 	return (0);
 }

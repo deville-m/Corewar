@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 10:51:43 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 12:02:00 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_bool	multiline_string(const char *line)
 	t_bool state;
 
 	if (!line)
-		return (FALSE);
+		return (TRUE);
 	state = FALSE;
 	while (*line)
 	{
@@ -51,8 +51,13 @@ static int	get_next_lines(int fd, char **line)
 	concat = NULL;
 	while (multiline_string(concat) && (ret = get_next_line(fd, &tmp)) > 0)
 	{
-		concat = ft_strnjoin(3, concat, eol, tmp);
-		free(tmp);
+		if (!concat)
+			concat = tmp;
+		else
+		{
+			concat = ft_strnjoin(3, concat, eol, tmp);
+			free(tmp);
+		}
 	}
 	*line = concat;
 	return (ret);
@@ -86,7 +91,7 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 		token->type = INSTRUCTION;
 	else
 	{
-		ft_fprintf(2, "Lexical error at [%d, %d]", token->line, token->column);
+		ft_fprintf(2, "Lexical error at [%d, %d]\n", token->line, token->column);
 		exit(42);
 	}
 	token->data = ft_strndup(input, ret);
@@ -124,7 +129,6 @@ t_dlist		*tokenize(int fd)
 {
 	t_dlist		*res;
 	char		*input;
-	char		*tmp;
 	t_asm_token	token;
 
 	input = NULL;
