@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/09 11:36:55 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:11:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@
 enum			e_type
 {
 	COMMAND_COMMENT = 0,
-	COMMAND_NAME,
-	STRING,
-	LABEL,
-	REGISTER,
-	DIRECT,
-	INDIRECT,
-	DIRECT_LABEL,
-	INDIRECT_LABEL,
-	SEPARATOR,
-	INSTRUCTION,
-	ENDLINE,
-	END
+	COMMAND_NAME = 1,
+	STRING = 2,
+	LABEL = 3,
+	REGISTER = 4,
+	DIRECT = 5,
+	INDIRECT = 6,
+	DIRECT_LABEL = 7,
+	INDIRECT_LABEL = 8,
+	SEPARATOR = 9,
+	INSTRUCTION = 10,
+	ENDLINE = 11,
+	END = 12
 };
 
 typedef enum	e_tok
@@ -147,5 +147,6 @@ int				oh_a_comment_pass_it(int fd);
 */
 
 t_dlist			*tokenize(int fd);
+void			print_tokens(t_dlist *elem);
 
 #endif

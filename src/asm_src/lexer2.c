@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 13:05:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:27:02 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,12 @@ size_t		is_indirect_label(const char *arg)
 	i = 0;
 	if (arg[i] != LABEL_CHAR)
 		return (0);
+	i++;
 	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 		++i;
-	return (i);
+	if (i >= 2)
+		return (i);
+	return (0);
 }
 
 /*
@@ -73,9 +76,15 @@ size_t		is_indirect_label(const char *arg)
 
 size_t		is_direct_label(const char *arg)
 {
+	size_t tmp;
+
 	if (*arg != DIRECT_CHAR)
 		return (0);
-	return (is_indirect_label(arg + 1) + 1);
+	tmp = is_indirect_label(arg + 1);
+	if (tmp)
+		return (1 + tmp);
+	else
+		return (0);
 }
 
 /*

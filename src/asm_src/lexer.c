@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 11:33:32 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:30:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,10 @@ size_t		is_register(const char *arg)
 	++i;
 	while (arg[i] && ft_strchr(BASE, arg[i]))
 		++i;
-	return (i);
+	if (i >= 2
+		&& (!arg[i]
+			|| ft_strchr(WHITESPACE, arg[i])
+			|| arg[i] == SEPARATOR_CHAR))
+		return (i);
+	return (0);
 }
