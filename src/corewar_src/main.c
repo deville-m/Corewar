@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.h                                               :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 14:22:09 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/09 14:13:38 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VM_H
-# define VM_H
+#include <vm.h>
 
-/*
-** VM related header file
-*/
-
-//# include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-
-#endif
+int		main(int argc, char *argv[])
+{
+	(void)argc;
+	(void)argv;
+	return (EXIT_SUCCESS);
+}

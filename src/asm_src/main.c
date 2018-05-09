@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vm.h                                               :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 14:22:09 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/09 14:05:54 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/09 14:06:20 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VM_H
-# define VM_H
-
-/*
-** VM related header file
-*/
-
-//# include "libft.h"
-# include <stdlib.h>
-# include <unistd.h>
-
-#endif
+int
+main(int argc, char *argv[])
+{
+	/* TODO: remove this shit befor merge */
+    return 0;
+}
