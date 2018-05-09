@@ -49,12 +49,35 @@ void	tmp_make_fake_header(t_env *env)
 	ft_bzero(env->header->comment, COMMENT_LENGTH + 1);
 	ft_memcpy(env->header->comment, "just a basic living prog", 24); // sooo fake
 }
-/*
+
 void	tmp_make_fake_prog(t_env *env)
 {
-	create_token(*env, LABEL, 4, 2, "name:");
+	// label l2
+	create_token(env, LABEL, 4, 2, "l2:", 0);
+	// sti
+	create_token(env, INSTRUCTION, 4, 2, "sti", 11);
+	// sti params
+	create_token(env, REGISTER, 4, 2, "r1", 1);
+	create_token(env, DIRECT_LABEL, 4, 2, "%:live", 15);
+	create_token(env, DIRECT, 4, 2, "%1", 1);
+	// and
+	create_token(env, INSTRUCTION, 4, 2, "and", 6);
+	// and params
+	create_token(env, REGISTER, 4, 2, "r1", 1);
+	create_token(env, DIRECT, 4, 2, "%0", 0);
+	create_token(env, REGISTER, 4, 2, "r1", 1);
+	// label live
+	create_token(env, LABEL, 4, 2, "live:", 15);
+	// live
+	create_token(env, INSTRUCTION, 4, 2, "live", 1);
+	// live param
+	create_token(env, DIRECT, 4, 2, "%1", 1);
+	// zjmp
+	create_token(env, INSTRUCTION, 4, 2, "zjmp", 9);
+	// zjmp param
+	create_token(env, DIRECT_LABEL, 4, 2, "%:live", 15);
 }
-*/
+
 void	init_env(t_env *env, char *input)
 {
 	env->tok_head = NULL;
@@ -77,6 +100,7 @@ int		main(int ac, char **av)
 		init_env(&env, av[1]);
 
 		tmp_make_fake_header(&env); // sooo fake
+		tmp_make_fake_prog(&env);
 
 		craft_file(&env);
 	}

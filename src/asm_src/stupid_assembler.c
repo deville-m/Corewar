@@ -66,7 +66,7 @@ void	tmp_print_lst(t_list *head)
 	}
 }
 
-int	create_token(t_env *env, enum e_type type, int line, int column, char *raw)
+int	create_token(t_env *env, enum e_type type, int line, int column, char *raw, int data)
 {
 	t_ltoken	*new;
 
@@ -78,7 +78,7 @@ int	create_token(t_env *env, enum e_type type, int line, int column, char *raw)
 	new->line = line;
 	new->column = column;
 	new->raw = raw;
-	new->data = -1;
+	new->data = data;
 //	new->data = ft_treat(new->type, new->raw);
 
 	ft_lstinsert(&(env->tok_head), (void *)(new), sizeof(new));
@@ -126,11 +126,11 @@ void		analyser(t_env *env, int fd, char buf)
 
 	ret = 1;
 	if (buf == STRING_CHAR)
-		ret = create_token(env, STRING, 4, 2, string_token(fd));
+		ret = create_token(env, STRING, 4, 2, string_token(fd), -1);
 	else if (buf == SEPARATOR_CHAR)
-		ret = create_token(env, SEPARATOR, 4, 2, ft_strdup(","));
+		ret = create_token(env, SEPARATOR, 4, 2, ft_strdup(","), -1);
 	else if (buf == EOL)
-		ret = create_token(env, ENDLINE, 4, 2, ft_strdup("\n"));
+		ret = create_token(env, ENDLINE, 4, 2, ft_strdup("\n"), -1);
 	else if (buf == DIRECT_CHAR)
 		ret = craft_directs(env, fd);
 	else if (buf == COMMENT_CHAR)

@@ -117,7 +117,7 @@ t_bool			check_collisions(uint_fast32_t i);
 /*
 ** @stupid_analyser.c
 */
-int		create_token(t_env *env, enum e_type type, int line, int column, char *raw);
+int		create_token(t_env *env, enum e_type type, int line, int column, char *raw, int data);
 
 /*
 ** @analyser.c
