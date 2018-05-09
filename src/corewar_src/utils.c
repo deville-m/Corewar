@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 17:18:45 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/09 17:22:47 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
-#include <op.h>
-#include <ncurses.h>
-#include <ft_getopt.h>
+#include <libft.h>
 
-int			main(int argc, char *argv[])
+/*
+** @desc print usage and exit;
+** @return Nil (exit)
+*/
+
+void	usage(void)
 {
-	struct s_option opts;
-
-	opts.dump = 0;
-	if (argc < 2 || !parse_options(argc, argv, &opts))
-		usage();
-	if ((argc - g_optind) > MAX_PLAYERS
-		|| (argc - g_optind) < 1)
-		usage();
-	printf("Option: %zu %zu | %d - %d\n", opts.dump, opts.cycles, g_optind , argc);
-	return (EXIT_SUCCESS);
+	ft_printf("Usage: ./corewar [-d nbr_cycles] ");
+	ft_printf("[[-n number] champion1.cor] ...\n");
+	exit(EXIT_FAILURE);
 }

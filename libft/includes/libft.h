@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 13:16:17 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 14:21:10 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:30:07 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,11 @@
 # include "memory.h"
 # include "path.h"
 # include "ft_ctype.h"
+
+typedef enum	e_bool
+{
+	FT_FALSE = 0,
+	FT_TRUE
+}				t_bool;
 
 #endif
