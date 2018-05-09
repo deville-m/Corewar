@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:38:11 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 11:08:13 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:35:59 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		transpose(t_tok *transpose,
 	{
 		if (split[i] == NULL)
 			return ;
-		transpose[i] = tokenize(split[i]);
+		transpose[i] = tokenize_args(split[i]);
 		i++;
 	}
 }

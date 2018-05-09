@@ -6,14 +6,21 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 10:55:02 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:33:32 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "libft.h"
 
-size_t	is_separator(const char *arg)
+/*
+** @desc predicate to detect
+**       separators
+** @params arg current curs
+** @return boolean
+*/
+
+size_t		is_separator(const char *arg)
 {
 	return (*arg == SEPARATOR_CHAR);
 }
@@ -25,7 +32,7 @@ size_t	is_separator(const char *arg)
 ** @return boolean
 */
 
-size_t	is_direct(const char *arg)
+size_t		is_direct(const char *arg)
 {
 	size_t i;
 
@@ -47,7 +54,7 @@ size_t	is_direct(const char *arg)
 ** @return boolean
 */
 
-t_bool		is_indirect(const char *arg)
+size_t		is_indirect(const char *arg)
 {
 	int i;
 
@@ -66,14 +73,17 @@ t_bool		is_indirect(const char *arg)
 ** @return boolean
 */
 
-t_bool		is_label(const char *arg)
+size_t		is_label(const char *arg)
 {
-	while (*arg && ft_strchr(LABEL_CHARS, *arg))
-		++arg;
-	if (*arg != LABEL_CHAR)
-		return (FALSE);
-	++arg;
-	return (!*arg);
+	size_t  i;
+
+	i = 0;
+	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
+		++i;
+	if (arg[i] != LABEL_CHAR)
+		return (0);
+	else
+		return (i + 1);
 }
 
 /*
@@ -83,12 +93,15 @@ t_bool		is_label(const char *arg)
 ** @return boolean
 */
 
-t_bool		is_register(const char *arg)
+size_t		is_register(const char *arg)
 {
-	if (*arg != REGISTER_CHAR)
-		return (FALSE);
-	++arg;
-	while (*arg && ft_strchr(BASE, *arg))
-		++arg;
-	return (!*arg);
+	size_t i;
+
+	i = 0;
+	if (arg[i] != REGISTER_CHAR)
+		return (0);
+	++i;
+	while (arg[i] && ft_strchr(BASE, arg[i]))
+		++i;
+	return (i);
 }

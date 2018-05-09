@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/09 11:10:03 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:36:55 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,16 @@ uint16_t		operator_tsize(void);
 */
 
 size_t			is_direct(const char *arg);
-t_bool			is_indirect(const char *arg);
-t_bool			is_label(const char *arg);
-t_bool			is_register(const char *arg);
+size_t			is_indirect(const char *arg);
+size_t			is_label(const char *arg);
+size_t			is_register(const char *arg);
+size_t			is_comment(const char *arg);
+size_t			is_name(const char *arg);
+size_t			is_indirect_label(const char *arg);
+size_t			is_direct_label(const char *arg);
+size_t			is_string(const char *arg);
+size_t			is_instruction(const char *arg);
+size_t			is_separator(const char *arg);
 
 /*
 ** @collision.c
