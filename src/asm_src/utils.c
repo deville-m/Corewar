@@ -6,13 +6,33 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 14:35:52 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/04 16:00:16 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:33:22 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <asm.h>
 #include <libft.h>
 #include <stdint.h>
+
+t_bool	multiline_string(const char *line)
+{
+	t_bool state;
+
+	if (!line)
+		return (TRUE);
+	state = FALSE;
+	while (*line)
+	{
+		if (*line == COMMENT_CHAR && state == 0)
+			return (FALSE);
+		else if (*line == STRING_CHAR && state == 0)
+			state = TRUE;
+		else if (*line == STRING_CHAR && state == 1)
+			state = FALSE;
+		++line;
+	}
+	return (state);
+}
 
 /*
 ** @desc compute tab size

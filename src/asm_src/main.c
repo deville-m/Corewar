@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:18:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 14:07:13 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:04:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "asm.h"
 #include "dlst.h"
 
-void print_tokens(t_dlist *elem)
+void	print_tokens(t_dlist *elem)
 {
 	t_asm_token *token;
 
@@ -28,7 +28,7 @@ void print_tokens(t_dlist *elem)
 		ft_printf("type: %d, %s\n", token->type, token->data);
 }
 
-int	main(int argc, char *const argv[])
+int		main(int argc, char *const argv[])
 {
 	int		fd;
 	t_dlist	*tokens;
@@ -39,6 +39,7 @@ int	main(int argc, char *const argv[])
 		exit(42);
 	if (!(tokens = tokenize(fd)))
 		exit(42);
+	ft_dlstreverse(&tokens);
 	ft_dlstiter(tokens, print_tokens);
 	close(fd);
 }

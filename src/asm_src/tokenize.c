@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 14:40:23 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:33:35 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,6 @@
 #include "ft_string.h"
 #include "ft_printf.h"
 #include "get_next_line.h"
-
-static t_bool	multiline_string(const char *line)
-{
-	t_bool state;
-
-	if (!line)
-		return (TRUE);
-	state = FALSE;
-	while (*line)
-	{
-		if (*line == COMMENT_CHAR && state == 0)
-			return (FALSE);
-		else if (*line == STRING_CHAR && state == 0)
-			state = TRUE;
-		else if (*line == STRING_CHAR && state == 1)
-			state = FALSE;
-		++line;
-	}
-	return (state);
-}
 
 static int	get_next_lines(int fd, char **line)
 {
@@ -63,17 +43,11 @@ static int	get_next_lines(int fd, char **line)
 	return (ret);
 }
 
-static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
+static int	parse_asm_token2(char *input, t_asm_token *token)
 {
 	size_t ret;
 
-	if ((ret = is_string(input, token)))
-		token->type = STRING;
-	else if ((ret = is_direct(input)))
-		token->type = DIRECT;
-	else if ((ret = is_indirect(input)))
-		token->type = INDIRECT;
-	else if ((ret = is_label(input)))
+	if ((ret = is_label(input)))
 		token->type = LABEL;
 	else if ((ret = is_register(input)))
 		token->type = REGISTER;
@@ -90,8 +64,26 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 	else if ((ret = is_instruction(input)))
 		token->type = INSTRUCTION;
 	else
+		return (0);
+	return (ret);
+}
+
+static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
+{
+	size_t ret;
+
+	if ((ret = is_string(input, token)))
+		token->type = STRING;
+	else if ((ret = is_direct(input)))
+		token->type = DIRECT;
+	else if ((ret = is_indirect(input)))
+		token->type = INDIRECT;
+	else if (!(ret = parse_asm_token2(input, token)))
 	{
-		ft_fprintf(2, "Lexical error at [%d, %d]\n", token->line, token->column);
+		ft_fprintf(
+				2,
+				"Lexical error at [%d, %d]\n",
+				token->line, token->column);
 		exit(42);
 	}
 	token->data = ft_strndup(input, ret);
@@ -111,7 +103,7 @@ static void	process_input(t_dlist **res, char *input, t_asm_token *token)
 			while (*input && *input != EOL)
 				++input;
 			if (!*input)
-				break;
+				break ;
 			token->type = ENDLINE;
 			ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
 			++token->line;

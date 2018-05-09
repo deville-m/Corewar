@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/09 14:37:19 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 15:34:32 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int				oh_a_comment_pass_it(int fd);
 ** @tokenize.c
 */
 
+t_bool			multiline_string(const char *line);
 t_dlist			*tokenize(int fd);
 void			print_tokens(t_dlist *elem);
 
