@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 17:26:23 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:04:03 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,18 +98,8 @@ static void	process_input(t_dlist **res, char *input, t_asm_token *token)
 	token->column = 1;
 	while (*input)
 	{
-		if (*input == EOL || *input == COMMENT_CHAR)
-		{
-			while (*input && *input != EOL)
-				++input;
-			if (!*input)
-				break ;
-			token->type = ENDLINE;
-			ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
-			++token->line;
-			token->column = 1;
-			++input;
-		}
+		if (*input == COMMENT_CHAR)
+			break ;
 		else if (!ft_strchr(WHITESPACE, *input))
 			input = parse_asm_token(res, input, token);
 		else
