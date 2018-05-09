@@ -6,44 +6,42 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/07 17:35:48 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 10:57:06 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
 # define ASM_H
 
+# include <stdint.h>
 # include "op.h"
-# include <libft.h>
+# include "ft_ctype.h"
+# include "dlst.h"
 
-/*
-** Pseudo tokenizer type
-** detemine param type
-** Meta[Nil]
-*/
-
-typedef enum	e_tok
+typedef enum	e_type
 {
-	REG = 1,
-	DIR = 2,
-	IND = 3,
-	LAB = 4,
-	SENTINEL
-}				t_tok;
+	COMMAND_COMMENT = 0,
+	COMMAND_NAME,
+	STRING,
+	LABEL,
+	REGISTER,
+	DIRECT,
+	INDIRECT,
+	DIRECT_LABEL,
+	INDIRECT_LABEL,
+	SEPARATOR,
+	INSTRUCTION,
+	ENDLINE,
+	END
+};
 
-/*
-** Literal token lexer structure
-** for word an syntax processing.
-** Meta[t_dlst*]
-*/
-
-typedef struct	s_ltoken
+typedef struct	s_asm_token
 {
-	enum e_tok	type;
+	enum e_type	type;
 	int			line;
 	int			column;
 	char		*data;
-}				t_ltoken;
+}				t_asm_token;
 
 /*
 ** @stupid_asm.c
@@ -94,5 +92,7 @@ t_bool			is_register(const char *arg);
 */
 
 t_bool			check_collisions(uint_fast32_t i);
+
+t_dlist *tokenize(int fd);
 
 #endif
