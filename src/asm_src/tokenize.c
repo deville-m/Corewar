@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 15:33:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:26:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ t_dlist		*tokenize(int fd)
 		ft_dlstprepend(&res, ft_dlstnew(&token, sizeof(token)));
 		free(input);
 	}
+	ft_dlstreverse(&res);
 	return (res);
 }

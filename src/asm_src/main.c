@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:18:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 15:04:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 17:43:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int		main(int argc, char *const argv[])
 		exit(42);
 	if (!(tokens = tokenize(fd)))
 		exit(42);
-	ft_dlstreverse(&tokens);
 	ft_dlstiter(tokens, print_tokens);
 	close(fd);
 }
