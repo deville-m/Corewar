@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 13:30:27 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 13:58:58 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ size_t		is_direct(const char *arg)
 {
 	size_t i;
 
-	i = 0;
-	if (arg[i] != DIRECT_CHAR)
+	if (*arg != DIRECT_CHAR)
 		return (0);
-	++i;
-	while (arg[i] && ft_strchr(BASE, arg[i]))
-		++i;
-	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
-		return (i);
+	i = is_indirect(arg + 1);
+	if (i)
+		return (1 + i);
 	return (0);
 }
 
@@ -61,7 +58,10 @@ size_t		is_indirect(const char *arg)
 	i = 0;
 	while (arg[i] && ft_strchr(BASE, arg[i]))
 		++i;
-	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
+	if (i >= 1
+		&& (!arg[i]
+			|| ft_strchr(WHITESPACE, arg[i])
+			|| arg[i] == SEPARATOR_CHAR))
 		return (i);
 	return (0);
 }

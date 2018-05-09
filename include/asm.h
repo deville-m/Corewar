@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/09 13:11:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 14:37:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ size_t			is_comment(const char *arg);
 size_t			is_name(const char *arg);
 size_t			is_indirect_label(const char *arg);
 size_t			is_direct_label(const char *arg);
-size_t			is_string(const char *arg);
+size_t			is_string(const char *arg, t_asm_token *token);
 size_t			is_instruction(const char *arg);
 size_t			is_separator(const char *arg);
 

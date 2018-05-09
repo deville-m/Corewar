@@ -6,10 +6,11 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 13:27:02 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 14:37:04 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "asm.h"
 #include "op.h"
 #include "ft_ctype.h"
 #include "ft_string.h"
@@ -93,18 +94,32 @@ size_t		is_direct_label(const char *arg)
 ** @return boolean
 */
 
-size_t		is_string(const char *arg)
+size_t		is_string(const char *arg, t_asm_token *token)
 {
-	size_t i;
+	size_t	i;
+	int		line;
+	int		column;
 
-	i = 0;
-	if (arg[i] != STRING_CHAR)
+	if (arg[0] != STRING_CHAR)
 		return (0);
-	++i;
+	i = 1;
+	line = token->line;
+	column = 1 + token->column;
 	while (arg[i] && arg[i] != STRING_CHAR)
+	{
+		if (arg[i] == EOL)
+		{
+			++line;
+			column = 1;
+		}
+		else
+			++column;
 		++i;
+	}
 	if (arg[i] != STRING_CHAR)
 		return (0);
+	token->column = column + 1;
+	token->line = line;
 	return (i + 1);
 }
 
