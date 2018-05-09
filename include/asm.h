@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/09 11:00:05 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:10:03 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ enum			e_type
 	END
 };
 
+typedef enum	e_tok
+{
+	REG = 1,
+	DIR = 2,
+	IND = 3,
+	LAB = 4,
+	SENTINEL
+}				t_tok;
+
 typedef struct	s_asm_token
 {
 	enum e_type	type;
@@ -43,6 +52,20 @@ typedef struct	s_asm_token
 	int			column;
 	char		*data;
 }				t_asm_token;
+
+/*
+** Literal token lexer structure
+** for word an syntax processing.
+** Meta[t_dlst*]
+*/
+
+typedef struct	s_env
+{
+	t_header	*header;
+	t_list		*tok_head;
+	char		*input_name;
+}				t_env;
+
 
 /*
 ** @stupid_asm.c
@@ -68,7 +91,7 @@ void			transpose(t_tok *transpose,
 						  const char **split,
 						  char opcode,
 						  uint8_t i);
-t_tok			tokenize(const char *occur);
+t_tok			tokenize_args(const char *occur);
 t_bool			check_rules(const char opcode,
 							t_tok *transpose,
 							uint8_t i);
@@ -84,7 +107,7 @@ uint16_t		operator_tsize(void);
 ** @lexer.c
 */
 
-t_bool			is_direct(const char *arg);
+size_t			is_direct(const char *arg);
 t_bool			is_indirect(const char *arg);
 t_bool			is_label(const char *arg);
 t_bool			is_register(const char *arg);
@@ -102,15 +125,20 @@ t_bool			check_collisions(const char	*base,
 ** @stupid_analyser.c
 */
 
-int		create_token(t_env *env, enum e_type type, int line,
-				int column, char *raw);
+int				create_token(t_env *env, enum e_type type, int line,
+					int column, char *raw);
 
 /*
 ** @analyser.c
 */
-int		craft_directs(t_env *env, int fd);
-int		oh_a_comment_pass_it(int fd);
 
-t_dlist *tokenize(int fd);
+int				craft_directs(t_env *env, int fd);
+int				oh_a_comment_pass_it(int fd);
+
+/*
+** @tokenize.c
+*/
+
+t_dlist			*tokenize(int fd);
 
 #endif

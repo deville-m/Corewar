@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:38:11 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/07 17:47:19 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:08:13 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		transpose(t_tok *transpose,
 ** @return Maybe[Token] | Some[Sentinel]
 */
 
-t_tok		tokenize(const char *occur)
+t_tok		tokenize_args(const char *occur)
 {
 	if (is_direct(occur))
 		return (DIR);

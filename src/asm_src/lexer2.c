@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/04 20:16:23 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/09 11:11:07 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,10 @@ t_bool		is_string(const char *arg)
 	while (*arg && *arg != STRING_CHAR)
 		++arg;
 	return (*arg == STRING_CHAR);
+}
+
+size_t is_instruction(const char *arg)
+{
+	(void)arg;
+	return (0);
 }
