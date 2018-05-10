@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/09 15:34:32 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/10 23:23:48 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef struct	s_asm_token
 	enum e_type	type;
 	int			line;
 	int			column;
-	char		*data;
+	char		*raw;
+	int			data;
+	t_bool		option;
 }				t_asm_token;
 
 /*
@@ -146,8 +148,11 @@ int				oh_a_comment_pass_it(int fd);
 ** @tokenize.c
 */
 
+t_asm_token		*get_token(t_dlist *elem);
 t_bool			multiline_string(const char *line);
 t_dlist			*tokenize(int fd);
 void			print_tokens(t_dlist *elem);
+void			syntax_check(t_dlist *tokens);
+void			syntax_error(char *message, t_asm_token *token);
 
 #endif

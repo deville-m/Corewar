@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 14:37:04 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:43:18 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,6 @@ size_t		is_string(const char *arg, t_asm_token *token)
 ** @params arg current curs
 ** @return boolean
 */
-
-#include "ft_printf.h"
 
 size_t		is_instruction(const char *arg)
 {

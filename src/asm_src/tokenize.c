@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 18:04:03 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/10 21:52:57 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int	get_next_lines(int fd, char **line)
 			free(tmp);
 		}
 	}
+	if (!ret)
+		free(tmp);
 	*line = concat;
 	return (ret);
 }
@@ -86,7 +88,7 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 				token->line, token->column);
 		exit(42);
 	}
-	token->data = ft_strndup(input, ret);
+	token->raw = ft_strndup(input, ret);
 	ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
 	if (token->type != STRING)
 		token->column += ret;
@@ -123,11 +125,14 @@ t_dlist		*tokenize(int fd)
 	{
 		process_input(&res, input, &token);
 		token.type = ENDLINE;
+		ft_dlstprepend(&res, ft_dlstnew(&token, sizeof(token)));
 		token.column = 1;
 		++token.line;
-		ft_dlstprepend(&res, ft_dlstnew(&token, sizeof(token)));
 		free(input);
 	}
+	token.type = END;
+	token.raw = NULL;
+	ft_dlstprepend(&res, ft_dlstnew(&token, sizeof(token)));
 	ft_dlstreverse(&res);
 	return (res);
 }

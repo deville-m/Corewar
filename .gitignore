@@ -10,3 +10,4 @@ libft.a
 ressources
 .syntastic_c_config
 libft/.obj
+*.dSYM

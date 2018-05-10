@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/09 13:01:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/10 23:32:10 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct					s_header
 # define BASE "0123456789"
 # define STRING_CHAR '"'
 
+# define INSTRUCTION_NBR 16
 # define INSTRUCTION_SIZE		256 /* taille max instructions */
 # define DESC_SIZE				1024 /* ??? */
 
@@ -134,6 +135,6 @@ typedef struct					s_op
 	int							index;
 }								t_op;
 
-extern t_op						g_op_tab[17];
+extern t_op						g_op_tab[INSTRUCTION_NBR];
 
 #endif

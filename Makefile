@@ -17,7 +17,7 @@ else
 	CC = clang
 endif
 
-CFLAGS=			-Wall -Wextra -fsanitize=address
+CFLAGS=			-Wall -Wextra #-fsanitize=address
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/
@@ -27,7 +27,8 @@ COREWARDIR=		corewar_src/
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			main.c tokenize.c utils.c lexer.c lexer2.c rules.c collision.c
+ASMSRC=			main.c tokenize.c utils.c lexer.c lexer2.c rules.c collision.c \
+				syntax_check.c
 
 COREWARSRC=		main.c
 
