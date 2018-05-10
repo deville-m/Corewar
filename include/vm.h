@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 10:05:36 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 11:36:55 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_bool		kernel(struct s_option *options);
 ** @curses.c
 */
 
-void		init_boxes(WINDOW *win);
-void		draw_borders(WINDOW *screen);
+void		init_curses(void);
+void		windows_borders(WINDOW *arena, WINDOW *status);
 
 #endif
