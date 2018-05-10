@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 14:12:13 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:46:42 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_arena
 typedef struct		s_process
 {
 	unsigned int	pc;
+	t_bool			carry;
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
 	unsigned int	registers[REG_NUMBER];
 }					t_process;
