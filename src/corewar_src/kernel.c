@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   kernel.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/04 10:14:20 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 09:23:24 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/10 09:29:45 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-# define ASM_H
+#include <vm.h>
 
 /*
-** ASM related header
+** @desc monothilic part of the arena
+** @param options retrieved
+** @return nil
 */
 
-#endif
+t_bool		kernel(struct s_option *options)
+{
+	init_boxes(NULL);
+	return (TRUE);
+}

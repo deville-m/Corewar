@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/09 17:39:50 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 10:05:36 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,20 @@ struct s_option
 };
 
 /*
-** -------------------
+** Players reference using
+** `MAX_PLAYERS` defines
+*/
+
+typedef struct		s_player
+{
+	unsigned int	id;
+	t_header		header;
+	unsigned int	last_live;
+}					t_player;
+
+/*
+** Arena structure with
+** players and ctx infos
 */
 
 typedef struct		s_arena
@@ -43,15 +56,9 @@ typedef struct		s_arena
 	unsigned int	clock;
 }					t_arena;
 
-typedef struct		s_player
-{
-	unsigned int	id;
-	t_header		header;
-	unsigned int	last_live;
-}					t_player;
-
 /*
-** --------------------
+** Current process structure
+** for players tracking
 */
 
 typedef struct		s_process
@@ -72,5 +79,18 @@ void		usage(void);
 */
 
 t_bool		parse_options(int argc, char *argv[], struct s_option *opts);
+
+/*
+** @kernel.c
+*/
+
+t_bool		kernel(struct s_option *options);
+
+/*
+** @curses.c
+*/
+
+void		init_boxes(WINDOW *win);
+void		draw_borders(WINDOW *screen);
 
 #endif
