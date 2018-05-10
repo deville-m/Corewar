@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 12:03:25 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 12:27:19 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,19 @@ void		init_curses(void)
 	atexit((void*)endwin);
 }
 
-void		windows_borders(WINDOW *arena, WINDOW *status)
+void		alloc_window(WINDOW *arena, WINDOW *status)
+{
+	arena = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
+	status = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
+}
+
+void		apply_windows(WINDOW *arena, WINDOW *status)
 {
 	clear();
 	arena = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
 	status = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
 	box(arena, ACS_VLINE, ACS_HLINE);
 	box(status, ACS_VLINE, ACS_HLINE);
-	/* TODO: Controler le render de l'arena/status */
 	wrefresh(arena);
 	wrefresh(status);
 	getch();
