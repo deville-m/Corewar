@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 09:22:37 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:36:25 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int			main(int argc, char *argv[])
 	if ((argc - g_optind) > MAX_PLAYERS
 		|| (argc - g_optind) < 1)
 		usage();
-	printf("Option: %zu %zu | %d - %d\n", opts.dump, opts.cycles, g_optind , argc);
+	printf("Option: %zu %zu | %d - %d\n", opts.dump, opts.cycles,
+		g_optind, argc);
 	if (!(kernel(&opts)))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

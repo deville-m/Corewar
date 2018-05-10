@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 12:27:19 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 12:39:19 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void		init_curses(void)
 	initscr();
 	cbreak();
 	noecho();
+	curs_set(0);
+	init_pair(1, COLOR_BLACK, COLOR_GREEN);
 	keypad(stdscr, TRUE);
 	atexit((void*)endwin);
 }
@@ -40,9 +42,8 @@ void		apply_windows(WINDOW *arena, WINDOW *status)
 	clear();
 	arena = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
 	status = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
+	wbkgd(arena, COLOR_PAIR(1));
+	wbkgd(status, COLOR_PAIR(1));
 	box(arena, ACS_VLINE, ACS_HLINE);
 	box(status, ACS_VLINE, ACS_HLINE);
-	wrefresh(arena);
-	wrefresh(status);
-	getch();
 }

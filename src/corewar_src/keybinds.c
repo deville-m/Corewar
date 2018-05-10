@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kernel.c                                           :+:      :+:    :+:   */
+/*   keybinds.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 13:30:27 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/10 13:27:54 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/10 13:35:38 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 
 /*
-** @desc monothilic part of the arena
-** @param options retrieved
+** @desc keybind callback
 ** @return nil
 */
 
-t_bool		kernel(struct s_option *options)
+void	keybindinds_callback(int c)
 {
-	WINDOW *arena = NULL;
-	WINDOW *status = NULL;
-
-	init_curses();
-	while (1)
-	{
-		apply_windows(arena, status);
-		wrefresh(arena);
-		wrefresh(status);
-		keybindinds_callback(getch());
-	}
-	return (TRUE);
+	if (c == 0x1b || c == 0x71)
+		return ((void)EXIT_SUCCESS);
 }

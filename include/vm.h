@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 12:21:29 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:32:07 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,11 @@ t_bool		kernel(struct s_option *options);
 void		init_curses(void);
 void		apply_windows(WINDOW *arena, WINDOW *status);
 void		alloc_window(WINDOW *arena, WINDOW *status);
+
+/*
+** @keybinds
+*/
+
+void		keybindinds_callback(int c);
 
 #endif
