@@ -6,27 +6,12 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:32:21 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/10 18:34:42 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:42:42 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "windows.h"
-
-int		create_file(t_env *env)
-{
-	char	*new;
-	int		fd;
-
-	new = ft_strrchr(env->input_name, '.');
-	*(new) = '\0';
-	new = ft_strjoin(env->input_name, ".cor");
-	if (!new)
-		bug_err("Error while malloc new file name\n");
-	if ((fd = open(new, O_CREAT | O_EXLOCK | O_TRUNC | O_WRONLY)) == -1)
-		bug_err("Error while create new file\n");
-	free(new);
-	return (fd);
-}
+#include "asm.h"
+#include "ft_string.h"
 
 t_lab	*new_t_lab(char *name, int offset, int instr_offset)
 {
@@ -41,56 +26,7 @@ t_lab	*new_t_lab(char *name, int offset, int instr_offset)
 	return (new);
 }
 
-unsigned char	craft_coding_byte(t_list *head)
-{
-	t_asm_token		*tmp;
-	unsigned char	result;
-	int				i;
-
-	i = 2;
-	result = 0;
-	if (!head)
-		return (0);
-	tmp = (t_asm_token *)head->content;
-	while (head && tmp && LABEL < tmp->type && tmp->type < SEPARATOR)
-	{
-		if (tmp->type == REGISTER)
-			result |= 1;
-		else if (tmp->type == DIRECT || tmp->type == DIRECT_LABEL)
-			result |= 2;
-		else
-			result |= 3;
-		result <<= 2;
-		i -= 1;
-		head = head->next;
-		tmp = (t_asm_token *)head->content;
-	}
-	while (i-- >= 0)
-		result <<= 2;
-	return (result);
-}
-
-int				craft_instru(t_env *env, t_list *current, int offset, int *in_off)
-{
-	t_asm_token		*tok;
-	unsigned char	c;
-
-	*in_off = offset;
-	if (!current)
-		bug_err("Error while trying to craft instruction\n");
-	if (!(tok = (t_asm_token *)current->content))
-		bug_err("Error while trying to craft instruction\n");
-	offset += write(env->fd, &(tok->data), 1);
-	if (tok->option)
-	{
-		if (!(c = craft_coding_byte(current->next)))
-			bug_err("Error while crafting coding byte\n");
-		offset += write(env->fd, &c, 1);
-	}
-	return (offset);
-}
-
-t_lab			*is_labelled(t_env *env, t_asm_token *tok)
+t_lab	*is_labelled(t_env *env, t_asm_token *tok)
 {
 	t_list	*tmp;
 	t_lab	*elem;
@@ -106,120 +42,10 @@ t_lab			*is_labelled(t_env *env, t_asm_token *tok)
 	return (NULL);
 }
 
-int				craft_labels(t_env *env, t_asm_token *tok, int offset, int instr_offset)
-{
-	t_lab	*tmp;
-	short	result;
-
-	if ((tmp = is_labelled(env, tok)))
-	{
-		result = (short)(tmp->offset - instr_offset);
-		swap_endian(&(result), 2);
-		offset += write(env->fd, &result, 2);
-	}
-	else
-	{
-		tmp = new_t_lab(tok->raw, offset, instr_offset);
-		ft_lstinsert(&(env->to_do), tmp, sizeof(t_lab));
-		offset += write(env->fd, "aa", 2);
-	}
-	return (offset);
-}
-
-int				craft_values(t_env *env, t_asm_token *tok, int offset)
-{
-	short	tmp;
-
-	tmp = 0;
-	if (tok->option || tok->type == INDIRECT)
-	{
-		tmp = (short)tok->data;
-		swap_endian(&tmp, 2);
-		offset += write(env->fd, &tmp, 2);
-	}
-	else
-	{
-		swap_endian(&(tok->data), 4);
-		offset += write(env->fd, &(tok->data), 4);
-	}
-	return (offset);
-}
-
-void			fill_label_gaps(t_env *env, int	offset, t_list *haystack)
-{
-	t_list	*tmp;
-	t_lab	*elem;
-	t_lab	*needle;
-	short	result;
-
-	env->header->prog_size = offset;
-	tmp = env->to_do;
-	while (tmp)
-	{
-		needle = (t_lab *)tmp->content;
-		haystack = env->lab_h;
-		while (haystack)
-		{
-			elem = (t_lab *)haystack->content;
-			if (ft_strcmp(elem->name, needle->name) == 0)
-			{
-				lseek(env->fd, needle->offset - offset, SEEK_END);
-				result = (short)(elem->offset - needle->instr_offset);
-				swap_endian(&(result), 2);
-				write(env->fd, &result, 2);
-			}
-			haystack = haystack->next;
-		}
-		tmp = tmp->next;
-	}
-}
-void			add_lab_elem(t_env *env, t_asm_token *tok, int offset)
+void	add_lab_elem(t_env *env, t_asm_token *tok, int offset)
 {
 	t_lab	*new;
 
 	new = new_t_lab(tok->raw, offset, -1);
 	ft_lstinsert(&(env->lab_h), (void *)new, sizeof(t_lab));
-}
-
-void			craft_prog(t_env *env, t_list *tmp)
-{
-	t_asm_token		*tok;
-	int				offset;
-	int				instr_offset;
-
-	offset = 0;
-	instr_offset = offset;
-	while (tmp)
-	{
-		tok = (t_asm_token *)tmp->content;
-		if (tok->type == LABEL)
-			add_lab_elem(env, tok, offset);
-		else if (tok->type == INSTRUCTION)
-			offset = craft_instru(env, tmp, offset, &instr_offset);
-		else
-		{
-			if (tok->type == REGISTER)
-				offset += write(env->fd, &(tok->data), 1);
-			else if (tok->type == DIRECT_LABEL || tok->type == INDIRECT_LABEL)
-				offset = craft_labels(env, tok, offset, instr_offset);
-			else if (tok->type == DIRECT || tok->type == INDIRECT)
-				offset = craft_values(env, tok, offset);
-			else
-				bug_err("Token list have wrong format\n");
-		}
-		tmp = tmp->next;
-	}
-	fill_label_gaps(env, offset, NULL);
-}
-
-int		craft_file(t_env *env)
-{
-	env->fd = create_file(env);
-	write(env->fd, env->header, sizeof(t_header));
-	craft_prog(env, env->tok_head);
-	if (lseek(env->fd, 0, SEEK_SET) == -1)
-		bug_err("Error while last lseek for writing header\n");
-	swap_endian(&(env->header->prog_size), 4);
-	write(env->fd, env->header, sizeof(t_header));
-	return (1);
 }

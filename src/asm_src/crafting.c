@@ -6,11 +6,12 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/10 18:52:04 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:31:25 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "windows.h"
+#include "asm.h"
+#include <stdlib.h>
 
 unsigned char	craft_coding_byte(t_list *head)
 {
@@ -41,7 +42,8 @@ unsigned char	craft_coding_byte(t_list *head)
 	return (result);
 }
 
-int				craft_instru(t_env *env, t_list *current, int offset, int *in_off)
+int				craft_instru(t_env *env,
+					t_list *current, int offset, int *in_off)
 {
 	t_asm_token		*tok;
 	unsigned char	c;
@@ -61,7 +63,8 @@ int				craft_instru(t_env *env, t_list *current, int offset, int *in_off)
 	return (offset);
 }
 
-int				craft_labels(t_env *env, t_asm_token *tok, int offset, int instr_offset)
+int				craft_labels(t_env *env,
+					t_asm_token *tok, int offset, int instr_offset)
 {
 	t_lab	*tmp;
 	short	result;
@@ -100,7 +103,7 @@ int				craft_values(t_env *env, t_asm_token *tok, int offset)
 	return (offset);
 }
 
-int			craft_prog(t_env *env, t_list *tmp)
+int				craft_prog(t_env *env, t_list *tmp)
 {
 	t_asm_token		*tok;
 	int				offset;
@@ -123,11 +126,10 @@ int			craft_prog(t_env *env, t_list *tmp)
 				offset = craft_labels(env, tok, offset, instr_offset);
 			else if (tok->type == DIRECT || tok->type == INDIRECT)
 				offset = craft_values(env, tok, offset);
-			else
-				bug_err("Token list have wrong format\n");
+			else //tmp
+				bug_err("Token list have wrong format\n");//tmp
 		}
 		tmp = tmp->next;
 	}
 	return (offset);
-	fill_label_gaps(env, offset, NULL);
 }

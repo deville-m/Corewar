@@ -26,10 +26,10 @@ COREWARDIR=		corewar_src/
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			asm.c toolbox.c predicate.c \
+ASMSRC=			asm.c predicate.c \
 				utils.c lexer.c lexer2.c rules.c collision.c \
-				analyser.c \
-				craft_out.c crafting.c crafting_tools.c create_output_file.c
+				craft_out.c crafting.c crafting_tools.c create_output_file.c \
+				toolbox.c
 
 COREWARSRC=		main.c
 
@@ -65,7 +65,7 @@ SILENT_C := \x1b[30;01m
 all: $(ASM) $(COREWAR)
 	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n$(NO_C)" $(ASM) $(COREWAR)
 
-%.o: %.c
+%.o: %.c $(INCLUDES) libft/includes
 	$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
 	printf "\n$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 

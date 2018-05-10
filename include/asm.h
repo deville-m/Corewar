@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/10 18:36:17 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:49:07 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define ASM_H
 
 # include "op.h"
-# include "libft.h"
+# include "lst.h"
+# include "ft_printf.h"
+# include "ft_ctype.h"
 
 typedef enum	e_tok
 {
@@ -73,14 +75,6 @@ typedef struct	s_env
 	int			fd;
 }				t_env;
 
-
-/*
-** @stupid_asm.c
-*/
-
-void			stupid_asm(t_env *env, char *in_name);
-void			bug_err(char *mess);
-
 /*
 ** @predicate.c
 */
@@ -126,35 +120,42 @@ t_bool			is_register(const char *arg);
 t_bool			check_collisions(uint_fast32_t i);
 
 /*
-** @stupid_analyser.c
-*/
-void	create_token(t_env *env, enum e_type type, int line, int column, char *raw, int data, int option);
-void	ft_lstinsert(t_list **head, void *content, int content_size);
-
-/*
 ** @analyser.c
 */
-int		craft_directs(t_env *env, int fd);
-int		oh_a_comment_pass_it(int fd);
+int				craft_directs(t_env *env, int fd);
+int				oh_a_comment_pass_it(int fd);
 
 /*
-** @output.c
+** @craft_out.c
 */
-int		craft_file(t_env *env);
+int				craft_file(t_env *env);
+
+/*
+** @crafting.c
+*/
+int				craft_prog(t_env *env, t_list *tmp);
 
 /*
 ** @crafting_tools.c
 */
-
+t_lab			*new_t_lab(char *name, int offset, int instr_offset);
+t_lab			*is_labelled(t_env *env, t_asm_token *tok);
+void			add_lab_elem(t_env *env, t_asm_token *tok, int offset);
 
 /*
 ** @create_output_file.c
 */
-int		create_output_file(t_env *env);
+int				create_output_file(t_env *env);
 
 /*
 ** @toolbox.c
 */
-void	swap_endian(void *data, size_t size);
+//tmp//
+void			create_token(t_env *env, enum e_type type, int line,
+					int column, char *raw, int data, int option);
+///tmp//
+void			ft_lstinsert(t_list **head, void *content, int content_size);
+void			bug_err(char *mess);
+void			swap_endian(void *data, size_t size);
 
 #endif

@@ -6,11 +6,13 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:34:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/10 18:41:02 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/10 19:43:53 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "windows.h"
+#include <fcntl.h>
+#include "asm.h"
+#include "ft_string.h"
 
 /*
 ** create_output_file:
