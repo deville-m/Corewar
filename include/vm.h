@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 13:32:07 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/10 14:12:13 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,11 @@ void		alloc_window(WINDOW *arena, WINDOW *status);
 */
 
 void		keybindinds_callback(int c);
+
+/*
+** @checker.c
+*/
+
+t_bool		valid_warriors(uint32_t i, char *argv[]);
 
 #endif
