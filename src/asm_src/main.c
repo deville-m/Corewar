@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:18:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/10 21:53:25 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 18:28:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	print_tokens(t_dlist *elem)
 	else if (token->type == END)
 		ft_printf("type: END\n");
 	else
-		ft_printf("type: %d, %s\n", token->type, token->raw);
+		ft_printf("type: %d -- raw: %s -- data: %d -- option: %d\n",
+				token->type, token->raw, token->data, token->option);
 }
 
 int		main(int argc, char *const argv[])
@@ -41,7 +42,7 @@ int		main(int argc, char *const argv[])
 		exit(42);
 	if (!(tokens = tokenize(fd)))
 		exit(42);
-	ft_dlstiter(tokens, print_tokens);
 	syntax_check(tokens);
+	ft_dlstiter(tokens, print_tokens);
 	close(fd);
 }

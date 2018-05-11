@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 14:21:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/10 23:42:49 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 18:32:24 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static inline t_bool	check_header2(
 	return (TRUE);
 }
 
-static t_dlist	*check_header(t_dlist *tokens)
+static t_dlist			*check_header(t_dlist *tokens)
 {
 	t_bool		comment;
 	t_bool		name;
@@ -52,26 +52,30 @@ static t_dlist	*check_header(t_dlist *tokens)
 	return (tokens);
 }
 
-static t_dlist	*check_exec(t_dlist *tokens)
+static inline t_dlist	*check_label(t_asm_token *curr, t_dlist *lst)
+{
+	if (((t_asm_token *)lst->content)->type != INSTRUCTION
+		&& ((t_asm_token *)lst->content)->type != ENDLINE)
+		syntax_error("Syntax error at token", get_token(lst));
+	curr->raw[ft_strlen(curr->raw) - 1] = '\0';
+	return (lst);
+}
+
+static t_dlist			*check_exec(t_dlist *tokens)
 {
 	t_asm_token	*curr;
 	int			token_cpt;
 
 	token_cpt = 0;
 	while ((curr = (t_asm_token *)tokens->content)->type == LABEL
-			|| curr->type == INSTRUCTION)
+			|| curr->type == INSTRUCTION || curr->type == ENDLINE)
 	{
 		if (curr->type == LABEL)
-		{
-			tokens = tokens->next;
-			if (((t_asm_token *)tokens->content)->type != INSTRUCTION
-				|| ((t_asm_token *)tokens->content)->type != ENDLINE)
-				syntax_error("Syntax error at token",
-							(t_asm_token *)tokens->content);
-			curr->raw[ft_strlen(curr->raw) - 1] = '\0';
-		}
-		else
+			tokens = check_label(curr, tokens->next);
+		else if (curr->type == INSTRUCTION)
 			tokens = check_instruction(tokens);
+		else
+			tokens = tokens->next;
 		++token_cpt;
 	}
 	if (!token_cpt)
@@ -79,8 +83,8 @@ static t_dlist	*check_exec(t_dlist *tokens)
 	return (tokens);
 }
 
-void			syntax_check(t_dlist *tokens)
+void						syntax_check(t_dlist *tokens)
 {
 	tokens = check_header(tokens);
-//	tokens = check_exec(tokens);
+	tokens = check_exec(tokens);
 }

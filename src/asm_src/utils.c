@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 14:35:52 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 23:23:21 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 18:30:51 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ void			syntax_error(char *message, t_asm_token *token)
 		[DIRECT_LABEL] = "DIRECT_LABEL",
 		[INDIRECT_LABEL] = "INDIRECT_LABEL",
 		[SEPARATOR] = "SEPARATOR",
+		[INSTRUCTION] = "INSTRUCTION",
 		[ENDLINE] = "ENDLINE",
 		[END] = "END",
 	};
 
-	if (!message)
-		exit(42);
 	if (token->type == ENDLINE)
 		ft_fprintf(2, "%s [TOKEN][%.3d:%.3d] %s\n",
 			message, token->line, token->column, token_enum[token->type]);
