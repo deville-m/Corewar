@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 14:21:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/11 18:32:24 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:38:01 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,16 @@ static t_dlist			*check_exec(t_dlist *tokens)
 	return (tokens);
 }
 
-void						syntax_check(t_dlist *tokens)
+t_dlist					*syntax_check(t_dlist *tokens)
 {
-	tokens = check_header(tokens);
-	tokens = check_exec(tokens);
+	t_dlist	*stop;
+
+	stop = check_header(tokens);
+	stop = check_exec(stop);
+	if (stop->prev)
+		stop->prev->next = NULL;
+	stop->prev = NULL;
+	ft_dlstdel(&stop, del_token);
+	ft_dlstfilter(&tokens, filter_token, del_token);
+	return (tokens);
 }

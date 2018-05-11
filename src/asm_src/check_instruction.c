@@ -6,13 +6,14 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 23:16:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/11 18:37:28 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 18:57:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "asm.h"
 #include "dlst.h"
+#include "memory.h"
 #include "ft_string.h"
 
 static void		check_param(t_asm_token *curr, size_t offset, char *msg, t_op o)
@@ -40,8 +41,9 @@ static void		check_parameter(t_asm_token *curr, t_op op, size_t param)
 		ft_memmove(curr->raw, curr->raw + 1, ft_strlen(curr->raw));
 	else
 	{
-		ft_fprintf(2, "Invalid parameter %zu for instruction %s\n",
-				param, op.name);
+		ft_fprintf(2,
+			"Invalid parameter %zu for instruction %s at token [%.3d:%.3d]\n",
+			param, op.name, curr->line, curr->column);
 		exit(42);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 14:35:52 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 18:30:51 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:32:18 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,40 +59,4 @@ uint8_t			arguments_size(const char **args)
 uint16_t		operator_tsize(void)
 {
 	return (sizeof(g_op_tab) / sizeof(g_op_tab[0]));
-}
-
-void			syntax_error(char *message, t_asm_token *token)
-{
-	static const char *token_enum[] = {
-		[COMMAND_COMMENT] = "COMMAND_COMMENT",
-		[COMMAND_NAME] = "COMMAND_NAME",
-		[STRING] = "STRING",
-		[LABEL] = "LABEL",
-		[REGISTER] = "REGISTER",
-		[DIRECT] = "DIRECT",
-		[INDIRECT] = "INDIRECT",
-		[DIRECT_LABEL] = "DIRECT_LABEL",
-		[INDIRECT_LABEL] = "INDIRECT_LABEL",
-		[SEPARATOR] = "SEPARATOR",
-		[INSTRUCTION] = "INSTRUCTION",
-		[ENDLINE] = "ENDLINE",
-		[END] = "END",
-	};
-
-	if (token->type == ENDLINE)
-		ft_fprintf(2, "%s [TOKEN][%.3d:%.3d] %s\n",
-			message, token->line, token->column, token_enum[token->type]);
-	else
-		ft_fprintf(2, "%s [TOKEN][%.3d:%.3d] %s \"%s\"\n",
-			message, token->line, token->column,
-			token_enum[token->type], token->raw);
-	exit(42);
-}
-
-t_asm_token		*get_token(t_dlist *elem)
-{
-	if (!elem)
-		return (NULL);
-	else
-		return ((t_asm_token *)elem->content);
 }

@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:18:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/11 18:28:31 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 19:40:44 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int		main(int argc, char *const argv[])
 		exit(42);
 	if (!(tokens = tokenize(fd)))
 		exit(42);
-	syntax_check(tokens);
+	tokens = syntax_check(tokens);
 	ft_dlstiter(tokens, print_tokens);
+	ft_dlstdel(&tokens, del_token);
 	close(fd);
+	while (1);
 }
