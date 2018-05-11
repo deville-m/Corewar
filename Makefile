@@ -30,7 +30,8 @@ COMMONSRC=		op.c swap_endian.c
 
 ASMSRC=			main.c #tokenize.c utils.c lexer.c lexer2.c rules.c collision.c
 
-COREWARSRC=		main.c utils.c options.c curses.c kernel.c keybinds.c checker.c
+COREWARSRC=		main.c utils.c options.c curses.c kernel.c keybinds.c checker.c\
+				parser.c
 
 COMMONDIR:= $(addprefix $(SRCDIR), $(COMMONDIR))
 ASMDIR:= $(addprefix $(SRCDIR), $(ASMDIR))

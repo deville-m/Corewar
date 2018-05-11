@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 14:21:04 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:30:15 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int			main(int argc, char *argv[])
 		|| valid_warriors(g_optind, argv) == FALSE)
 		usage();
 	if ((argc - g_optind) > MAX_PLAYERS
-		|| (argc - g_optind) < 1)
+		|| (argc - g_optind) < 1
+		|| !parseplayers(&arena, &argv[optind], 0))
 		usage();
 	if (!(kernel(&opts, &arena)))
 		return (EXIT_FAILURE);
