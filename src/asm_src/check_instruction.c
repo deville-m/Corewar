@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 23:16:06 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/11 18:27:42 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/11 18:37:28 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ t_dlist			*check_instruction(t_dlist *lst)
 	get_token(lst)->option = g_op_tab[i].coding_byte;
 	get_token(lst)->data = g_op_tab[i].op_code;
 	lst = check_parameters(lst->next, g_op_tab[i]);
+	if (get_token(lst)->type != ENDLINE)
+		syntax_error("Syntax error at token", get_token(lst));
 	return (lst);
 }
