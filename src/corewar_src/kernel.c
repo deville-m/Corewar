@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 13:30:27 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/11 14:24:56 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,30 @@
 
 /*
 ** @desc monothilic part of the arena
+**       arena.players should be init
+**       before fun call.
 ** @param options retrieved
 ** @return nil
 */
 
-t_bool		kernel(struct s_option *options)
+t_bool		kernel(struct s_option *options, t_arena *arena)
 {
-	WINDOW *arena = NULL;
-	WINDOW *status = NULL;
+	WINDOW 	*warena = NULL;
+	WINDOW	*status = NULL;
 
 	init_curses();
-	while (1)
+	/* init_arena(arena)*/
+	while (arena->processes != NULL)
 	{
-		apply_windows(arena, status);
-		wrefresh(arena);
+		/*
+		 * Graphics sections - plz ignore
+		 */
+		apply_windows(warena, status);
+		wrefresh(warena);
 		wrefresh(status);
 		keybindinds_callback(getch());
 	}
+	free(warena);
+	free(status);
 	return (TRUE);
 }

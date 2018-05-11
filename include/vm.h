@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 15:46:42 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/11 14:56:40 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,13 @@ struct s_option
 
 typedef struct		s_player
 {
+	unsigned int	live_cpt;
+	unsigned char	exec[CHAMP_MAX_SIZE];
 	unsigned int	id;
+	t_dlist			*processes;
 	t_header		header;
 	unsigned int	last_live;
 }					t_player;
-
-/*
-** Arena structure with
-** players and ctx infos
-*/
-
-typedef struct		s_arena
-{
-	unsigned char	arena[MEM_SIZE];
-	t_dlist			*processes;
-	t_player		players[MAX_PLAYERS];
-	unsigned int	clock;
-}					t_arena;
 
 /*
 ** Current process structure
@@ -64,10 +54,25 @@ typedef struct		s_arena
 typedef struct		s_process
 {
 	unsigned int	pc;
+	unsigned int	id_player;
 	t_bool			carry;
+	t_bool			alive;
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
-	unsigned int	registers[REG_NUMBER];
+	unsigned char	registers[REG_NUMBER][REG_SIZE];
 }					t_process;
+
+/*
+** Arena structure with
+** players and ctx infos
+*/
+
+typedef struct		s_arena
+{
+	unsigned char	arena[MEM_SIZE];
+	unsigned int	cycle_to_die;
+	t_player		players[MAX_PLAYERS];
+	unsigned int	clock;
+}					t_arena;
 
 /*
 ** @utils.c
@@ -85,7 +90,7 @@ t_bool		parse_options(int argc, char *argv[], struct s_option *opts);
 ** @kernel.c
 */
 
-t_bool		kernel(struct s_option *options);
+t_bool		kernel(struct s_option *options, t_arena *arena);
 
 /*
 ** @curses.c
@@ -106,5 +111,12 @@ void		keybindinds_callback(int c);
 */
 
 t_bool		valid_warriors(uint32_t i, char *argv[]);
+
+/*
+** @parser.c
+*/
+
+t_bool		parseplayers(t_arena *arena,
+					char *argv[]);
 
 #endif

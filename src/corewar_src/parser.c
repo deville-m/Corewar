@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 14:21:04 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/11 14:48:09 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
-#include <op.h>
-#include <ncurses.h>
-#include <ft_getopt.h>
 
-int			main(int argc, char *argv[])
+t_bool	parseplayers(t_arena *arena,
+					 char *argv[])
 {
-	struct s_option opts;
-	t_arena			arena;
-
-	opts.dump = 0;
-	if (argc < 2 || !parse_options(argc, argv, &opts)
-		|| valid_warriors(g_optind, argv) == FALSE)
-		usage();
-	if ((argc - g_optind) > MAX_PLAYERS
-		|| (argc - g_optind) < 1)
-		usage();
-	if (!(kernel(&opts, &arena)))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (TRUE);
 }
