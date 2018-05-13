@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/13 17:52:56 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:05:25 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@
 ** @return boolean
 */
 
-static t_bool			xperror(const char *message)
+static t_bool			xperror(const char *file,
+								const char *message)
 {
-	ft_fprintf(2, "Error: %s\n", message);
+	ft_fprintf(2, "Error: File \"%s\" %s\n", file, message);
 	exit(EXIT_FAILURE);
 }
 
@@ -33,13 +34,16 @@ static t_bool			xperror(const char *message)
 ** @return Maybe[Char*] | Nothing[Null]
 */
 
-static unsigned char	*parse_content(int fd, int offset)
+static unsigned char	*parse_content(int fd, uint32_t size)
 {
 	unsigned char		*buffer;
+	char		nil[0x2];
 
-	if (!(read(fd, &buffer, CHAMP_MAX_SIZE) == CHAMP_MAX_SIZE))
+	buffer = (unsigned char*)ft_strnew(CHAMP_MAX_SIZE);
+	swap_endian(&size, sizeof(size));
+	if ((read(fd, buffer, size) != size))
 		return (NULL);
-	if ((read(fd, NULL, 0x13)) != 0)
+	if ((read(fd, nil, 0x13)) != 0)
 		return (NULL);
 	return (buffer);
 }
@@ -58,12 +62,13 @@ t_bool					parseplayers(t_arena *arena,
 
 	while (argv[i] != NULL)
 	{
-		printf("Processing: %s\n", argv[i]);
-		if ((fd = open(argv[i], O_RDONLY) < 0))
-			return (xperror("Invalid file"));
+		if ((fd = open(argv[i], O_RDONLY)) < 0)
+			return (xperror(argv[i] ,"is an invalid file"));
+		ft_printf("Processing: %s with fd %d\n", argv[i], fd);
 		if (read(fd, &arena->players[i].header, sizeof(t_header)) < 0
-			|| ((arena->players[i].exec = parse_content(fd, 0)) == NULL))
-			return (xperror("Invalid file size."));
+			|| ((arena->players[i].exec = parse_content(fd,
+					arena->players[i].header.prog_size))== NULL))
+			return (xperror(argv[i], "have an invalid file size."));
 		arena->players[i].id = i;
 		arena->players[i].last_live = 0;
 		arena->players[i].live_cpt = 0;

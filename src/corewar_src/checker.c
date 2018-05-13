@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:42:25 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 15:39:31 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:04:22 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 ** @return boolean
 */
 
-static t_bool	xperror(const char *message)
+static t_bool	xperror(const char *f, const char *message)
 {
-	ft_fprintf(2, "Error: %s\n", message);
+	ft_fprintf(2, "Error: File \"%s\" %s\n",f , message);
 	exit(EXIT_FAILURE);
 }
 
@@ -54,9 +54,9 @@ static t_bool	is_valid_warrior(const char *filename)
 	int			fd;
 
 	if ((fd = open(filename, O_RDONLY)) < 0)
-		return (xperror("File doesn't exists"));
+		return (xperror(filename, " doesn't exists"));
 	if (!(check_magic(fd)))
-		return (xperror("Invalid magic number"));
+		return (xperror(filename, "have an invalid magic number"));
 	close(fd);
 	return (TRUE);
 }
