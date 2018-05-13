@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/13 15:31:39 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:48:19 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ unsigned char	craft_coding_byte(t_list *head)
 	while (head && tmp && LABEL < tmp->type && tmp->type < SEPARATOR)
 	{
 		if (tmp->type == REGISTER)
-			result |= 1;
+			result |= REG_CODE;
 		else if (tmp->type == DIRECT || tmp->type == DIRECT_LABEL)
-			result |= 2;
+			result |= DIR_CODE;
 		else
-			result |= 3;
+			result |= IND_CODE;
 		result <<= 2;
 		i -= 1;
 		head = head->next;
@@ -63,6 +63,8 @@ int				craft_instru(t_env *env,
 	return (offset);
 }
 
+// ici je dois utiliser IND_SIZE & DIR_SIZE mais je n'ai pas
+// la moindre idee de comment adapter cela aux short et int
 int				craft_labels(t_env *env,
 					t_asm_token *tok, int offset, int instr_offset)
 {
@@ -84,6 +86,7 @@ int				craft_labels(t_env *env,
 	return (offset);
 }
 
+// meme probleme de modularite que ci-dessus
 int				craft_values(t_env *env, t_asm_token *tok, int offset)
 {
 	short	tmp;
@@ -104,6 +107,7 @@ int				craft_values(t_env *env, t_asm_token *tok, int offset)
 	return (offset);
 }
 
+// attention, tmp a supprimer ci-dessous
 int				craft_prog(t_env *env, t_list *tmp)
 {
 	t_asm_token		*tok;
