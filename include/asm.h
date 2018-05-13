@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/11 19:38:16 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/13 12:49:49 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "op.h"
 # include "ft_ctype.h"
 # include "dlst.h"
+# include "lst.h"
 # include "libft.h"
 
 enum			e_type
@@ -66,15 +67,17 @@ typedef struct	s_env
 	t_header	*header;
 	t_list		*tok_head;
 	char		*input_name;
+	t_list		*lab_h;
+	t_list		*to_do;
+	int			fd;
 }				t_env;
 
-
-/*
-** @stupid_asm.c
-*/
-
-void			stupid_asm(t_env *env, char *in_name);
-void			bug_err(char *mess);
+typedef struct	s_lab
+{
+	char		*name;
+	int			offset;
+	int			instr_offset;
+}				t_lab;
 
 /*
 ** @predicate.c
@@ -131,20 +134,6 @@ t_bool			check_collisions(const char	*base,
 								const char  *c_cmd);
 
 /*
-** @stupid_analyser.c
-*/
-
-int				create_token(t_env *env, enum e_type type, int line,
-					int column, char *raw);
-
-/*
-** @analyser.c
-*/
-
-int				craft_directs(t_env *env, int fd);
-int				oh_a_comment_pass_it(int fd);
-
-/*
 ** @tokenize.c
 */
 
@@ -158,6 +147,39 @@ void			del_token(void *content, size_t content_size);
 t_dlist			*check_instruction(t_dlist *lst);
 t_dlist			*syntax_check(t_dlist *tokens);
 void			syntax_error(char *message, t_asm_token *token);
+
+/*
+** @craft_out.c
+*/
+
+int				craft_file(t_env *env);
+
+/*
+** @crafting.c
+*/
+int				craft_prog(t_env *env, t_list *tmp);
+
+/*
+** @crafting_tools.c
+*/
+
+t_lab			*new_t_lab(char *name, int offset, int instr_offset);
+t_lab			*is_labelled(t_env *env, t_asm_token *tok);
+void			add_lab_elem(t_env *env, t_asm_token *tok, int offset);
+
+/*
+** @create_output_file.c
+*/
+int				create_output_file(t_env *env);
+
+/*
+** @toolbox.c
+*/
+void			ft_lstinsert(t_list **head, void *content, int content_size);
+void			bug_err(char *mess);
+void			swap_endian(void *data, size_t size);
+
+
 
 
 #endif

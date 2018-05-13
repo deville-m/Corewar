@@ -27,8 +27,11 @@ COREWARDIR=		corewar_src/
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			main.c tokenize.c utils.c lexer.c lexer2.c syntax_check.c \
-				check_instruction.c token_utils.c
+ASMSRC=			asm.c tokenize.c utils.c lexer.c lexer2.c syntax_check.c \
+				check_instruction.c token_utils.c \
+				craft_out.c crafting.c crafting_tools.c create_output_file.c \
+				toolbox.c \
+				collision.c
 
 COREWARSRC=		main.c
 
