@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getopt.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 16:04:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 15:04:03 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/09 14:05:54 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/09 14:06:20 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_GETOPT_H
-# define FT_GETOPT_H
-
-extern char	*g_optarg;
-extern int	g_optind;
-extern int	g_opterr;
-extern int	g_optopt;
-
-int			ft_getopt(int argc, char *const argv[], const char *opstring);
-
-#endif
+int
+main(int argc, char *argv[])
+{
+	/* TODO: remove this shit befor merge */
+    return 0;
+}

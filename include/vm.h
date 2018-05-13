@@ -3,25 +3,122 @@
 /*                                                        :::      ::::::::   */
 /*   vm.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 17:33:54 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/04 12:18:22 by mdeville         ###   ########.fr       */
+/*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/13 17:18:59 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#ifndef VM_H
+# define VM_H
 
-typedef enum		e_bool
-{
-	FALSE = 0,
-	TRUE = 1
-}					t_bool;
+/*
+** VM related header file
+*/
 
-typedef struct		s_proc
+# include <stdlib.h>
+# include <unistd.h>
+# include <ncurses.h>
+# include <op.h>
+
+# include <libft.h>
+
+struct s_option
 {
-	int				player_id;
-	char			PC[REG_SIZE];
+	size_t	dump;
+	size_t	cycles;
+	t_bool	gfx;
+};
+
+/*
+** Players reference using
+** `MAX_PLAYERS` defines
+*/
+
+typedef struct		s_player
+{
+	unsigned int	live_cpt;
+	unsigned char	exec[CHAMP_MAX_SIZE];
+	unsigned int	id;
+	t_dlist			*processes;
+	t_header		header;
+	unsigned int	last_live;
+}					t_player;
+
+/*
+** Current process structure
+** for players tracking
+*/
+
+typedef struct		s_process
+{
+	unsigned int	pc;
+	unsigned int	id_player;
 	t_bool			carry;
-	char			reg[REG_NUMBER][REG_SIZE];
-}					t_proc;
+	t_bool			alive;
+	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
+	unsigned char	registers[REG_NUMBER][REG_SIZE];
+}					t_process;
+
+/*
+** Arena structure with
+** players and ctx infos
+*/
+
+typedef struct		s_arena
+{
+	unsigned char	arena[MEM_SIZE];
+	unsigned int	cycle_to_die;
+	t_player		players[MAX_PLAYERS];
+	unsigned int	clock;
+}					t_arena;
+
+/*
+** @utils.c
+*/
+
+void		usage(void);
+
+/*
+** @options
+*/
+
+t_bool		parse_options(int argc, char *argv[], struct s_option *opts);
+
+/*
+** @kernel.c
+*/
+
+t_bool		kernel(struct s_option *options, t_arena *arena);
+
+/*
+** @curses.c
+*/
+
+void		init_curses(void);
+void		apply_windows(WINDOW *arena, WINDOW *status);
+void		alloc_window(WINDOW *arena, WINDOW *status);
+
+/*
+** @keybinds
+*/
+
+void		keybindinds_callback(int c);
+
+/*
+** @checker.c
+*/
+
+t_bool		valid_warriors(uint32_t i, char *argv[]);
+
+/*
+** @parser.c
+*/
+
+t_bool		parseplayers(t_arena *arena,
+						 char *argv[],
+						 size_t i);
+
+#endif
+>>>>>>> 063cbac578947cc601deeafd2b1f9a91811193d9

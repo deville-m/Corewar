@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getopt.h                                        :+:      :+:    :+:   */
+/*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 16:04:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 15:04:03 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/04 10:14:20 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/10 09:23:24 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_GETOPT_H
-# define FT_GETOPT_H
+#ifndef ASM_H
+# define ASM_H
 
-extern char	*g_optarg;
-extern int	g_optind;
-extern int	g_opterr;
-extern int	g_optopt;
-
-int			ft_getopt(int argc, char *const argv[], const char *opstring);
+/*
+** ASM related header
+*/
 
 #endif

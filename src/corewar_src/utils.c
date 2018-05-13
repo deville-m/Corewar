@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getopt.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/15 16:04:46 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/09 15:04:03 by ctrouill         ###   ########.fr       */
+/*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/05/09 17:22:47 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_GETOPT_H
-# define FT_GETOPT_H
+#include <vm.h>
+#include <libft.h>
 
-extern char	*g_optarg;
-extern int	g_optind;
-extern int	g_opterr;
-extern int	g_optopt;
+/*
+** @desc print usage and exit;
+** @return Nil (exit)
+*/
 
-int			ft_getopt(int argc, char *const argv[], const char *opstring);
-
-#endif
+void	usage(void)
+{
+	ft_printf("Usage: ./corewar [-d nbr_cycles] ");
+	ft_printf("[[-n number] champion1.cor] ...\n");
+	exit(EXIT_FAILURE);
+}
