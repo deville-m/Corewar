@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 14:24:56 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/13 17:19:57 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 
 	init_curses();
 	/* init_arena(arena)*/
-	while (arena->processes != NULL)
+	while (arena->clock > 0) /* TODO: modifier la condition */
 	{
 		/*
 		 * Graphics sections - plz ignore

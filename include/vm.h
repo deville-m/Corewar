@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 15:30:16 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/13 17:52:56 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ struct s_option
 typedef struct		s_player
 {
 	unsigned int	live_cpt;
-	unsigned char	exec[CHAMP_MAX_SIZE];
+	unsigned char	*exec;		/* Size should be checked before */
 	unsigned int	id;
 	t_dlist			*processes;
 	t_header		header;
