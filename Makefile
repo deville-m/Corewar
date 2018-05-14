@@ -74,7 +74,7 @@ $(OBJDIR):
 all: $(OBJDIR) $(ASM) $(COREWAR)
 	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n$(NO_C)" $(ASM) $(COREWAR)
 
-$(OBJDIR)/%.o: %.c
+%.o: %.c
 	$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
 	printf "\n$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
