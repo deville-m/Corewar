@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/14 14:16:50 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:09:24 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 {
 	size_t ret;
 
-	if ((ret = is_string(input, token)))
+	if ((ret = is_string(input)))
 		token->type = STRING;
 	else if ((ret = is_direct(input)))
 		token->type = DIRECT;
@@ -90,8 +90,7 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 	}
 	token->raw = ft_strndup(input, ret);
 	ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
-	if (token->type != STRING)
-		token->column += ret;
+	update_token(token);
 	return (input + ret);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 14:35:52 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 19:32:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:14:51 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,24 @@ t_bool			multiline_string(const char *line)
 		++line;
 	}
 	return (state);
+}
+
+void		update_token(t_asm_token *token)
+{
+	char *tmp;
+
+	tmp = token->raw;
+	while (*tmp)
+	{
+		if (*tmp == EOL)
+		{
+			++token->line;
+			token->column = 1;
+		}
+		else
+			++token->column;
+		tmp++;
+	}
 }
 
 /*

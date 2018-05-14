@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/10 13:43:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:13:14 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,32 +94,17 @@ size_t		is_direct_label(const char *arg)
 ** @return boolean
 */
 
-size_t		is_string(const char *arg, t_asm_token *token)
+size_t		is_string(const char *arg)
 {
 	size_t	i;
-	int		line;
-	int		column;
 
 	if (arg[0] != STRING_CHAR)
 		return (0);
 	i = 1;
-	line = token->line;
-	column = 1 + token->column;
 	while (arg[i] && arg[i] != STRING_CHAR)
-	{
-		if (arg[i] == EOL)
-		{
-			++line;
-			column = 1;
-		}
-		else
-			++column;
 		++i;
-	}
 	if (arg[i] != STRING_CHAR)
 		return (0);
-	token->column = column + 1;
-	token->line = line;
 	return (i + 1);
 }
 
