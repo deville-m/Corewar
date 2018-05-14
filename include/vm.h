@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/13 17:56:42 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/14 15:48:36 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ struct s_option
 
 typedef struct		s_player
 {
-	unsigned int	live_cpt;
+	unsigned int	live_cpt;	/* Nombre de fois rapporte en vie [Inc] */
 	unsigned char	*exec;		/* Size should be checked before */
 	unsigned int	id;
-	t_dlist			*processes;
 	t_header		header;
-	unsigned int	last_live;
+	unsigned int	last_live;	/* Derniere fois que le joueur a rapporte en vie */
 }					t_player;
 
 /*
@@ -53,10 +52,9 @@ typedef struct		s_player
 
 typedef struct		s_process
 {
-	unsigned int	pc;
-	unsigned int	id_player;
-	t_bool			carry;
-	t_bool			alive;
+	unsigned int	pc;			/* Curseur du process */
+	t_bool			carry;		/* Si une operation est un succes */
+	t_bool			alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
 	unsigned char	registers[REG_NUMBER][REG_SIZE];
 }					t_process;
@@ -68,10 +66,12 @@ typedef struct		s_process
 
 typedef struct		s_arena
 {
-	unsigned char	arena[MEM_SIZE];
-	unsigned int	cycle_to_die;
+	unsigned char	memory[MEM_SIZE]; /* Plage de memoire */
+	unsigned int	ownership[MEM_SIZE]; /* Index d'appartenance */
+	unsigned int	cycle_to_die; /* Periode de verification des processus */
+	t_dlist			*processes;	/* Liste des processus */
 	t_player		players[MAX_PLAYERS];
-	unsigned int	clock;
+	unsigned int	clock;		/* Compteur general de cycle */
 }					t_arena;
 
 /*
