@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/13 19:05:25 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/14 17:28:49 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ t_bool					parseplayers(t_arena *arena,
 		arena->players[i].id = i;
 		arena->players[i].last_live = 0;
 		arena->players[i].live_cpt = 0;
-		arena->players[i].processes = NULL;
 		close(fd);
 		i++;
 	}
