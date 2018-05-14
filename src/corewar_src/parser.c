@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 17:28:49 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:31:51 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ t_bool					parseplayers(t_arena *arena,
 									 char *argv[],
 									 size_t i)
 {
-	int fd;
+	int					fd;
+	unsigned int		id;
 
+	id = -1;
 	while (argv[i] != NULL)
 	{
 		if ((fd = open(argv[i], O_RDONLY)) < 0)
@@ -69,7 +71,7 @@ t_bool					parseplayers(t_arena *arena,
 			|| ((arena->players[i].exec = parse_content(fd,
 					arena->players[i].header.prog_size))== NULL))
 			return (xperror(argv[i], "have an invalid file size."));
-		arena->players[i].id = i;
+		arena->players[i].id = id--;
 		arena->players[i].last_live = 0;
 		arena->players[i].live_cpt = 0;
 		close(fd);

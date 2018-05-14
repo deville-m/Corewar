@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 15:48:36 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/14 18:34:45 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,10 @@ t_bool		valid_warriors(uint32_t i, char *argv[]);
 t_bool		parseplayers(t_arena *arena,
 						 char *argv[],
 						 size_t i);
+
+/*
+** @init.c
+*/
+void		init_arena(t_arena *arena);
 
 #endif
