@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/13 12:49:49 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/14 14:13:25 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ t_bool			check_collisions(const char	*base,
 ** @tokenize.c
 */
 
+void			print_tokens(t_dlist *elem);
 t_asm_token		*get_token(t_dlist *elem);
 t_bool			multiline_string(const char *line);
 t_dlist			*tokenize(int fd);

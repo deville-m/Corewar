@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/10 21:52:57 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/14 14:16:50 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 	{
 		ft_fprintf(
 				2,
-				"Lexical error at [%d, %d]\n",
+				"Lexical error at [%d:%d]\n",
 				token->line, token->column);
 		exit(42);
 	}

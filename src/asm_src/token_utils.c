@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 19:06:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/11 19:35:32 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/14 14:12:59 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,18 @@ t_asm_token	*get_token(t_dlist *elem)
 		return (NULL);
 	else
 		return ((t_asm_token *)elem->content);
+}
+
+void	print_tokens(t_dlist *elem)
+{
+	t_asm_token *token;
+
+	token = (t_asm_token *)elem->content;
+	if (token->type == ENDLINE)
+		ft_printf("type: ENDLINE\n");
+	else if (token->type == END)
+		ft_printf("type: END\n");
+	else
+		ft_printf("type: %d -- raw: %s -- data: %d -- option: %d\n",
+				token->type, token->raw, token->data, token->option);
 }

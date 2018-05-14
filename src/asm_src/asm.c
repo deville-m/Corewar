@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/13 15:56:53 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/14 14:14:01 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,6 @@
 #include "ft_string.h"
 #include "libft.h"
 #include "dlst.h"
-
-void	print_tokens(t_dlist *elem)
-{
-	t_asm_token *token;
-
-	token = (t_asm_token *)elem->content;
-	if (token->type == ENDLINE)
-		ft_printf("type: ENDLINE\n");
-	else if (token->type == END)
-		ft_printf("type: END\n");
-	else
-		ft_printf("type: %d -- raw: %s -- data: %d -- option: %d\n",
-				token->type, token->raw, token->data, token->option);
-}
 
 static void	init_header(t_env *env)
 {

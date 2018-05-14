@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/11 20:03:25 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/14 14:16:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ size_t		is_label(const char *arg)
 	i = 0;
 	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 		++i;
-	if (arg[i] != LABEL_CHAR)
+	if (i == 0 || arg[i] != LABEL_CHAR)
 		return (0);
 	else
 		return (i + 1);
