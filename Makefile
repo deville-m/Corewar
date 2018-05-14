@@ -23,6 +23,7 @@ SRCDIR=			src/
 COMMONDIR=		commons/
 ASMDIR=			asm_src/
 COREWARDIR=		corewar_src/
+OBJDIR=         .objs
 
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
@@ -50,8 +51,9 @@ COREWARSRC:= $(addprefix $(COREWARDIR), $(COREWARSRC))
 COREWARSRC:= $(COREWARSRC) $(COMMONSRC)
 COREWAROBJ:= $(COREWARSRC:.c=.o)
 # -------~-------~--~------------------~------
-vpath %.c $(SRCS)
-vpath %.h $(INCLDIRS)
+
+vpath %.c $(SRCDIR)
+vpath %.h $(INCLUDES)
 # -------~-------~--~------------------~------
 _CC_ = `echo $(CC) | tr a-z A-Z`
 _LD_ = `echo $(LD) | tr a-z A-Z`
@@ -64,10 +66,15 @@ ERROR_C  := \x1b[31;01m
 WARN_C   := \x1b[33;01m
 SILENT_C := \x1b[30;01m
 # -------~-------~--~------------------~------
-all: $(ASM) $(COREWAR)
+$(OBJDIR):
+	printf "\n$(LOG_U)$(OK_C)[MK]$(NO_C) Creating temp directory: $(SILENT_C) %s\n" $(OBJDIR)
+	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)/{$(ASMDIR),$(COREWARDIR),$(COMMONDIR)}
+
+all: $(OBJDIR) $(ASM) $(COREWAR)
 	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n$(NO_C)" $(ASM) $(COREWAR)
 
-%.o: %.c
+$(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
 	printf "\n$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
@@ -84,12 +91,12 @@ $(COREWAR): $(COREWAROBJ) $(LIB)
 	$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
 
 clean:
-	rm -f $(ASMOBJ) $(COREWAROBJ)
+	rm -rf $(OBJDIR)
 	$(MAKE) -C libft/ clean
 	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up objects$(SILENT_C)\n"
 
 fclean: clean
-	rm -f $(ASM) $(COREWAR)
+	rm -fr $(ASM) $(COREWAR)
 	$(MAKE) -C libft/ fclean
 	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up targets:$(SILENT_C)%s %s\n" $(ASM) $(COREWAR)
 
