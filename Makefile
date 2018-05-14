@@ -20,6 +20,7 @@ SRCDIR=			src/
 COMMONDIR=		commons/
 ASMDIR=			asm/
 COREWARDIR=		corewar/
+OBJDIR=         .objs
 
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
@@ -42,6 +43,7 @@ ASMOBJ:= $(ASMSRC:.c=.o)
 COREWARSRC:= $(addprefix $(COREWARDIR), $(COREWARSRC))
 COREWARSRC:= $(COREWARSRC) $(COMMONSRC)
 COREWAROBJ:= $(COREWARSRC:.c=.o)
+
 # -------~-------~--~------------------~------
 vpath %.c $(SRCS)
 vpath %.h $(INCLDIRS)
@@ -57,12 +59,16 @@ ERROR_C  := \x1b[31;01m
 WARN_C   := \x1b[33;01m
 SILENT_C := \x1b[30;01m
 # -------~-------~--~------------------~------
-all: $(ASM) $(COREWAR)
+all: $(OBJDIR) $(ASM) $(COREWAR)
 	@echo "\tDONE !!"
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
-	@printf "$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)/{$(ASMDIR),$(COREWARDIR),$(COMMONDIR)}
+
+$(OBJDIR)/%.o: %.c
+	$(CC) $(CFLAGS) -I$(INCLUDES) -Ilibft/includes -c $< -o $@
+	printf "\n$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
 $(ASM): $(ASMOBJ)
 	@echo "\tLinking $@"
