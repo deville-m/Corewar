@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 10:57:41 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 15:53:34 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ typedef struct		s_player
 }					t_player;
 
 /*
+** instruction enum type
+*/
+
+enum				e_type
+{
+	INDIRECT = 0,
+	DIRECT,
+	REGISTRE
+};
+
+/*
+** Parameter structs
+** TODO: write docs
+*/
+
+typedef struct		s_param
+{
+	enum e_type		type;
+	unsigned char	*data;
+}					t_param;
+
+/*
 ** Current process structure
 ** for players tracking
 */
@@ -58,6 +80,8 @@ typedef struct		s_process
 	t_bool			alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
 	unsigned char	registers[REG_NUMBER][REG_SIZE];
+	t_op			op;
+	t_param			params[MAX_ARGS_NUMBER];
 }					t_process;
 
 /*
@@ -129,5 +153,12 @@ t_bool		parseplayers(t_arena *arena,
 ** @init.c
 */
 void		init_arena(t_arena *arena);
+
+/*
+** loader.c
+*/
+
+t_bool	load_instruction(t_arena *arena,
+				t_process *process);
 
 #endif
