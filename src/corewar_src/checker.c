@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:42:25 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/13 19:04:22 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 11:29:36 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 static t_bool	xperror(const char *f, const char *message)
 {
-	ft_fprintf(2, "Error: File \"%s\" %s\n",f , message);
+	ft_fprintf(2, "Error: File \"%s\" %s\n", f, message);
 	exit(EXIT_FAILURE);
 }
 

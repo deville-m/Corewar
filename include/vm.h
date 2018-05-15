@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 10:39:49 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 10:57:41 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct		s_arena
 void		usage(void);
 void		dump_memory(const unsigned char *memory,
 				size_t i);
+void		dump_player_exec(t_arena *arena);
+
 /*
 ** @options
 */
