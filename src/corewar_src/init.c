@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 14:44:34 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 15:04:06 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,16 @@ static void			alloc_processus(t_arena *arena,
 									uint16_t actor,
 									size_t offset)
 {
-	t_process	*process;
+	t_process		process;
 
-	if (!(process = (t_process*)malloc(sizeof(t_process))))
-		exit(EXIT_FAILURE);
-	process->pc = offset;
-	process->carry = FALSE;
-	process->alive = FALSE;
-	process->wait = 0;
-	process->registers[0][0] = arena->players[actor].id;
-	if (arena->processes == NULL)
-		arena->processes = ft_dlstnew(process, sizeof(process));
-	else
-		ft_dlstappend(&arena->processes,
-			ft_dlstnew(process, sizeof(process)));
+	process.pc = offset;
+	process.carry = FALSE;
+	process.alive = FALSE;
+	process.wait = 0;
+	ft_memcpy(process.registers[0], &(arena->players[actor].id),
+		sizeof(unsigned int));
+	ft_dlstappend(&(arena->processes),
+		ft_dlstnew(&process, sizeof(t_process)));
 }
 
 static void 		init_memory(t_arena *arena,
@@ -71,6 +67,7 @@ void	init_arena(t_arena *arena)
 	**   + bzero sur tout les derniers
 	*/
 	arena->clock = 0;
+	arena->processes = NULL;
 	arena->cycle_to_die = CYCLE_TO_DIE;
 	ft_memset(arena->memory, 0xff, MEM_SIZE);
 	init_memory(arena, 0);
