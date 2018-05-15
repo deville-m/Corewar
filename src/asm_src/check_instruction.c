@@ -34,7 +34,10 @@ static void		check_parameter(t_asm_token *curr, t_op op, size_t param)
 	else if (curr->type == DIRECT && op.arg_type[param] & T_DIR)
 		check_param(curr, 1, "Invalid direct at token", op);
 	else if (curr->type == DIRECT_LABEL && op.arg_type[param] & T_DIR)
+	{
 		ft_memmove(curr->raw, curr->raw + 2, ft_strlen(curr->raw + 1));
+		curr->option = op.index;
+	}
 	else if (curr->type == INDIRECT && op.arg_type[param] & T_IND)
 		check_param(curr, 0, "Invalid indirect at token", op);
 	else if (curr->type == INDIRECT_LABEL && op.arg_type[param] & T_IND)

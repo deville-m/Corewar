@@ -73,12 +73,16 @@ int				craft_labels(t_env *env,
 
 	if ((tmp = is_labelled(env, tok)))
 	{
+		if (tok->type == DIRECT_LABEL && !tok->option)
+			offset += write(env->fd, "\0\0", 2);
 		result = (short)(tmp->offset - instr_offset);
 		swap_endian(&(result), 2);
 		offset += write(env->fd, &result, 2);
 	}
 	else
 	{
+		if (tok->type == DIRECT_LABEL && !tok->option)
+			offset += write(env->fd, "\0\0", 2);
 		tmp = new_t_lab(tok->raw, offset, instr_offset);
 		ft_lstinsert(&(env->to_do), tmp, sizeof(t_lab));
 		offset += write(env->fd, "aa", 2);
@@ -92,8 +96,7 @@ int				craft_values(t_env *env, t_asm_token *tok, int offset)
 	short	tmp;
 
 	tmp = 0;
-	if (tok->option || tok->type == INDIRECT || tok->type == DIRECT_LABEL
-			|| tok->type == INDIRECT_LABEL)
+	if (tok->option || tok->type == INDIRECT || tok->type == INDIRECT_LABEL)
 	{
 		tmp = (short)tok->data;
 		swap_endian(&tmp, 2);
