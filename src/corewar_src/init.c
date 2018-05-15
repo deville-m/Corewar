@@ -6,31 +6,49 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 14:08:16 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:44:34 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 
+static void			alloc_processus(t_arena *arena,
+									uint16_t actor,
+									size_t offset)
+{
+	t_process	*process;
+
+	if (!(process = (t_process*)malloc(sizeof(t_process))))
+		exit(EXIT_FAILURE);
+	process->pc = offset;
+	process->carry = FALSE;
+	process->alive = FALSE;
+	process->wait = 0;
+	process->registers[0][0] = arena->players[actor].id;
+	if (arena->processes == NULL)
+		arena->processes = ft_dlstnew(process, sizeof(process));
+	else
+		ft_dlstappend(&arena->processes,
+			ft_dlstnew(process, sizeof(process)));
+}
+
 static void 		init_memory(t_arena *arena,
 							size_t k)
 {
-	size_t			cursor;
 	unsigned short	actor;
-	size_t			i;
 	size_t			offset;
 
 	offset = 0;
 	actor = 0;
-	i = 0;
-	cursor = 0;
 	printf("Taille memoire: %d | nombres de joueurs: %d\n",
 		   MEM_SIZE, arena->np);
-	while (actor < arena->np) {
+	while (actor < arena->np)
+	{
 		ft_memcpy(arena->memory + offset, arena->players[actor].exec,
 			arena->players[actor].header.prog_size);
 		ft_memset(arena->ownership + offset, arena->players[actor].id,
 			arena->players[actor].header.prog_size);
+		alloc_processus(arena, actor, offset);
 		offset += (MEM_SIZE / arena->np);
 		actor++;
 	}
