@@ -75,15 +75,15 @@ all: $(OBJDIR) $(ASM) $(COREWAR)
 	printf "\n$(LOG_U)$(OK_C)[$(_CC_)]$(NO_C) Compiling file: $(SILENT_C) %s\n" $@
 
 $(LIB):
-	printf "\n$(LOG_U)$(OK_C)[MAKE]$(NO_C) Checking library: $(SILENT_C) %s\n" $@
+	printf "\n$(LOG_U)$(OK_C)[MAKE]$(NO_C) Checking library:$(SILENT_C) %s\n" $@
 	$(MAKE) -C libft/
 
 $(ASM): $(ASMOBJ) $(LIB)
-	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
+	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file:$(SILENT_C) %s\n" $@
 	$(CC) $(CFLAGS_ASM) -I$(INCLUDES) -o $@ $^
 
 $(COREWAR): $(COREWAROBJ) $(LIB)
-	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
+	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file:$(SILENT_C) %s\n" $@
 	$(CC) $(CFLAGS_VM) -I$(INCLUDES) -o $@ $^
 
 clean:
@@ -94,7 +94,7 @@ clean:
 fclean: clean
 	rm -fr $(ASM) $(COREWAR)
 	$(MAKE) -C libft/ fclean
-	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up targets:$(SILENT_C)%s %s\n" $(ASM) $(COREWAR)
+	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up targets:$(SILENT_C) %s %s\n" $(ASM) $(COREWAR)
 
 re: fclean
 	$(MAKE)

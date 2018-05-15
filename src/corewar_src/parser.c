@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 18:31:51 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 09:14:38 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,10 @@ t_bool					parseplayers(t_arena *arena,
 {
 	int					fd;
 	unsigned int		id;
+	unsigned short		np;
 
 	id = -1;
+	np = 0;
 	while (argv[i] != NULL)
 	{
 		if ((fd = open(argv[i], O_RDONLY)) < 0)
@@ -76,6 +78,7 @@ t_bool					parseplayers(t_arena *arena,
 		arena->players[i].live_cpt = 0;
 		close(fd);
 		i++;
+		np++;
 	}
-	return (TRUE);
+	return ((arena->np = np) | 1);
 }

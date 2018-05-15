@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 18:34:45 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 10:39:49 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <op.h>
 
 # include <libft.h>
+# include <colors.h>
 
 struct s_option
 {
@@ -71,6 +72,7 @@ typedef struct		s_arena
 	unsigned int	cycle_to_die; /* Periode de verification des processus */
 	t_dlist			*processes;	/* Liste des processus */
 	t_player		players[MAX_PLAYERS];
+	unsigned short	np;			/* Current player numbers */
 	unsigned int	clock;		/* Compteur general de cycle */
 }					t_arena;
 
@@ -79,7 +81,8 @@ typedef struct		s_arena
 */
 
 void		usage(void);
-
+void		dump_memory(const unsigned char *memory,
+				size_t i);
 /*
 ** @options
 */

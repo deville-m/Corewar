@@ -6,34 +6,49 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 19:41:27 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 10:30:40 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 
-#define CUR_PLAYER 2
-
-static void init_memory(char *memory,
-						char *ownership,
-						t_player *players,
-						size_t k)
+static void 		init_memory(t_arena *arena,
+							size_t k)
 {
-	size_t i;
-	size_t j;
+	size_t			cursor;
+	unsigned short	actor;
 
-	i = 0;
-	j = 0;
-	while (i < CUR_PLAYER)
+	actor = 0;
+	printf("Taille memoire: %d\n", MEM_SIZE);
+	while (actor <= arena->np)
 	{
-		while (players[i].exec[j] != '\0')
+		if (actor == 0)
 		{
-			memory[k] = players[i].exec[j];
-			j++;
+			cursor = 0;
+			while (cursor < arena->players[0].header.prog_size)
+			{
+				arena->memory[cursor] = arena->players[0].exec[cursor];
+				cursor++;
+			}
 		}
-		i++;
+		if (actor == 1)
+		{
+			cursor = MEM_SIZE / 2;
+			while (cursor < arena->players[1].header.prog_size)
+			{
+				arena->memory[cursor] = arena->players[1].exec[cursor];
+				cursor++;
+			}
+		}
+		actor++;
 	}
 }
+
+/*
+** Initialise the arena
+** with default values
+** and place users memory
+*/
 
 void	init_arena(t_arena *arena)
 {
@@ -47,6 +62,7 @@ void	init_arena(t_arena *arena)
 	 */
 	arena->clock = 0;
 	arena->cycle_to_die = CYCLE_TO_DIE;
-	init_memory(arena->memory, arena->ownership, arena->players, 0);
-	return ;
+	ft_memset(arena->memory, 0xff, MEM_SIZE);
+	init_memory(arena, 0);
+	dump_memory(arena->memory, 0);
 }
