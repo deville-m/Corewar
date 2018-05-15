@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 10:50:55 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 14:08:16 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,21 @@ static void 		init_memory(t_arena *arena,
 {
 	size_t			cursor;
 	unsigned short	actor;
+	size_t			i;
+	size_t			offset;
 
+	offset = 0;
 	actor = 0;
-	printf("Taille memoire: %d\n", MEM_SIZE);
-	while (actor <= arena->np)
-	{
-		if (actor == 0)
-		{
-			cursor = 0;
-			while (cursor < arena->players[0].header.prog_size)
-			{
-				arena->memory[cursor] = arena->players[0].exec[cursor];
-				cursor++;
-			}
-		}
-		if (actor == 1)
-		{
-			cursor = MEM_SIZE / 2;
-			while (cursor < arena->players[1].header.prog_size)
-			{
-				arena->memory[cursor] = arena->players[1].exec[cursor];
-				cursor++;
-			}
-		}
+	i = 0;
+	cursor = 0;
+	printf("Taille memoire: %d | nombres de joueurs: %d\n",
+		   MEM_SIZE, arena->np);
+	while (actor < arena->np) {
+		ft_memcpy(arena->memory + offset, arena->players[actor].exec,
+			arena->players[actor].header.prog_size);
+		ft_memset(arena->ownership + offset, arena->players[actor].id,
+			arena->players[actor].header.prog_size);
+		offset += (MEM_SIZE / arena->np);
 		actor++;
 	}
 }
@@ -53,13 +45,13 @@ static void 		init_memory(t_arena *arena,
 void	init_arena(t_arena *arena)
 {
 	/*
-	 * TODO:
-	 * - Dump a equidistance du exec des players
-	 *   + set ownership en fct des ID des joueurs
-	 * - Spawner 2 proc ou le pc pointe vers le dbt de chq joueurs
-	 *   + Initialiser le registre `R1` en fct des id des jrs
-	 *   + bzero sur tout les derniers
-	 */
+	** TODO:
+	** - Dump a equidistance du exec des players
+	**   + set ownership en fct des ID des joueurs
+	** - Spawner 2 proc ou le pc pointe vers le dbt de chq joueurs
+	**   + Initialiser le registre `R1` en fct des id des jrs
+	**   + bzero sur tout les derniers
+	*/
 	arena->clock = 0;
 	arena->cycle_to_die = CYCLE_TO_DIE;
 	ft_memset(arena->memory, 0xff, MEM_SIZE);
