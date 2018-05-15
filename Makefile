@@ -18,7 +18,7 @@ else
 endif
 
 CFLAGS_ASM=			-Wall -Wextra -fsanitize=address
-CFLAGS_VM=			-Wall -Wextra -lncurses -g
+CFLAGS_VM=			-Wall -Wextra -lncurses -g -fsanitize=address
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/

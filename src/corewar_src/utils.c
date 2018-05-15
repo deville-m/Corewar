@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 11:28:50 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 11:48:27 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ void		dump_memory(const unsigned char *memory,
 	ft_printf("Dumping memory of size: %d\n", MEM_SIZE);
 	while (i < MEM_SIZE)
 	{
-		if (memory[i] != 0xff)
-			ft_putstr(BOLDGREEN);
-		else
+		if (memory[i] == 0xff)
 			ft_putstr(BLACK);
+		else if (memory[i] == 0x0)
+			ft_putstr(GREEN);
+		else
+			ft_putstr(BOLDGREEN);
 		if ((i % 40) == 0)
 			ft_putchar('\n');
 		ft_printf("%.2x ", memory[i]);
