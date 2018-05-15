@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 15:53:34 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/15 20:03:16 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ enum				e_type
 {
 	INDIRECT = 0,
 	DIRECT,
-	REGISTRE
+	REGISTER
 };
 
 /*
@@ -62,27 +62,18 @@ enum				e_type
 ** TODO: write docs
 */
 
+union				u_data
+{
+	unsigned char	reg_nbr;
+	unsigned char	direct[DIR_SIZE];
+	unsigned char	indirect[IND_SIZE];
+};
+
 typedef struct		s_param
 {
 	enum e_type		type;
-	unsigned char	*data;
+	union u_data	data;
 }					t_param;
-
-/*
-** Current process structure
-** for players tracking
-*/
-
-typedef struct		s_process
-{
-	unsigned int	pc;			/* Curseur du process */
-	t_bool			carry;		/* Si une operation est un succes */
-	t_bool			alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
-	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
-	unsigned char	registers[REG_NUMBER][REG_SIZE];
-	t_op			op;
-	t_param			params[MAX_ARGS_NUMBER];
-}					t_process;
 
 /*
 ** Arena structure with
@@ -99,6 +90,24 @@ typedef struct		s_arena
 	unsigned short	np;			/* Current player numbers */
 	unsigned int	clock;		/* Compteur general de cycle */
 }					t_arena;
+
+/*
+** Current process structure
+** for players tracking
+*/
+
+typedef struct		s_process
+{
+	unsigned char	registers[REG_NUMBER][REG_SIZE];
+	int				pc;			/* Curseur du process */
+	t_bool			carry;		/* Carry comme defini dans le sujet */
+	t_bool			alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
+	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
+	void			(*instruction)(t_arena *, struct s_process *); /* Callback */
+	t_op			op;
+	t_param			params[MAX_ARGS_NUMBER];
+	int				offset;
+}					t_process;
 
 /*
 ** @utils.c
