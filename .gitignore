@@ -1,11 +1,9 @@
 *.o
+*.cor
 .DS_Store
 asm
 corewar
 test*
 libft.a
-ressources
 .syntastic_c_config
-asm
-corewar
 libft/.obj
