@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 20:03:16 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/16 16:51:28 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ typedef struct		s_process
 	t_bool			alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
 	void			(*instruction)(t_arena *, struct s_process *); /* Callback */
-	t_op			op;
-	t_param			params[MAX_ARGS_NUMBER];
-	int				offset;
+	t_op			op; /* instruction parsed according to g_op_tab in op.c */
+	t_param			params[MAX_ARGS_NUMBER]; /* Array of parameters */
+	int				offset; /* How many bytes to move after instruction exec */
 }					t_process;
 
 /*

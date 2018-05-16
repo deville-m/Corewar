@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/15 20:04:56 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/16 19:57:21 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,31 @@ static t_bool	set_op(unsigned char op_code, t_op *op)
 	return (FALSE);
 }
 
-static int		calc_offset(unsigned char encoding_byte, t_op op)
+static int		set_params(t_arena *arena, t_process *process)
 {
-	
+	return (1);
+}
+
+static int		calc_offset(t_op op, unsigned char encoding_byte)
+{
+	int				offset;
+	unsigned int	tmp;
+
+	if (!op.coding_byte)
+		encoding_byte = op.arg_type[0];
+	offset = 0;
+	while (encoding_byte)
+	{
+		tmp = encoding_byte & 0X03;
+		if (tmp == T_REG)
+			++offset;
+		else if (tmp == T_DIR)
+			offset += op.index ? IND_SIZE : DIR_SIZE;
+		else if (tmp == T_IND)
+			offset += IND_SIZE;
+		encoding_byte >>= 2;
+	}
+	return (offset);
 }
 
 void			check_process(t_arena *arena, t_dlist *elem)
@@ -59,7 +81,7 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	proc->wait = proc->op.cycle_cost + arena->clock;
 	if (!set_params(arena, proc))
 		proc->instruction = NULL;
-	proc->offset = calc_offset(
-								arena->memory[(proc->pc + 1) % MEM_SIZE],
-								proc->op);
+	proc->offset = 1 + calc_offset(
+								proc->op,
+								arena->memory[(proc->pc + 1) % MEM_SIZE]);
 }
