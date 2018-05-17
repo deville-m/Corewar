@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/16 19:57:21 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/17 18:23:46 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,79 @@ static t_bool	set_op(unsigned char op_code, t_op *op)
 	return (FALSE);
 }
 
-static int		set_params(t_arena *arena, t_process *process)
+static t_bool	parse_direct(
+							t_arena *arena,
+							t_process *proc,
+							size_t i)
 {
-	return (1);
+	t_bool success;
+	t_bool index;
+
+	success = TRUE;
+	index = (proc->op.index) ? TRUE : FALSE;
+	if (!(proc->op.arg_type[i] & T_DIR))
+		success = FALSE;
+	vm_read(arena->memory, proc->pc + proc->offset,
+			&proc->params[i].data.direct, index ? IND_SIZE : DIR_SIZE);
+	proc->offset += (index) ? IND_SIZE : DIR_SIZE;
+	return (success);
 }
 
-static int		calc_offset(t_op op, unsigned char encoding_byte)
+static t_bool	parse_param(
+							t_arena *arena,
+							t_process *proc,
+							unsigned char type,
+							size_t index)
 {
-	int				offset;
-	unsigned int	tmp;
+	t_bool success;
 
-	if (!op.coding_byte)
-		encoding_byte = op.arg_type[0];
-	offset = 0;
+	success = TRUE;
+	if (type == T_REG)
+	{
+		if (!(proc->op.arg_type[index] & T_REG))
+			success = FALSE;
+		proc->params[index].type = REGISTER;
+		vm_read(arena->memory, proc->pc + proc->offset,
+				&proc->params[index].data.reg_nbr, 1);
+		++proc->offset;
+	}
+	else if (type == T_DIR)
+		success = parse_direct(arena, proc, index);
+	else if (type == T_IND)
+	{
+		if (!(proc->op.arg_type[index] & T_IND))
+			success = FALSE;
+		vm_read(arena->memory, proc->pc + proc->offset,
+				&proc->params[index].data.indirect, IND_SIZE);
+		proc->offset += IND_SIZE;
+	}
+	return (success);
+}
+
+static t_bool	set_params(t_arena *arena, t_process *proc)
+{
+	size_t			i;
+	unsigned char	encoding_byte;
+	t_bool			success;
+
+	proc->offset = 1;
+	if (!proc->op.coding_byte)
+		encoding_byte = proc->op.arg_type[0];
+	else
+	{
+		encoding_byte = arena->memory[(proc->pc + 1) % MEM_SIZE];
+		++proc->offset;
+	}
+	success = TRUE;
+	i = 0;
 	while (encoding_byte)
 	{
-		tmp = encoding_byte & 0X03;
-		if (tmp == T_REG)
-			++offset;
-		else if (tmp == T_DIR)
-			offset += op.index ? IND_SIZE : DIR_SIZE;
-		else if (tmp == T_IND)
-			offset += IND_SIZE;
-		encoding_byte >>= 2;
+		if (!parse_param(arena, proc, encoding_byte & 0XC0, i))
+			success = FALSE;
+		++i;
+		encoding_byte <<= 2;
 	}
-	return (offset);
+	return (success);
 }
 
 void			check_process(t_arena *arena, t_dlist *elem)
@@ -79,9 +127,8 @@ void			check_process(t_arena *arena, t_dlist *elem)
 		return ;
 	}
 	proc->wait = proc->op.cycle_cost + arena->clock;
-	if (!set_params(arena, proc))
+	if (set_params(arena, proc) == FALSE)
 		proc->instruction = NULL;
-	proc->offset = 1 + calc_offset(
-								proc->op,
-								arena->memory[(proc->pc + 1) % MEM_SIZE]);
+	else
+		set_instruction(proc, proc->op.op_code);
 }

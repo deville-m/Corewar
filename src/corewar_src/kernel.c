@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 10:57:56 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/17 17:22:49 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	dump_player_exec(arena);
 	init_arena(arena);
 	init_curses();
-	while (arena->clock > 0) /* TODO: modifier la condition */
+	while (arena->processes) /* TODO: modifier la condition */
 	{
-		/*
-		 * Graphics sections - plz ignore
-		 */
+		exec_processes(arena);
+		if (arena->clock && (arena->clock % arena->cycle_to_die) == 0)
+			if (proc_filter(&arena->processes) > NBR_LIVE)
+				arena->cycle_to_die -= CYCLE_DELTA;
+		++arena->clock;
 		apply_windows(warena, status);
 		wrefresh(warena);
 		wrefresh(status);

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/16 16:51:28 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/17 17:24:31 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct		s_process
 	unsigned char	registers[REG_NUMBER][REG_SIZE];
 	int				pc;			/* Curseur du process */
 	t_bool			carry;		/* Carry comme defini dans le sujet */
-	t_bool			alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
+	unsigned int	alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
 	void			(*instruction)(t_arena *, struct s_process *); /* Callback */
 	t_op			op; /* instruction parsed according to g_op_tab in op.c */
@@ -110,9 +110,25 @@ typedef struct		s_process
 }					t_process;
 
 /*
+** @process_utils.c
+*/
+
+unsigned int	proc_filter(t_dlist **processes);
+
+/*
 ** @utils.c
 */
 
+int			vm_read(
+					const unsigned char *memory,
+					int pc,
+					void *buffer,
+					size_t size);
+int			vm_write(
+					const unsigned char *memory,
+					int pc,
+					void *buffer,
+					size_t size);
 void		usage(void);
 void		dump_memory(const unsigned char *memory,
 				size_t i);
