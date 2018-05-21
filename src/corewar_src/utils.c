@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/17 15:31:51 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:29:40 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int			vm_read(const void *memory, int pc, void *buffer, size_t size)
 	return (i);
 }
 
-int			vm_write(const void *memory, int pc, void *buffer, size_t size)
+int			vm_write(void *memory, int pc, void *buffer, size_t size)
 {
 	unsigned char	*smem;
 	unsigned char	*sbuf;

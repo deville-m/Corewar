@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/17 17:24:31 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:29:20 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,12 +120,12 @@ unsigned int	proc_filter(t_dlist **processes);
 */
 
 int			vm_read(
-					const unsigned char *memory,
+					const void *memory,
 					int pc,
 					void *buffer,
 					size_t size);
 int			vm_write(
-					const unsigned char *memory,
+					void *memory,
 					int pc,
 					void *buffer,
 					size_t size);
