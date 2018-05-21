@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/21 16:34:25 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/21 16:55:09 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct		s_process
 */
 
 unsigned int	proc_filter(t_dlist **processes);
+void			check_process(t_arena *arena, t_dlist *elem);
+void			set_instruction(t_process *proc, int op_code);
 
 /*
 ** @utils.c
@@ -188,5 +190,11 @@ t_bool	load_instruction(t_arena *arena,
 
 
 void		swap_endian(void *data, size_t size);
+
+/*
+** live.c (mess)
+*/
+
+void		live(t_arena *map, t_process *proc);
 
 #endif
