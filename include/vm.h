@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/21 16:29:20 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/21 16:34:25 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,8 @@ void		init_arena(t_arena *arena);
 
 t_bool	load_instruction(t_arena *arena,
 				t_process *process);
+
+
+void		swap_endian(void *data, size_t size);
 
 #endif
