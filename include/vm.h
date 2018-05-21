@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/21 16:29:20 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/21 16:48:29 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ typedef struct		s_process
 */
 
 unsigned int	proc_filter(t_dlist **processes);
+void			check_process(t_arena *arena, t_dlist *elem);
+void			set_instruction(t_process *proc, int op_code);
 
 /*
 ** @utils.c
