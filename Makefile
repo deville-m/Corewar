@@ -17,7 +17,7 @@ else
 	CC = clang
 endif
 
-CFLAGS=			-Wall -Wextra # -fsanitize=address
+CFLAGS=			-Wall -Wextra #-fsanitize=address
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/
@@ -30,7 +30,8 @@ COMMONSRC=		op.c swap_endian.c
 
 ASMSRC=			asm.c tokenize.c utils.c lexer.c lexer2.c syntax_check.c \
 				check_instruction.c token_utils.c craft_out.c crafting.c \
-				crafting_tools.c create_output_file.c toolbox.c collision.c
+				crafting_tools.c create_output_file.c toolbox.c collision.c \
+				check_labels.c
 
 COREWARSRC=		main.c
 

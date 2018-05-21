@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/14 18:15:40 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/21 17:20:51 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void			print_tokens(t_dlist *elem);
 int				filter_token(t_dlist *elem);
 void			del_token(void *content, size_t content_size);
 t_dlist			*check_instruction(t_dlist *lst);
+void			check_labels(t_dlist *tokens);
 t_dlist			*syntax_check(t_dlist *tokens);
 void			syntax_error(char *message, t_asm_token *token);
 

@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 14:21:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/11 19:38:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:59:10 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_dlist					*syntax_check(t_dlist *tokens)
 {
 	t_dlist	*stop;
 
+	check_labels(tokens);
 	stop = check_header(tokens);
 	stop = check_exec(stop);
 	if (stop->prev)
