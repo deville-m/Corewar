@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/21 16:55:09 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/21 19:20:23 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,18 @@ enum				e_type
 
 union				u_data
 {
+	unsigned int	reg_nbr;
+	unsigned int	direct;
+	unsigned short	indirect;
+};
+/*
+union				u_data
+{
 	unsigned char	reg_nbr;
 	unsigned char	direct[DIR_SIZE];
 	unsigned char	indirect[IND_SIZE];
 };
-
+*/
 typedef struct		s_param
 {
 	enum e_type		type;
@@ -98,7 +105,8 @@ typedef struct		s_arena
 
 typedef struct		s_process
 {
-	unsigned char	registers[REG_NUMBER][REG_SIZE];
+//	unsigned char	registers[REG_NUMBER][REG_SIZE];
+	unsigned int	reg[REG_NUMBER];
 	int				pc;			/* Curseur du process */
 	t_bool			carry;		/* Carry comme defini dans le sujet */
 	unsigned int	alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */
@@ -196,5 +204,6 @@ void		swap_endian(void *data, size_t size);
 */
 
 void		live(t_arena *map, t_process *proc);
+void		ld(t_arena *map, t_process *proc);
 
 #endif
