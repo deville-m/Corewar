@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/21 16:55:09 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/21 17:56:00 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct		s_param
 typedef struct		s_arena
 {
 	unsigned char	memory[MEM_SIZE]; /* Plage de memoire */
-	unsigned int	ownership[MEM_SIZE]; /* Index d'appartenance */
+	unsigned char	ownership[MEM_SIZE]; /* Index d'appartenance */
 	unsigned int	cycle_to_die; /* Periode de verification des processus */
 	t_dlist			*processes;	/* Liste des processus */
 	t_player		players[MAX_PLAYERS];
