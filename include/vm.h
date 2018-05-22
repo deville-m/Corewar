@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:37:22 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 13:53:06 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,5 +206,11 @@ void		live(t_arena *map, t_process *proc);
 void		ld(t_arena *map, t_process *proc);
 void		st(t_arena *map, t_process *proc);
 void		add(t_arena *map, t_process *proc);
+void		sub(t_arena *map, t_process *proc);
+void		and(t_arena *map, t_process *proc);
+void		or(t_arena *map, t_process *proc);
+void		xor(t_arena *map, t_process *proc);
+
+void		lld(t_arena *map, t_process *proc);
 
 #endif
