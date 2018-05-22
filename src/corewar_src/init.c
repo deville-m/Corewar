@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 10:28:31 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:15:32 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void 		init_memory(t_arena *arena,
 	actor = 0;
 	printf("Taille memoire: %d | nombres de joueurs: %d\n",
 		   MEM_SIZE, arena->np);
+	ft_bzero(arena->memory, MEM_SIZE);
+	ft_bzero(arena->ownership, MEM_SIZE);
 	while (actor < arena->np)
 	{
 		ft_memcpy(arena->memory + offset, arena->players[actor].exec,
