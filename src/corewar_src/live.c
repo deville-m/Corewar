@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/22 10:57:38 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 11:33:25 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,24 @@
 int	vm_read(void *memory, int pc, void *buffer, size_t size);
 int	vm_write(void *memory, int pc, void *buffer, size_t size);
 */
+
+void	trad_short(unsigned char *src, short *dest, int len)
+{
+	int	i;
+	int	j;
+
+	*dest = 0;
+	i = 0;
+	j = (len - 1) * 8;
+	while (i < len)
+	{
+		*dest |= src[i];
+		if (j > 0)
+			*dest <<= j;
+		i += 1;
+		j -= 8;
+	}
+}
 
 void	trad_input(unsigned char *src, unsigned int *dest, int len)
 {
@@ -73,7 +91,6 @@ void	ld(t_arena *map, t_process *proc)
 		if (vm_read((void *)map->memory, proc->pc + (int)ind, buf, 4) == 4)
 		{
 			// ici reg est stocke en little endian
-//			ft_memcpy(proc->reg[proc->params[1].data.reg_nbr], buf, 4);
 			trad_input(buf, &(proc->reg[proc->param[1].data.reg_nbr]), 4);
 			swap_endian(&(proc->reg[proc->param[1].data.reg_nbr]), 4);
 			proc->carry = 1;
@@ -91,30 +108,42 @@ void	ld(t_arena *map, t_process *proc)
 
 void	st(t_arena *map, t_process *proc)
 {
-	int		npc;
-	short	ind;
+	int				npc;
+	short			ind;
+	unsigned int	tmp;
 
-	npc = 0;
-//	if (proc->params[1].type == REGISTER)
-//	{
-//		npc = proc->pc + ();
-//			((int)proc->reg[proc->params[1].data.reg_nbr]
-		vm_write(map->memory, npc, (void *)&(proc->param[0].data), 4);
-//	}
-//	else
-//	{
-//		npc = proc->pc + ( % IDX_MOD);
-//		npc = proc->pc ((int)swap_endian(&(proc->params[1]), IND_SIZE) % IDX_MOD);
-//		vm_write(map->memory, npc, (void *)&(proc->params[0]), 1);
-//	}
+	if (proc->param[1].type == REGISTER)
+	{
+		tmp = proc->reg[proc->param[0].data.reg_nbr];
+		proc->reg[proc->param[1].data.reg_nbr] = tmp;
+	}
+	else
+	{
+		ind = proc->param[1].data.indirect;
+		swap_endian(&ind, IND_SIZE);
+		npc = proc->pc + (ind % IDX_MOD);
+		tmp = proc->reg[proc->param[0].data.reg_nbr];
+		swap_endian(&tmp, 4);
+		vm_write(map->memory, npc, (void *)&(tmp), 4);
+	}
 }
-/*
+
 void	add(t_arena *map, t_process *proc)
 {
-	proc->param[2] = proc->param[0] + proc->param[1];
-	proc->carry = 1;
+	unsigned int	a;
+	unsigned int	b;
+
+	a = proc->reg[proc->param[0].data.reg_nbr];
+	b = proc->reg[proc->param[1].data.reg_nbr];
+	swap_endian(&a, 4);
+	swap_endian(&b, 4);
+	a = a + b;
+	swap_endian(&a, 4);
+	proc->reg[proc->param[2].data.reg_nbr] = a;
 }
 
+
+/*
 // faire un test pour s'assurer que la soustraction est realisee dans ce sens... Rien ne
 // le garanti en l'etat
 void	sub(t_arena *map, t_process *proc)
