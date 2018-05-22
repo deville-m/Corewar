@@ -6,13 +6,13 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:24:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/21 16:47:33 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:54:15 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "op.h"
-
+/*
 int		set_instruction2(t_process *proc, int op_code)
 {
 	if (op_code == g_op_tab[8].op_code)
@@ -35,12 +35,12 @@ int		set_instruction2(t_process *proc, int op_code)
 		return (0);
 	return (1);
 }
-
+*/
 void	set_instruction(t_process *proc, int op_code)
 {
 	if (op_code == g_op_tab[0].op_code)
 		proc->instruction = live;
-	else if (op_code == g_op_tab[1].op_code)
+/*	else if (op_code == g_op_tab[1].op_code)
 		proc->instruction = ld;
 	else if (op_code == g_op_tab[2].op_code)
 		proc->instruction = st;
@@ -56,4 +56,5 @@ void	set_instruction(t_process *proc, int op_code)
 		proc->instruction = xor;
 	else if (!set_instruction2(proc, op_code))
 		proc->instruction = NULL;
+*/
 }
