@@ -24,7 +24,7 @@ SRCDIR=			src/
 COMMONDIR=		commons/
 ASMDIR=			asm_src/
 COREWARDIR=		corewar_src/
-OBJDIR=         .objs
+
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
@@ -63,12 +63,7 @@ ERROR_C  := \x1b[31;01m
 WARN_C   := \x1b[33;01m
 SILENT_C := \x1b[30;01m
 # -------~-------~--~------------------~------
-$(OBJDIR):
-	printf "\n$(LOG_U)$(OK_C)[MK]$(NO_C) Creating temp directory: $(SILENT_C) %s\n" $(OBJDIR)
-	mkdir -p $(OBJDIR)
-	mkdir -p $(OBJDIR)/{$(ASMDIR),$(COREWARDIR),$(COMMONDIR)}
-
-all: $(OBJDIR) $(ASM) $(COREWAR)
+all: $(ASM) $(COREWAR)
 	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n$(NO_C)" $(ASM) $(COREWAR)
 
 %.o: %.c
@@ -88,7 +83,7 @@ $(COREWAR): $(COREWAROBJ) $(LIB)
 	$(CC) $(CFLAGS_VM) -I$(INCLUDES) -o $@ $^
 
 clean:
-	rm -fr $(OBJDIR)
+	rm -fr $(COREWAROBJ) $(ASMOBJ) $(COMMONOBJ)
 	$(MAKE) -C libft/ clean
 	printf "\n$(LOG_U)$(OK_C)[RM]$(NO_C) Cleaned up objects$(SILENT_C)\n"
 
