@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 10:55:09 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 11:23:51 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ typedef struct		s_arena
 
 typedef struct		s_process
 {
-//	unsigned char	registers[REG_NUMBER][REG_SIZE];
 	unsigned int	reg[REG_NUMBER];
 	int				pc;			/* Curseur du process */
 	t_bool			carry;		/* Carry comme defini dans le sujet */
@@ -206,5 +205,6 @@ void		swap_endian(void *data, size_t size);
 void		live(t_arena *map, t_process *proc);
 void		ld(t_arena *map, t_process *proc);
 void		st(t_arena *map, t_process *proc);
+void		add(t_arena *map, t_process *proc);
 
 #endif
