@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 10:19:32 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:24:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct		s_arena
 	unsigned char	memory[MEM_SIZE]; /* Plage de memoire */
 	unsigned char	ownership[MEM_SIZE]; /* Index d'appartenance */
 	unsigned int	cycle_to_die; /* Periode de verification des processus */
-	t_dlist			*processes;	/* Liste des processus */
+	t_dlist			*procs;	/* Liste des processus */
 	t_player		players[MAX_PLAYERS];
 	unsigned short	np;			/* Current player numbers */
 	unsigned int	clock;		/* Compteur general de cycle */
@@ -113,7 +113,7 @@ typedef struct		s_process
 	unsigned int	wait;		/* temps d'attente en cycle avt proch instru */
 	void			(*instruction)(t_arena *, struct s_process *); /* Callback */
 	t_op			op; /* instruction parsed according to g_op_tab in op.c */
-	t_param			params[MAX_ARGS_NUMBER]; /* Array of parameters */
+	t_param			param[MAX_ARGS_NUMBER]; /* Array of parameters */
 	int				offset; /* How many bytes to move after instruction exec */
 }					t_process;
 
@@ -193,7 +193,7 @@ void		init_arena(t_arena *arena);
 ** loader.c
 */
 
-t_bool	load_instruction(t_arena *arena,
+t_bool		load_instruction(t_arena *arena,
 				t_process *process);
 
 
