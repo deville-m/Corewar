@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 21:40:33 by iomonad          ###   ########.fr       */
+/*   Updated: 2018/05/22 22:38:00 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,17 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 		/* if (arena->clock && (arena->clock % arena->cycle_to_die) == 0) */
 		/* 	if (proc_filter(&arena->procs) > NBR_LIVE) */
 		/* 		arena->cycle_to_die -= CYCLE_DELTA; */
+
+		/* ch = getch(); */
+		/* keybindinds_callback(ch); */
 		++arena->clock;
 		apply_windows(warena, status);
 		dump_cycle_memory(warena, status, arena);
 		wrefresh(warena);
 		wrefresh(status);
-		keybindinds_callback(getch());
+		refresh();
+		fflush(stdout);
+		usleep(10000);
 	}
 	free(warena);
 	free(status);

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/10 18:44:37 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 22:24:57 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	set_delimiters(WINDOW *status)
 	mvwprintw(status, 9, x/5, "      By: mdeville, rbaraud & ctrouill   ");
 	wattroff(status, A_BOLD | COLOR_PAIR(1));
 	mvwhline(status, y / 6, 1, ACS_HLINE, x - 2);
-	print_status(status, 1337, 1337);
+//	print_status(status, 1337, 1337);
 }
 
 void		apply_windows(WINDOW *arena, WINDOW *status)
