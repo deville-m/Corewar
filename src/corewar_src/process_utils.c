@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:51:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/17 17:25:10 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:30:32 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void			exec_processes(t_arena *arena)
 {
 	t_dlist *walk;
 
-	walk = arena->processes;
+	walk = arena->procs;
 	while (walk)
 	{
 		check_process(arena, walk);

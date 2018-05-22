@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/21 19:45:08 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 10:46:34 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	live(t_arena *map, t_process *proc)
 	i = 0;
 	value = proc->params[0].data.direct;
 //	trad_input(&(proc->params[0].data.direct[0]), &value, DIR_SIZE);
+//	int_input(&(proc->param[0].data.direct[0]), &value);
+	value = proc->param[0].data.direct;
 	swap_endian(&value, DIR_SIZE);
 	while (i < MAX_PLAYERS)
 	{
