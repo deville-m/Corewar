@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 15:03:19 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:31:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,12 @@ void		live(t_arena *map, t_process *proc);
 void		ld(t_arena *map, t_process *proc);
 void		st(t_arena *map, t_process *proc);
 void		add(t_arena *map, t_process *proc);
+
+/*
+** verbose.c
+*/
+
+void		verbose(t_arena *arena, int level);
 
 /*
 ** @printers
