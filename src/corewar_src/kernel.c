@@ -6,12 +6,24 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 10:58:46 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:11:40 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 #include <commons.h>
+
+static void	exec_processes(t_arena *arena)
+{
+	t_dlist *walk;
+
+	walk = arena->procs;
+	while (walk)
+	{
+		check_process(arena, walk);
+		walk = walk->next;
+	}
+}
 
 /*
 ** @desc monothilic part of the arena
@@ -31,7 +43,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	init_curses();
 	while (arena->procs) /* TODO: modifier la condition */
 	{
-		//exec_processes(arena);
+		exec_processes(arena);
 		if (arena->clock && (arena->clock % arena->cycle_to_die) == 0)
 			if (proc_filter(&arena->procs) > NBR_LIVE)
 				arena->cycle_to_die -= CYCLE_DELTA;
