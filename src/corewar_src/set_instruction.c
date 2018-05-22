@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:24:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/22 11:33:47 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 13:15:43 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	set_instruction(t_process *proc, int op_code)
 		proc->instruction = st;
 	else if (op_code == g_op_tab[3].op_code)
 		proc->instruction = add;
-/*	else if (op_code == g_op_tab[4].op_code)
+	else if (op_code == g_op_tab[4].op_code)
 		proc->instruction = sub;
 	else if (op_code == g_op_tab[5].op_code)
 		proc->instruction = and;
@@ -54,7 +54,7 @@ void	set_instruction(t_process *proc, int op_code)
 		proc->instruction = or;
 	else if (op_code == g_op_tab[7].op_code)
 		proc->instruction = xor;
-	else if (!set_instruction2(proc, op_code))
+/*	else if (!set_instruction2(proc, op_code))
 		proc->instruction = NULL;
 */
 }
