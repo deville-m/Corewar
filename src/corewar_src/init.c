@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:15:32 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:18:22 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	init_arena(t_arena *arena)
 	arena->cycle_to_die = CYCLE_TO_DIE;
 	ft_memset(arena->memory, 0xff, MEM_SIZE);
 	init_memory(arena, 0);
-	dump_memory(arena->memory, 0);
+	dump_memory(arena->memory, arena->ownership, 0);
 }

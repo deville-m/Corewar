@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/21 16:29:40 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:05:03 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,48 @@ void		usage(void)
 }
 
 /*
+ * Retrieve ad-hoc colors depending
+ * of the player cusor.
+ */
+static char*
+jcolors(unsigned char owner, t_bool bold)
+{
+	if (owner == 0xFF) {
+		return ((bold) ? LIGHTGREEN : GREEN);
+	} else if (owner == 0xFE) {
+		return ((bold) ? LIGHTBLUE : BLUE);
+	} else if (owner == 0xFD) {
+		return ((bold) ? LIGHTRED : RED);
+	} else if (owner == 0xFC) {
+		return ((bold) ? LIGHTYELLOW : YELLOW);
+	}
+	return ((bold) ? LIGHTBLACK : BLACK);
+}
+
+/*
 ** @desc dump memory to stdout
 ** @return nil
 */
 
-void		dump_memory(const unsigned char *memory,
-					size_t i)
+void			dump_memory(const unsigned char *memory,
+							const unsigned char *ownership,
+							size_t i)
 {
 	ft_printf("Dumping memory of size: %d\n", MEM_SIZE);
 	while (i < MEM_SIZE)
 	{
 		if (memory[i] == 0xff)
-			ft_putstr(BLACK);
-		else if (memory[i] == 0x0)
-			ft_putstr(GREEN);
+			ft_putstr(jcolors(ownership[i], FALSE));
+		else if (memory[i] == 0x00)
+			ft_putstr(jcolors(ownership[i], FALSE));
 		else
-			ft_putstr(BOLDGREEN);
+			ft_putstr(jcolors(ownership[i], TRUE));
 		if ((i % 50) == 0)
 			ft_putchar('\n');
 		ft_printf("%.2x ", memory[i]);
 		i++;
 	}
+	ft_putchar('\n');
 	ft_putstr(RESET);
 }
 
@@ -113,7 +134,7 @@ void		dump_player_exec(t_arena *arena)
 		while (i < arena->players[p].header.prog_size)
 		{
 			if (arena->players[p].exec[i] != 0x0)
-				ft_putstr(BOLDRED);
+				ft_putstr(LIGHTRED);
 			else
 				ft_putstr(BLACK);
 			if ((i % 15) == 0)

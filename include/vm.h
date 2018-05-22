@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 13:53:06 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:43:22 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 struct s_option
 {
 	size_t	dump;
+	t_bool	trash;
 	size_t	cycles;
 	t_bool	gfx;
 };
@@ -140,7 +141,8 @@ int			vm_write(
 					size_t size);
 void		usage(void);
 void		dump_memory(const unsigned char *memory,
-				size_t i);
+						const unsigned char *ownership,
+						size_t i);
 void		dump_player_exec(t_arena *arena);
 
 /*
@@ -154,6 +156,7 @@ t_bool		parse_options(int argc, char *argv[], struct s_option *opts);
 */
 
 t_bool		kernel(struct s_option *options, t_arena *arena);
+t_bool		kernel_gfx(struct s_option *options, t_arena *arena);
 
 /*
 ** @curses.c
@@ -189,7 +192,7 @@ t_bool		parseplayers(t_arena *arena,
 void		init_arena(t_arena *arena);
 
 /*
-** loader.c
+** @loader.c
 */
 
 t_bool		load_instruction(t_arena *arena,
@@ -199,7 +202,7 @@ t_bool		load_instruction(t_arena *arena,
 void		swap_endian(void *data, size_t size);
 
 /*
-** live.c (mess)
+** @live.c (mess)
 */
 
 void		live(t_arena *map, t_process *proc);
@@ -212,5 +215,18 @@ void		or(t_arena *map, t_process *proc);
 void		xor(t_arena *map, t_process *proc);
 
 void		lld(t_arena *map, t_process *proc);
+
+/*
+** verbose.c
+*/
+
+void		verbose(t_arena *arena, int level);
+
+/*
+** @printers
+*/
+
+void		print_player_headers(t_arena *arena, size_t i);
+void		print_winner(t_arena *arena, size_t i);
 
 #endif
