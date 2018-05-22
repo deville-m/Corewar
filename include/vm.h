@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:23:51 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 11:37:22 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct		s_player
 {
 	unsigned int	live_cpt;	/* Nombre de fois rapporte en vie [Inc] */
 	unsigned char	*exec;		/* Size should be checked before */
-	unsigned int	id;
+	unsigned char	id;
 	t_header		header;
 	unsigned int	last_live;	/* Derniere fois que le joueur a rapporte en vie */
 }					t_player;
