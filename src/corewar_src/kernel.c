@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 12:11:40 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:45:59 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,29 @@ static void	exec_processes(t_arena *arena)
 
 t_bool		kernel(struct s_option *options, t_arena *arena)
 {
+	dump_player_exec(arena);
+	init_arena(arena);
+	while (arena->procs) /* TODO: modifier la condition */
+	{
+		/* exec_processes(arena); */
+		/* if (arena->clock && (arena->clock % arena->cycle_to_die) == 0) */
+		/* 	if (proc_filter(&arena->procs) > NBR_LIVE) */
+		/* 		arena->cycle_to_die -= CYCLE_DELTA; */
+		++arena->clock;
+	}
+	return (TRUE);
+}
+
+/*
+** @desc monothilic part of the graphical arena
+**       arena.players should be init
+**       before fun call.
+** @param options retrieved
+** @return nil
+*/
+
+t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
+{
 	WINDOW 	*warena = NULL;
 	WINDOW	*status = NULL;
 
@@ -43,10 +66,10 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	init_curses();
 	while (arena->procs) /* TODO: modifier la condition */
 	{
-		exec_processes(arena);
-		if (arena->clock && (arena->clock % arena->cycle_to_die) == 0)
-			if (proc_filter(&arena->procs) > NBR_LIVE)
-				arena->cycle_to_die -= CYCLE_DELTA;
+		/* exec_processes(arena); */
+		/* if (arena->clock && (arena->clock % arena->cycle_to_die) == 0) */
+		/* 	if (proc_filter(&arena->procs) > NBR_LIVE) */
+		/* 		arena->cycle_to_die -= CYCLE_DELTA; */
 		++arena->clock;
 		apply_windows(warena, status);
 		wrefresh(warena);

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 12:47:37 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 13:48:21 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ t_bool		parse_options(int argc, char *argv[], struct s_option *opts);
 */
 
 t_bool		kernel(struct s_option *options, t_arena *arena);
+t_bool		kernel_gfx(struct s_option *options, t_arena *arena);
 
 /*
 ** @curses.c
