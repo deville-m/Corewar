@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:51:09 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 12:08:53 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,15 @@ static char*
 jcolors(unsigned char owner, t_bool bold)
 {
 	if (owner == 0xFF) {
-		return ((bold) ? BOLDGREEN : GREEN);
+		return ((bold) ? LIGHTGREEN : GREEN);
 	} else if (owner == 0xFE) {
-		return ((bold) ? BOLDBLUE : BLUE);
+		return ((bold) ? LIGHTBLUE : BLUE);
 	} else if (owner == 0xFD) {
-		return ((bold) ? BOLDRED : RED);
+		return ((bold) ? LIGHTRED : RED);
 	} else if (owner == 0xFC) {
-		return ((bold) ? BOLDYELLOW : YELLOW);
+		return ((bold) ? LIGHTYELLOW : YELLOW);
 	}
-	return ((bold) ? BOLDBLACK : BLACK);
+	return ((bold) ? LIGHTBLACK : BLACK);
 }
 
 /*
@@ -133,7 +133,7 @@ void		dump_player_exec(t_arena *arena)
 		while (i < arena->players[p].header.prog_size)
 		{
 			if (arena->players[p].exec[i] != 0x0)
-				ft_putstr(BOLDRED);
+				ft_putstr(LIGHTRED);
 			else
 				ft_putstr(BLACK);
 			if ((i % 15) == 0)
