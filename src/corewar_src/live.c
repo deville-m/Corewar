@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/22 10:29:56 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 10:57:38 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,22 @@ int	vm_read(void *memory, int pc, void *buffer, size_t size);
 int	vm_write(void *memory, int pc, void *buffer, size_t size);
 */
 
-void	short_input(unsigned char *src, unsigned short *dest)
+void	trad_input(unsigned char *src, unsigned int *dest, int len)
 {
-	*dest = 0;
-	*dest |= src[0];
-	*dest <<= 2;
-	*dest |= src[1];
-}
+	int	i;
+	int	j;
 
-void	int_input(unsigned char *src, unsigned int *dest)
-{
 	*dest = 0;
-	*dest |= src[0];
-	*dest <<= 6;
-	*dest |= src[1];
-	*dest <<= 4;
-	*dest |= src[2];
-	*dest <<= 2;
-	*dest |= src[3];
+	i = 0;
+	j = (len - 1) * 8;
+	while (i < len)
+	{
+		*dest |= src[i];
+		if (j > 0)
+			*dest <<= j;
+		i += 1;
+		j -= 8;
+	}
 }
 
 void	live(t_arena *map, t_process *proc)
@@ -45,7 +43,9 @@ void	live(t_arena *map, t_process *proc)
 
 	proc->alive += 1;
 	i = 0;
-	//int_input(&(proc->param[0].data.direct[0]), &value);
+//	trad_input(&(proc->params[0].data.direct[0]), &value, DIR_SIZE);
+//	int_input(&(proc->param[0].data.direct[0]), &value);
+	value = proc->param[0].data.direct;
 	swap_endian(&value, DIR_SIZE);
 	while (i < MAX_PLAYERS)
 	{
@@ -54,42 +54,61 @@ void	live(t_arena *map, t_process *proc)
 		i += 1;
 	}
 }
-/*
-void	ld(t_arena *map, t_process *proc)
-{
-	void	*tmp;
 
 // je dois determiner s'il s'agit d'un label, si oui aller chercher la donnee et lire
 // l'info, comment savoir sa taille ? ->test, sinon, faire le swap endian en fonction de la
-// taille et stocker dans l'int du registre...)
-// determinger si nous devons stocker en little ou big endian dans les reg
-	if (vm_read(map->memory, , tmp, 1) > 0)
-	{
+// taille et stocker dans l'int du registre ==> pas forcement un int...)
 
-		proc->carry = 1;
+void	ld(t_arena *map, t_process *proc)
+{
+	unsigned char	buf[4];
+	unsigned int	dir;
+	short			ind;
+
+	if (proc->param[0].type == INDIRECT)
+	{
+		ind = proc->param[0].data.indirect;
+		swap_endian(&ind, IND_SIZE);
+		// je vais lire arbitrairement 4 bytes pour le registre...
+		if (vm_read((void *)map->memory, proc->pc + (int)ind, buf, 4) == 4)
+		{
+			// ici reg est stocke en little endian
+//			ft_memcpy(proc->reg[proc->params[1].data.reg_nbr], buf, 4);
+			trad_input(buf, &(proc->reg[proc->param[1].data.reg_nbr]), 4);
+			swap_endian(&(proc->reg[proc->param[1].data.reg_nbr]), 4);
+			proc->carry = 1;
+		}
+		else
+			proc->carry = 0;
 	}
 	else
-		proc->carry = 0;
-
-	proc->param[1] = swap_endian(proc->param[0], sizeof(proc->param[0]));
+	{
+		dir = proc->param[0].data.direct;
+		swap_endian(&dir, IND_SIZE);
+		proc->carry = 1;
+	}
 }
 
 void	st(t_arena *map, t_process *proc)
 {
-	int	new_pc;
+	int		npc;
+	short	ind;
 
-	if (sizeof(proc->param[1]) == 1)
-	{
-		new_pc = proc->pc + ((int)proc->param[1] % IDX_MOD);
-		vm_write(map->memory, new_pc, (void *)&(proc->param[0]), 1); //map->memory ??
-	}
-	else
-	{
-		new->pc = proc->pc ((int)swap_endian(&(proc->param[1]), IND_SIZE) % IDX_MOD);
-		vm_write(map->memory, new_pc, (void *)&(proc->param[0]), 1); //map->memory ??
-	}
+	npc = 0;
+//	if (proc->params[1].type == REGISTER)
+//	{
+//		npc = proc->pc + ();
+//			((int)proc->reg[proc->params[1].data.reg_nbr]
+		vm_write(map->memory, npc, (void *)&(proc->param[0].data), 4);
+//	}
+//	else
+//	{
+//		npc = proc->pc + ( % IDX_MOD);
+//		npc = proc->pc ((int)swap_endian(&(proc->params[1]), IND_SIZE) % IDX_MOD);
+//		vm_write(map->memory, npc, (void *)&(proc->params[0]), 1);
+//	}
 }
-
+/*
 void	add(t_arena *map, t_process *proc)
 {
 	proc->param[2] = proc->param[0] + proc->param[1];

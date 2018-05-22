@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:00:24 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:18:44 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct		s_player
 {
 	unsigned int	live_cpt;	/* Nombre de fois rapporte en vie [Inc] */
 	unsigned char	*exec;		/* Size should be checked before */
-	unsigned int	id;
+	unsigned char	id;
 	t_header		header;
 	unsigned int	last_live;	/* Derniere fois que le joueur a rapporte en vie */
 }					t_player;
@@ -206,6 +206,7 @@ void		swap_endian(void *data, size_t size);
 
 void		live(t_arena *map, t_process *proc);
 void		ld(t_arena *map, t_process *proc);
+void		st(t_arena *map, t_process *proc);
 
 /*
 ** Colors reference

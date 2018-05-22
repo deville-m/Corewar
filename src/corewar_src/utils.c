@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:13:25 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:51:09 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,25 @@ void		usage(void)
 }
 
 /*
+ * Retrieve ad-hoc colors depending
+ * of the player cusor.
+ */
+static char*
+jcolors(unsigned char owner, t_bool bold)
+{
+	if (owner == 0xFF) {
+		return ((bold) ? BOLDGREEN : GREEN);
+	} else if (owner == 0xFE) {
+		return ((bold) ? BOLDBLUE : BLUE);
+	} else if (owner == 0xFD) {
+		return ((bold) ? BOLDRED : RED);
+	} else if (owner == 0xFC) {
+		return ((bold) ? BOLDYELLOW : YELLOW);
+	}
+	return ((bold) ? BOLDBLACK : BLACK);
+}
+
+/*
 ** @desc dump memory to stdout
 ** @return nil
 */
@@ -76,24 +95,15 @@ void			dump_memory(const unsigned char *memory,
 							const unsigned char *ownership,
 							size_t i)
 {
-	static char	*cindex[MAX_PLAYERS]
-		= { GREEN,
-			BLUE,
-			RED,
-			MAGENTA };
-
 	ft_printf("Dumping memory of size: %d\n", MEM_SIZE);
 	while (i < MEM_SIZE)
 	{
-		printf("OWNERSHIP: %d\n", ownership[i]);
 		if (memory[i] == 0xff)
-			ft_putstr(BLACK);
-		else if (memory[i] == 0x0)
-			/* ft_putstr(cindex[(unsigned int)ownership[i]]); */
-			ft_putstr(GREEN);
+			ft_putstr(jcolors(ownership[i], FALSE));
+		else if (memory[i] == 0x00)
+			ft_putstr(jcolors(ownership[i], FALSE));
 		else
-			/* ft_putstr(cindex[(unsigned int)ownership[i]]); */
-			ft_putstr(BOLDGREEN);
+			ft_putstr(jcolors(ownership[i], TRUE));
 		if ((i % 50) == 0)
 			ft_putchar('\n');
 		ft_printf("%.2x ", memory[i]);
