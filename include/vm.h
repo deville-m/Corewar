@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 10:24:19 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 11:00:24 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ int			vm_write(
 					size_t size);
 void		usage(void);
 void		dump_memory(const unsigned char *memory,
-				size_t i);
+						const unsigned char *ownership,
+						size_t i);
 void		dump_player_exec(t_arena *arena);
 
 /*
@@ -205,5 +206,17 @@ void		swap_endian(void *data, size_t size);
 
 void		live(t_arena *map, t_process *proc);
 void		ld(t_arena *map, t_process *proc);
+
+/*
+** Colors reference
+*/
+
+typedef struct	s_pcolor
+{
+	char *regular;
+	char *bold;
+}				t_color;
+
+
 
 #endif
