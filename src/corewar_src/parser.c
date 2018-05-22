@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 15:15:26 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:54:07 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,21 @@ static t_bool			xperror(const char *file,
 ** @return Maybe[Char*] | Nothing[Null]
 */
 
-static unsigned char	*parse_content(int fd, uint32_t size)
+static t_bool				parse_content(
+										int fd,
+										unsigned char *buffer,
+										unsigned int *prog_size)
 {
-	unsigned char		*buffer;
-	char		nil[0x2];
+	char c;
 
-	buffer = (unsigned char*)ft_strnew(CHAMP_MAX_SIZE);
-	swap_endian(&size, sizeof(size));
-	if ((read(fd, buffer, size) != size))
-		return (NULL);
-	if ((read(fd, nil, 0x13)) != 0)
-		return (NULL);
-	return (buffer);
+	swap_endian(prog_size, sizeof(unsigned int));
+	if ((read(fd, buffer, *prog_size) != *prog_size))
+		return (FALSE);
+	if ((read(fd, &c, 1)) != 0)
+		return (FALSE);
+	if (*prog_size > CHAMP_MAX_SIZE)
+		return (FALSE);
+	return (TRUE);
 }
 
 /*
@@ -60,24 +63,25 @@ t_bool					parseplayers(t_arena *arena,
 {
 	int					fd;
 	unsigned char		id;
-	unsigned short		np;
+	size_t				ret;
 
 	id = -1;
-	np = 0;
+	arena->np = 0;
 	while (argv[i] != NULL)
 	{
 		if ((fd = open(argv[i], O_RDONLY)) < 0)
 			return (xperror(argv[i] ,"is an invalid file"));
-		if (read(fd, &arena->players[i].header, sizeof(t_header)) < 0
-			|| ((arena->players[i].exec = parse_content(fd,
-					arena->players[i].header.prog_size)) == NULL))
+		ret = read(fd, &arena->players[i].header, sizeof(t_header));
+		if (ret != sizeof(t_header)
+				|| !parse_content(fd, arena->players[i].exec,
+					&arena->players[i].header.prog_size))
 			return (xperror(argv[i], "have an invalid file size."));
 		arena->players[i].id = id--;
 		arena->players[i].last_live = 0;
 		arena->players[i].live_cpt = 0;
 		close(fd);
 		i++;
-		np++;
+		arena->np++;
 	}
-	return ((arena->np = np) | 1);
+	return (TRUE);
 }

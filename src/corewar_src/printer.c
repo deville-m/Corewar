@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:23:36 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 15:19:23 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:56:27 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				print_player_headers(t_arena *arena,
 	uint32_t x;
 
 	ft_printf("Introducing contestants...\n");
-	while (arena->players[i].exec != NULL)
+	while (i < arena->np)
 	{
 		x = arena->players[i].header.prog_size;
 		swap_endian(&x, sizeof(x));
@@ -50,7 +50,7 @@ void				print_winner(t_arena *arena,
 
 	maxi = 0;
 	aref = 0;
-	while (arena->players[i].exec != NULL)
+	while (i < arena->np)
 	{
 		if (arena->players[i].last_live > maxi)
 		{

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 15:05:03 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:52:09 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ void		dump_player_exec(t_arena *arena)
 	while (p < arena->np)
 	{
 		i = 0;
-		swap_endian(&arena->players[p].header.prog_size,
-					sizeof(arena->players[p].header.prog_size));
 		ft_printf("\nSize of player[%zu]: %u\n", p,
 			arena->players[p].header.prog_size);
 		while (i < arena->players[p].header.prog_size)
