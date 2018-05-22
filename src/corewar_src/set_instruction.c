@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:24:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/22 10:43:59 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 10:57:55 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	set_instruction(t_process *proc, int op_code)
 {
 	if (op_code == g_op_tab[0].op_code)
 		proc->instruction = live;
-/*	else if (op_code == g_op_tab[1].op_code)
+	else if (op_code == g_op_tab[1].op_code)
 		proc->instruction = ld;
 	else if (op_code == g_op_tab[2].op_code)
 		proc->instruction = st;
-	else if (op_code == g_op_tab[3].op_code)
+/*	else if (op_code == g_op_tab[3].op_code)
 		proc->instruction = add;
 	else if (op_code == g_op_tab[4].op_code)
 		proc->instruction = sub;

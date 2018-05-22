@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/22 10:46:34 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/22 10:57:38 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	live(t_arena *map, t_process *proc)
 
 	proc->alive += 1;
 	i = 0;
-	value = proc->params[0].data.direct;
 //	trad_input(&(proc->params[0].data.direct[0]), &value, DIR_SIZE);
 //	int_input(&(proc->param[0].data.direct[0]), &value);
 	value = proc->param[0].data.direct;
@@ -66,17 +65,17 @@ void	ld(t_arena *map, t_process *proc)
 	unsigned int	dir;
 	short			ind;
 
-	if (proc->params[0].type == INDIRECT)
+	if (proc->param[0].type == INDIRECT)
 	{
-		ind = proc->params[0].data.indirect;
+		ind = proc->param[0].data.indirect;
 		swap_endian(&ind, IND_SIZE);
 		// je vais lire arbitrairement 4 bytes pour le registre...
 		if (vm_read((void *)map->memory, proc->pc + (int)ind, buf, 4) == 4)
 		{
 			// ici reg est stocke en little endian
 //			ft_memcpy(proc->reg[proc->params[1].data.reg_nbr], buf, 4);
-			trad_input(buf, &(proc->reg[proc->params[1].data.reg_nbr]), 4);
-			swap_endian(&(proc->reg[proc->params[1].data.reg_nbr]), 4);
+			trad_input(buf, &(proc->reg[proc->param[1].data.reg_nbr]), 4);
+			swap_endian(&(proc->reg[proc->param[1].data.reg_nbr]), 4);
 			proc->carry = 1;
 		}
 		else
@@ -84,7 +83,7 @@ void	ld(t_arena *map, t_process *proc)
 	}
 	else
 	{
-		dir = proc->params[0].data.direct;
+		dir = proc->param[0].data.direct;
 		swap_endian(&dir, IND_SIZE);
 		proc->carry = 1;
 	}
@@ -95,18 +94,19 @@ void	st(t_arena *map, t_process *proc)
 	int		npc;
 	short	ind;
 
-	if (proc->params[1].type == REGISTER)
-	{
-		npc = proc->pc + ();
-			((int)proc->reg[proc->params[1].data.reg_nbr]
-		vm_write(map->memory, npc, (void *)&(proc->params[0].data), 4);
-	}
-	else
-	{
-		npc = proc->pc + ( % IDX_MOD);
-		npc = proc->pc ((int)swap_endian(&(proc->params[1]), IND_SIZE) % IDX_MOD);
-		vm_write(map->memory, npc, (void *)&(proc->params[0]), 1);
-	}
+	npc = 0;
+//	if (proc->params[1].type == REGISTER)
+//	{
+//		npc = proc->pc + ();
+//			((int)proc->reg[proc->params[1].data.reg_nbr]
+		vm_write(map->memory, npc, (void *)&(proc->param[0].data), 4);
+//	}
+//	else
+//	{
+//		npc = proc->pc + ( % IDX_MOD);
+//		npc = proc->pc ((int)swap_endian(&(proc->params[1]), IND_SIZE) % IDX_MOD);
+//		vm_write(map->memory, npc, (void *)&(proc->params[0]), 1);
+//	}
 }
 /*
 void	add(t_arena *map, t_process *proc)
