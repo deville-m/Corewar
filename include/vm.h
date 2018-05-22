@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 16:07:40 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:56:49 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,14 @@ void		live(t_arena *map, t_process *proc);
 void		ld(t_arena *map, t_process *proc);
 void		st(t_arena *map, t_process *proc);
 void		add(t_arena *map, t_process *proc);
+void		sub(t_arena *map, t_process *proc);
+void		and(t_arena *map, t_process *proc);
+void		or(t_arena *map, t_process *proc);
+void		xor(t_arena *map, t_process *proc);
+
+void		lld(t_arena *map, t_process *proc);
+
+void		trad_input(unsigned char *src, unsigned int *dest, int len);
 
 /*
 ** verbose.c

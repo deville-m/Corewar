@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/05/10 23:32:10 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 16:58:03 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct					s_op
 	char						desc[DESC_SIZE];
 	int							coding_byte;
 	int							index;
+	int							carry;
 }								t_op;
 
 extern t_op						g_op_tab[INSTRUCTION_NBR];

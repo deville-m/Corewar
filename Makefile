@@ -24,7 +24,8 @@ SRCDIR=			src/
 COMMONDIR=		commons/
 ASMDIR=			asm_src/
 COREWARDIR=		corewar_src/
-
+INSTRUCTIONDIR= instructions/
+OBJDIR=         .objs
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
@@ -32,11 +33,15 @@ ASMSRC=			main.c #tokenize.c utils.c lexer.c lexer2.c rules.c collision.c
 
 COREWARSRC=		main.c utils.c options.c curses.c kernel.c keybinds.c checker.c\
 				parser.c init.c process_utils.c check_process.c set_instruction.c\
-				live.c printer.c verbose.c
+				printer.c verbose.c
+
+COREWARINSTR=	live.c ld.c st.c add_sub.c instr_bit.c zjmp.c toolbox_vm.c
 
 COMMONDIR:= $(addprefix $(SRCDIR), $(COMMONDIR))
 ASMDIR:= $(addprefix $(SRCDIR), $(ASMDIR))
 COREWARDIR:= $(addprefix $(SRCDIR), $(COREWARDIR))
+
+INSTRDIR:= $(addprefix $(COREWARDIR), $(INSTRUCTIONDIR))
 
 COMMONSRC:= $(addprefix $(COMMONDIR), $(COMMONSRC))
 COMMONOBJ:= $(COMMONOBJ:.c=.o)
@@ -46,10 +51,11 @@ ASMSRC:= $(ASMSRC) $(COMMONSRC)
 ASMOBJ:= $(ASMSRC:.c=.o)
 
 COREWARSRC:= $(addprefix $(COREWARDIR), $(COREWARSRC))
-COREWARSRC:= $(COREWARSRC) $(COMMONSRC)
+INSTRSRC  := $(addprefix $(INSTRDIR), $(COREWARINSTR))
+COREWARSRC:= $(COREWARSRC) $(COMMONSRC) $(INSTRSRC)
 COREWAROBJ:= $(COREWARSRC:.c=.o)
 # -------~-------~--~------------------~------
-vpath %.c $(SRCS)
+#vpath %.c $(SRCDIR)$(COREWARDIR)$(INSTRUCTIONDIR)
 vpath %.h $(INCLUDES)
 # -------~-------~--~------------------~------
 _CC_ = `echo $(CC) | tr a-z A-Z`
