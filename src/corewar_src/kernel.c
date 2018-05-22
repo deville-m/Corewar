@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 14:08:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:20:58 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	exec_processes(t_arena *arena)
 
 t_bool		kernel(struct s_option *options, t_arena *arena)
 {
+	print_player_headers(arena, 0);
 	dump_player_exec(arena);
 	init_arena(arena);
 	while (arena->procs) /* TODO: modifier la condition */
@@ -45,6 +46,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 				arena->cycle_to_die -= CYCLE_DELTA;
 		++arena->clock;
 	}
+	print_winner(arena, 0);
 	return (TRUE);
 }
 

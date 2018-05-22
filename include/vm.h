@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 13:48:21 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:03:19 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 struct s_option
 {
 	size_t	dump;
+	t_bool	trash;
 	size_t	cycles;
 	t_bool	gfx;
 };
@@ -191,7 +192,7 @@ t_bool		parseplayers(t_arena *arena,
 void		init_arena(t_arena *arena);
 
 /*
-** loader.c
+** @loader.c
 */
 
 t_bool		load_instruction(t_arena *arena,
@@ -201,7 +202,7 @@ t_bool		load_instruction(t_arena *arena,
 void		swap_endian(void *data, size_t size);
 
 /*
-** live.c (mess)
+** @live.c (mess)
 */
 
 void		live(t_arena *map, t_process *proc);
@@ -210,15 +211,10 @@ void		st(t_arena *map, t_process *proc);
 void		add(t_arena *map, t_process *proc);
 
 /*
-** Colors reference
+** @printers
 */
 
-typedef struct	s_pcolor
-{
-	char *regular;
-	char *bold;
-}				t_color;
-
-
+void		print_player_headers(t_arena *arena, size_t i);
+void		print_winner(t_arena *arena, size_t i);
 
 #endif

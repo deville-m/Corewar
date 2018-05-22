@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 12:08:53 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:05:03 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void			dump_memory(const unsigned char *memory,
 		ft_printf("%.2x ", memory[i]);
 		i++;
 	}
+	ft_putchar('\n');
 	ft_putstr(RESET);
 }
 

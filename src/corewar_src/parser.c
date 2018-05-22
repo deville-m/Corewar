@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 11:08:14 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 15:15:26 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ t_bool					parseplayers(t_arena *arena,
 	{
 		if ((fd = open(argv[i], O_RDONLY)) < 0)
 			return (xperror(argv[i] ,"is an invalid file"));
-		ft_printf("Processing: %s with fd %d\n", argv[i], fd);
 		if (read(fd, &arena->players[i].header, sizeof(t_header)) < 0
 			|| ((arena->players[i].exec = parse_content(fd,
 					arena->players[i].header.prog_size)) == NULL))
