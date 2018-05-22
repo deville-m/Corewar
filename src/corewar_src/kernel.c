@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 16:50:08 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/22 21:40:33 by iomonad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	exec_processes(t_arena *arena)
 t_bool		kernel(struct s_option *options, t_arena *arena)
 {
 	print_player_headers(arena, 0);
-	dump_player_exec(arena);
+	/* dump_player_exec(arena); */
 	init_arena(arena);
 	while (arena->procs && arena->clock < 100) /* TODO: modifier la condition */
 	{
@@ -75,6 +75,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 		/* 		arena->cycle_to_die -= CYCLE_DELTA; */
 		++arena->clock;
 		apply_windows(warena, status);
+		dump_cycle_memory(warena, status, arena);
 		wrefresh(warena);
 		wrefresh(status);
 		keybindinds_callback(getch());

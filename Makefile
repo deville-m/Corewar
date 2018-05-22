@@ -33,7 +33,7 @@ ASMSRC=			main.c #tokenize.c utils.c lexer.c lexer2.c rules.c collision.c
 
 COREWARSRC=		main.c utils.c options.c curses.c kernel.c keybinds.c checker.c\
 				parser.c init.c process_utils.c check_process.c set_instruction.c\
-				printer.c verbose.c
+				printer.c verbose.c dump.c
 
 COREWARINSTR=	live.c ld.c st.c add_sub.c instr_bit.c zjmp.c toolbox_vm.c
 
