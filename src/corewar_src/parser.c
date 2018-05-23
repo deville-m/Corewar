@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 16:54:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:58:22 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_bool					parseplayers(t_arena *arena,
 									 size_t i)
 {
 	int					fd;
-	unsigned char		id;
+	unsigned int		id;
 	size_t				ret;
 
 	id = -1;

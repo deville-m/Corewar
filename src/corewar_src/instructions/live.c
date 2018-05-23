@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/22 16:05:28 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/23 14:58:38 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	live(t_arena *map, t_process *proc)
 {
-	int	i;
+	int				i;
 	unsigned int	value;
 
 	proc->alive += 1;

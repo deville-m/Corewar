@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/23 13:24:34 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:00:57 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_bool	parse_direct(
 	if (!(proc->op.arg_type[i] & T_DIR))
 		success = FALSE;
 	vm_read(arena->memory, proc->pc + proc->offset,
-			&proc->param[i].data.direct, index ? IND_SIZE : DIR_SIZE);
+			&proc->param[i].data, index ? IND_SIZE : DIR_SIZE);
 	proc->offset += (index) ? IND_SIZE : DIR_SIZE;
 	return (success);
 }
@@ -128,7 +128,10 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	}
 	proc->wait = proc->op.cycle_cost + arena->clock;
 	if (set_params(arena, proc) == FALSE)
+	{
+		proc->carry = (proc->op.carry) ? FALSE: proc->carry;
 		proc->instruction = NULL;
+	}
 	else
 		set_instruction(proc, proc->op.op_code);
 }
