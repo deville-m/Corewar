@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 15:02:59 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:56:01 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,8 @@ t_bool		parseplayers(t_arena *arena,
 /*
 ** @init.c
 */
-void		init_arena(t_arena *arena);
+
+void	init_arena(t_arena *arena, struct s_option *opts);
 
 /*
 ** @loader.c

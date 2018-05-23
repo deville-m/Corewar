@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 14:55:30 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:56:01 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void			alloc_processus(t_arena *arena,
 		ft_dlstnew(&process, sizeof(t_process)));
 }
 
-static void 		init_memory(t_arena *arena,
-							size_t k)
+static void 		init_memory(t_arena *arena)
 {
 	unsigned short	actor;
 	size_t			offset;
@@ -59,7 +58,7 @@ static void 		init_memory(t_arena *arena,
 ** and place users memory
 */
 
-void	init_arena(t_arena *arena)
+void	init_arena(t_arena *arena, struct s_option *opts)
 {
 	/*
 	** TODO:
@@ -73,6 +72,7 @@ void	init_arena(t_arena *arena)
 	arena->procs = NULL;
 	arena->cycle_to_die = CYCLE_TO_DIE;
 	ft_memset(arena->memory, 0xff, MEM_SIZE);
-	init_memory(arena, 0);
-	dump_memory(arena->memory, arena->ownership, 0);
+	init_memory(arena);
+	if (opts->trash)
+		dump_memory(arena->memory, arena->ownership, 0);
 }

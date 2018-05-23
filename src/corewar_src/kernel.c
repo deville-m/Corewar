@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 15:02:40 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:56:02 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ static void	exec_processes(t_arena *arena)
 t_bool		kernel(struct s_option *options, t_arena *arena)
 {
 	print_player_headers(arena, 0);
-	dump_player_exec(arena);
-	init_arena(arena);
+	if (options->trash == TRUE)
+		dump_player_exec(arena);
+	init_arena(arena, options);
 	while (arena->procs && arena->clock < 20) /* TODO: modifier la condition */
 	{
 		exec_processes(arena);
@@ -63,8 +64,9 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 {
 	t_scene	scene;
 
-	dump_player_exec(arena);
-	init_arena(arena);
+	if (options->trash == TRUE)
+		dump_player_exec(arena);
+	init_arena(arena, options);
 	init_curses();
 	alloc_window(&scene);
 	while (arena->procs) /* TODO: modifier la condition */
