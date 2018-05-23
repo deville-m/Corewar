@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/22 10:24:56 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:24:34 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_bool	parse_param(
 	t_bool success;
 
 	success = TRUE;
-	if (type == T_REG)
+	if (type == (REG_CODE << 6))
 	{
 		if (!(proc->op.arg_type[index] & T_REG))
 			success = FALSE;
@@ -66,9 +66,9 @@ static t_bool	parse_param(
 				&proc->param[index].data.reg_nbr, 1);
 		++proc->offset;
 	}
-	else if (type == T_DIR)
+	else if (type == (DIR_CODE << 6))
 		success = parse_direct(arena, proc, index);
-	else if (type == T_IND)
+	else if (type == (IND_CODE << 6))
 	{
 		if (!(proc->op.arg_type[index] & T_IND))
 			success = FALSE;
@@ -76,6 +76,8 @@ static t_bool	parse_param(
 				&proc->param[index].data.indirect, IND_SIZE);
 		proc->offset += IND_SIZE;
 	}
+	else
+		success = FALSE;
 	return (success);
 }
 
@@ -87,7 +89,7 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 
 	proc->offset = 1;
 	if (!proc->op.coding_byte)
-		encoding_byte = proc->op.arg_type[0];
+		encoding_byte = proc->op.arg_type[0] << 6;
 	else
 	{
 		encoding_byte = arena->memory[(proc->pc + 1) % MEM_SIZE];
@@ -109,17 +111,15 @@ void			check_process(t_arena *arena, t_dlist *elem)
 {
 	t_process *proc;
 
-	proc = (t_process *)elem;
+	proc = (t_process *)elem->content;
 	if (arena->clock != proc->wait)
 		return ;
-	proc->wait = 0;
+	proc->wait = arena->clock + 1;
 	if (proc->instruction)
 		proc->instruction(arena, proc);
 	proc->pc = (proc->pc + proc->offset) % MEM_SIZE;
 	if (proc->pc < 0)
 		proc->pc = MEM_SIZE + proc->pc;
-	else
-		proc->pc = MEM_SIZE - (proc->offset - proc->pc);
 	if (!set_op(arena->memory[proc->pc], &proc->op))
 	{
 		proc->instruction = NULL;

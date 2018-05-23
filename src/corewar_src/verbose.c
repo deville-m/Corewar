@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:22:21 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/22 15:15:53 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 13:43:30 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	instruction(t_dlist *elem)
 		i = 0;
 		ft_printf("Executing %s | ", proc->op.name);
 		while (i < proc->op.nb_param - 1)
-			ft_printf("%X, ", proc->param[i++].data);
-		ft_printf("%X\n", proc->param[i].data);
+			ft_printf("%.8X, ", proc->param[i++].data);
+		ft_printf("%.8X\n", proc->param[i].data);
 	}
 }
 

@@ -17,8 +17,9 @@ else
 	CC = clang
 endif
 
-CFLAGS_ASM=			-Wall -Wextra -fsanitize=address
-CFLAGS_VM=			-Wall -Wextra -lncurses -g -fsanitize=address
+CFLAGS=				-Wall -Wextra -g
+CFLAGS_ASM=			$(CFLAGS)
+CFLAGS_VM=			$(CFLAGS) -lncurses
 INCLUDES=		include
 SRCDIR=			src/
 COMMONDIR=		commons/

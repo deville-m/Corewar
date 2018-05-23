@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 22:38:00 by iomonad          ###   ########.fr       */
+/*   Updated: 2018/05/23 13:47:15 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	print_player_headers(arena, 0);
 	/* dump_player_exec(arena); */
 	init_arena(arena);
-	while (arena->procs && arena->clock < 100) /* TODO: modifier la condition */
+	while (arena->procs && arena->clock < 20) /* TODO: modifier la condition */
 	{
 		exec_processes(arena);
 		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
