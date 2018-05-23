@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 15:56:01 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 16:27:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void			alloc_processus(t_arena *arena,
 	process.carry = FALSE;
 	process.alive = FALSE;
 	process.wait = 0;
-	process.reg[0] = arena->players[actor].id;
+	process.reg[1] = arena->players[actor].id;
 	process.instruction = NULL;
 	ft_bzero(&process.op, sizeof(t_op));
 	ft_bzero(process.param, sizeof(process.param));
