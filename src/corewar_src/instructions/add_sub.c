@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:05:06 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/23 15:36:22 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/23 16:16:01 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	add(t_arena *map, t_process *proc)
 	a = a + b;
 	swap_endian(&a, 4);
 	proc->reg[proc->param[2].data.reg_nbr] = a;
-	proc->carry = 1;
+	if (a == 0)
+		proc->carry = 1;
+	else
+		proc->carry = 0;
 }
 
 void	sub(t_arena *map, t_process *proc)
@@ -40,4 +43,8 @@ void	sub(t_arena *map, t_process *proc)
 	a = a - b;
 	swap_endian(&a, 4);
 	proc->reg[proc->param[2].data.reg_nbr] = a;
+	if (a == 0)
+		proc->carry = 1;
+	else
+		proc->carry = 0;
 }

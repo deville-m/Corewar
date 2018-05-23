@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 15:02:59 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 16:22:05 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ typedef struct		s_arena
 
 typedef struct		s_process
 {
-	unsigned int	reg[REG_NUMBER];
+	unsigned int	reg[REG_NUMBER + 1];
 	int				pc;			/* Curseur du process */
 	t_bool			carry;		/* Carry comme defini dans le sujet */
 	unsigned int	alive;		/* Verifie si le processus est en vie | Mis a `false` tous les cycle_to_die */

@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:04:03 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/22 16:04:14 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/23 16:12:50 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ void	ld(t_arena *map, t_process *proc)
 		{
 			trad_input(buf, &(proc->reg[proc->param[1].data.reg_nbr]), 4);
 			swap_endian(&(proc->reg[proc->param[1].data.reg_nbr]), 4);
-			proc->carry = 1;
 		}
-		else
-			proc->carry = 0;
 	}
 	else
 	{
 		dir = proc->param[0].data.direct;
 		swap_endian(&dir, IND_SIZE);
 		proc->reg[proc->param[1].data.reg_nbr] = dir;
-		proc->carry = 1;
 	}
+	if (proc->reg[proc->param[1].data.reg_nbr] == 0)
+		proc->carry = 1;
+	else
+		proc->carry = 0;
 }
