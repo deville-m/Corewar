@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 11:29:46 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:31:19 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ void		dump_memory(const unsigned char *memory,
 						const unsigned char *ownership,
 						size_t i);
 void		dump_player_exec(t_arena *arena);
+char*		jcolors(unsigned char owner, t_bool bold);
+uint8_t		icolors(unsigned char owner);
 
 /*
 ** @options

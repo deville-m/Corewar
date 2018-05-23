@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 11:36:30 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:36:04 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,12 @@ void		init_curses(void)
 		exit(1);
 	}
 	start_color();
-	init_pair(1, COLOR_RED, COLOR_BLACK);
-	init_pair(2, COLOR_BLACK, COLOR_GREEN);
+	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	init_pair(2, COLOR_BLUE, COLOR_BLACK);
+	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
+	init_pair(5, COLOR_CYAN, COLOR_BLACK);
+	init_pair(5, COLOR_BLACK, COLOR_BLACK);
 	atexit((void*)endwin);
 }
 
@@ -48,7 +52,7 @@ void print_status(t_scene *scene, int cycle, int processes)
 	wattron(scene->sidebar, A_BOLD);
 	mvwprintw(scene->sidebar, y/6 + 2, x/5, "Cycles: %d", cycle);
 	mvwprintw(scene->sidebar, y/6 + 4, x/5, "Processes: %d", processes);
-	mvwprintw(scene->sidebar, y/6 + 6, x/5, "-------");
+	mvwprintw(scene->sidebar, y/6 + 6, x/5, "-----------------");
 	mvwprintw(scene->sidebar, y/6 + 8, x/5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
 	mvwprintw(scene->sidebar, y/6 + 10, x/5, "CYCLE_DELTA: %d", CYCLE_DELTA);
 	mvwprintw(scene->sidebar, y/6 + 12, x/5, "NBR_LIVE: %d", NBR_LIVE);

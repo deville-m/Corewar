@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 11:37:03 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 12:22:09 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	alloc_window(&scene);
 	while (arena->procs) /* TODO: modifier la condition */
 	{
-		print_status(&scene, (int)arena->clock, 100);
+		dump_cycle_memory(&scene, arena);
 		refresh();
 		++arena->clock;
+		usleep(100000);
 	}
 	free(scene.memory);
 	free(scene.sidebar);
