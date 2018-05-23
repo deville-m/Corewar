@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 15:01:15 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:02:40 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	exec_processes(t_arena *arena)
 t_bool		kernel(struct s_option *options, t_arena *arena)
 {
 	print_player_headers(arena, 0);
-	/* dump_player_exec(arena); */
+	dump_player_exec(arena);
 	init_arena(arena);
 	while (arena->procs && arena->clock < 20) /* TODO: modifier la condition */
 	{
@@ -61,31 +61,20 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 
 t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 {
-	WINDOW 	*warena = NULL;
-	WINDOW	*status = NULL;
+	t_scene	scene;
 
 	dump_player_exec(arena);
 	init_arena(arena);
 	init_curses();
+	alloc_window(&scene);
 	while (arena->procs) /* TODO: modifier la condition */
 	{
-		/* exec_processes(arena); */
-		/* if (arena->clock && (arena->clock % arena->cycle_to_die) == 0) */
-		/* 	if (proc_filter(&arena->procs) > NBR_LIVE) */
-		/* 		arena->cycle_to_die -= CYCLE_DELTA; */
-
-		/* ch = getch(); */
-		/* keybindinds_callback(ch); */
-		++arena->clock;
-		apply_windows(warena, status);
-		dump_cycle_memory(warena, status, arena);
-		wrefresh(warena);
-		wrefresh(status);
+		dump_cycle_memory(&scene, arena);
 		refresh();
-		fflush(stdout);
-		usleep(10000);
+		++arena->clock;
+		usleep(100000);
 	}
-	free(warena);
-	free(status);
+	free(scene.memory);
+	free(scene.sidebar);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 14:49:59 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 15:02:59 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ typedef struct		s_player
 	t_header		header;
 	unsigned int	last_live;	/* Derniere fois que le joueur a rapporte en vie */
 }					t_player;
+
+/*
+** Windows scene structure
+*/
+
+typedef struct		s_scene
+{
+	WINDOW			*memory;
+	WINDOW			*sidebar;
+	int				key;
+}					t_scene;
 
 /*
 ** instruction enum type
@@ -144,6 +155,8 @@ void		dump_memory(const unsigned char *memory,
 						const unsigned char *ownership,
 						size_t i);
 void		dump_player_exec(t_arena *arena);
+char*		jcolors(unsigned char owner, t_bool bold);
+uint8_t		icolors(unsigned char owner);
 
 /*
 ** @options
@@ -163,8 +176,9 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena);
 */
 
 void		init_curses(void);
-void		apply_windows(WINDOW *arena, WINDOW *status);
-void		alloc_window(WINDOW *arena, WINDOW *status);
+void		apply_windows(t_scene *scene);
+void		alloc_window(t_scene *scene);
+void		print_status(t_scene *scene, int cycle, int processes);
 
 /*
 ** @keybinds
@@ -235,7 +249,7 @@ void		print_winner(t_arena *arena, size_t i);
 ** @dump.c
 */
 
-void		dump_cycle_memory(WINDOW *mem, WINDOW *info,
-						t_arena *arena);
+void		dump_cycle_memory(t_scene *scene,
+					t_arena *arena);
 
 #endif

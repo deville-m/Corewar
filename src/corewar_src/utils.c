@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 16:52:09 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 14:29:17 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void		usage(void)
  * Retrieve ad-hoc colors depending
  * of the player cusor.
  */
-static char*
-jcolors(unsigned char owner, t_bool bold)
+char*	jcolors(unsigned char owner, t_bool bold)
 {
 	if (owner == 0xFF) {
 		return ((bold) ? LIGHTGREEN : GREEN);
@@ -84,6 +83,20 @@ jcolors(unsigned char owner, t_bool bold)
 		return ((bold) ? LIGHTYELLOW : YELLOW);
 	}
 	return ((bold) ? LIGHTBLACK : BLACK);
+}
+
+uint8_t	icolors(unsigned char owner)
+{
+	if (owner == 0xFF) {
+		return (1);
+	} else if (owner == 0xFE) {
+		return (2);
+	} else if (owner == 0xFD) {
+		return (3);
+	} else if (owner == 0xFC) {
+		return (4);
+	}
+	return (5);
 }
 
 /*
