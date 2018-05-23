@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 14:29:17 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 16:07:37 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,12 @@ int			vm_write(void *memory, int pc, void *buffer, size_t size)
 
 void		usage(void)
 {
-	ft_printf("Usage: ./corewar [-d nbr_cycles] ");
-	ft_printf("[[-n number] champion1.cor] ...\n");
+	ft_printf("Usage: ./corewar [OPTS] championXX.cor <...>\n");
+	ft_printf("where options include:\n");
+	ft_printf("    -d <nbr_cycle> :: Int\n");
+	ft_printf("    -n <number>    :: Int\n");
+	ft_printf("    -x             # Ncurses output\n");
+	ft_printf("    -t             # Dump loader init to stdout\n");
 	exit(EXIT_FAILURE);
 }
 
