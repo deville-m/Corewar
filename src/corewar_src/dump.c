@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/23 17:07:31 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:31:15 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ void		dump_cycle_memory(t_scene *scene, t_arena *arena)
 {
 	apply_memory(scene->memory, arena, 0, 0);
 	print_status(scene, (int)arena->clock,
-		ft_dlstlen(arena->procs));
+		ft_dlstlen(arena->procs), arena);
 }

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 16:33:59 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:32:50 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void		init_curses(void)
 	atexit((void*)endwin);
 }
 
-void print_status(t_scene *scene, int cycle, int processes)
+void print_status(t_scene *scene, int cycle,
+			int processes, t_arena *arena)
 {
 	int x;
 	int y;
+	int z = 0;
 
 	getmaxyx(scene->sidebar, y, x);
 	wattron(scene->sidebar, A_BOLD);
@@ -57,11 +59,18 @@ void print_status(t_scene *scene, int cycle, int processes)
 	mvwprintw(scene->sidebar, y/6 + 10, x/5, "CYCLE_DELTA: %d", CYCLE_DELTA);
 	mvwprintw(scene->sidebar, y/6 + 12, x/5, "NBR_LIVE: %d", NBR_LIVE);
 	mvwprintw(scene->sidebar, y/6 + 14, x/5, "MAX_CHECKS: %d", MAX_CHECKS);
+	mvwprintw(scene->sidebar, y/6 + 16, x/5, "-----------------");
+	while (z < arena->np)
+	{
+		mvwprintw(scene->sidebar, y/6 + 17 + z, x/5,
+			"Player %d: %s", z, arena->players[z].header.prog_name);
+		z++;
+	}
 	wattroff(scene->sidebar, A_BOLD);
 	wrefresh(scene->sidebar);
 }
 
-static void	set_delimiters(t_scene *scene)
+static void	set_delimiters(t_scene *scene, t_arena *arena)
 {
 	int x;
 	int y;
@@ -76,10 +85,10 @@ static void	set_delimiters(t_scene *scene)
 	mvwprintw(scene->sidebar, 9, x/5, "      By: mdeville, rbaraud & ctrouill   ");
 	wattroff(scene->sidebar, A_BOLD | COLOR_PAIR(1));
 	mvwhline(scene->sidebar, y / 6, 1, ACS_HLINE, x - 2);
-	print_status(scene, 0, 0);
+	print_status(scene, 0, 0, arena);
 }
 
-void	alloc_window(t_scene *scene)
+void	alloc_window(t_scene *scene, t_arena *arena)
 {
 	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
 	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
@@ -88,15 +97,15 @@ void	alloc_window(t_scene *scene)
 	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
 	box(scene->memory, ACS_VLINE, ACS_HLINE);
 	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
-	set_delimiters(scene);
+	set_delimiters(scene, arena);
 }
 
-void		apply_windows(t_scene *scene)
+void		apply_windows(t_scene *scene, t_arena *arena)
 {
 	clear();
 	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
 	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
 	box(scene->memory, ACS_VLINE, ACS_HLINE);
 	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
-	set_delimiters(scene);
+	set_delimiters(scene, arena);
 }

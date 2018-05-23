@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 16:34:42 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:38:34 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,17 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 		dump_player_exec(arena);
 	init_arena(arena, options);
 	init_curses();
-	alloc_window(&scene);
+	alloc_window(&scene, arena);
 	while (arena->procs) /* TODO: modifier la condition */
 	{
+		exec_processes(arena);
+		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
+			if (proc_filter(&arena->procs) > NBR_LIVE)
+				arena->cycle_to_die -= CYCLE_DELTA;
 		dump_cycle_memory(&scene, arena);
 		refresh();
 		++arena->clock;
-		usleep(100000);
+		usleep(10000);
 	}
 	free(scene.memory);
 	free(scene.sidebar);

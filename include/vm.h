@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 17:09:50 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/23 17:21:35 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,9 +176,10 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena);
 */
 
 void		init_curses(void);
-void		apply_windows(t_scene *scene);
-void		alloc_window(t_scene *scene);
-void		print_status(t_scene *scene, int cycle, int processes);
+void		apply_windows(t_scene *scene, t_arena *arena);
+void		alloc_window(t_scene *scene, t_arena *arena);
+void		print_status(t_scene *scene, int cycle,
+				int processes, t_arena *arena);
 
 /*
 ** @keybinds
@@ -204,7 +205,7 @@ t_bool		parseplayers(t_arena *arena,
 ** @init.c
 */
 
-void	init_arena(t_arena *arena, struct s_option *opts);
+void		init_arena(t_arena *arena, struct s_option *opts);
 
 /*
 ** @loader.c
