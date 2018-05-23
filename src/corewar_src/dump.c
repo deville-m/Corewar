@@ -6,11 +6,38 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/23 15:03:26 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/23 17:07:31 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
+
+static t_bool		player_ownership(unsigned int player)
+{
+	if (player == 0xFF
+		|| player == 0xFE
+		|| player == 0xFD
+		|| player == 0xFC)
+		return (TRUE);
+	return (FALSE);
+}
+
+static t_bool		apply_pc(t_arena *arena,
+							 int i)
+{
+	t_dlist			*walk;
+	t_process		*cur;
+
+	walk = arena->procs;
+	while (walk != NULL)
+	{
+		cur = (t_process*)walk->content;
+		if (cur->pc == i)
+			return (TRUE);
+		walk = walk->next;
+	}
+	return (FALSE);
+}
 
 /*
 ** @desc This is the visual meat.
@@ -29,12 +56,14 @@ static void	apply_memory(WINDOW *mem,
 
 	getmaxyx(mem, y, x);
 	while (i < MEM_SIZE) {
-		if (arena->memory[i] == 0xff)
-			attron(COLOR_PAIR(icolors(arena->ownership[i])));
+		if (arena->memory[i] == 0xff && !player_ownership(arena->ownership[i]))
+			wattron(mem, COLOR_PAIR(6));
 		else if (arena->memory[i] == 0x00)
-			attron(COLOR_PAIR(icolors(arena->ownership[i])));
+			wattron(mem, A_BOLD);
 		else
-			attroff(COLOR_PAIR(6));
+			wattron(mem, COLOR_PAIR(icolors(arena->ownership[i])));
+		if (apply_pc(arena, i) == TRUE)
+			wattron(mem, A_STANDOUT);
 		mvwprintw(mem, yy, xx, "%.2x", arena->memory[i]);
 		if ((xx % (x - 2) == 0))
 		{
@@ -43,6 +72,7 @@ static void	apply_memory(WINDOW *mem,
 		}
 		else
 			xx += 3;
+		wattroff(mem, A_STANDOUT );
 		i++;
 	}
 	wrefresh(mem);
