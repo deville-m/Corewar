@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 22:24:57 by iomonad          ###   ########.fr       */
+/*   Updated: 2018/05/23 11:36:30 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		init_curses(void)
 	noecho();
 	curs_set(0);
 	keypad(stdscr, TRUE);
-	if(has_colors() == FALSE)
+	if (has_colors() == FALSE)
 	{
 		endwin();
 		ft_printf("Your terminal does not support color\n");
@@ -39,53 +39,60 @@ void		init_curses(void)
 	atexit((void*)endwin);
 }
 
-void		alloc_window(WINDOW *arena, WINDOW *status)
-{
-	arena = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
-	status = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
-}
-
-static void print_status(WINDOW *status, int cycle, int processes)
+void print_status(t_scene *scene, int cycle, int processes)
 {
 	int x;
 	int y;
 
-	getmaxyx(status, y, x);
-	wattron(status, A_BOLD);
-	mvwprintw(status, y/6 + 2, x/5, "Cycle: %d", cycle);
-	mvwprintw(status, y/6 + 4, x/5, "Processes: %d", cycle);
-	mvwprintw(status, y/6 + 6, x/5, "-------");
-	mvwprintw(status, y/6 + 8, x/5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
-	mvwprintw(status, y/6 + 10, x/5, "CYCLE_DELTA: %d", CYCLE_DELTA);
-	mvwprintw(status, y/6 + 12, x/5, "NBR_LIVE: %d", NBR_LIVE);
-	mvwprintw(status, y/6 + 14, x/5, "MAX_CHECKS: %d", MAX_CHECKS);
-	wattroff(status, A_BOLD);
+	getmaxyx(scene->sidebar, y, x);
+	wattron(scene->sidebar, A_BOLD);
+	mvwprintw(scene->sidebar, y/6 + 2, x/5, "Cycles: %d", cycle);
+	mvwprintw(scene->sidebar, y/6 + 4, x/5, "Processes: %d", processes);
+	mvwprintw(scene->sidebar, y/6 + 6, x/5, "-------");
+	mvwprintw(scene->sidebar, y/6 + 8, x/5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
+	mvwprintw(scene->sidebar, y/6 + 10, x/5, "CYCLE_DELTA: %d", CYCLE_DELTA);
+	mvwprintw(scene->sidebar, y/6 + 12, x/5, "NBR_LIVE: %d", NBR_LIVE);
+	mvwprintw(scene->sidebar, y/6 + 14, x/5, "MAX_CHECKS: %d", MAX_CHECKS);
+	wattroff(scene->sidebar, A_BOLD);
+	wrefresh(scene->sidebar);
 }
 
-static void	set_delimiters(WINDOW *status)
+static void	set_delimiters(t_scene *scene)
 {
 	int x;
 	int y;
 
-	getmaxyx(status, y, x);
-	wattron(status, A_BOLD | COLOR_PAIR(1));
-	mvwprintw(status, 2, x/5, "   ______                                  ");
-	mvwprintw(status, 3, x/5, "  / ____/___  ________ _      ______ ______");
-	mvwprintw(status, 4, x/5, " / /   / __ \\/ ___/ _ \\ | /| / / __ `/ ___/");
-	mvwprintw(status, 5, x/5, "/ /___/ /_/ / /  /  __/ |/ |/ / /_/ / /    ");
-	mvwprintw(status, 6, x/5, "\\____/\\____/_/   \\___/|__/|__/\\__,_/_/");
-	mvwprintw(status, 9, x/5, "      By: mdeville, rbaraud & ctrouill   ");
-	wattroff(status, A_BOLD | COLOR_PAIR(1));
-	mvwhline(status, y / 6, 1, ACS_HLINE, x - 2);
-//	print_status(status, 1337, 1337);
+	getmaxyx(scene->sidebar, y, x);
+	wattron(scene->sidebar, A_BOLD | COLOR_PAIR(1));
+	mvwprintw(scene->sidebar, 2, x/5, "   ______                                  ");
+	mvwprintw(scene->sidebar, 3, x/5, "  / ____/___  ________ _      ______ ______");
+	mvwprintw(scene->sidebar, 4, x/5, " / /   / __ \\/ ___/ _ \\ | /| / / __ `/ ___/");
+	mvwprintw(scene->sidebar, 5, x/5, "/ /___/ /_/ / /  /  __/ |/ |/ / /_/ / /    ");
+	mvwprintw(scene->sidebar, 6, x/5, "\\____/\\____/_/   \\___/|__/|__/\\__,_/_/");
+	mvwprintw(scene->sidebar, 9, x/5, "      By: mdeville, rbaraud & ctrouill   ");
+	wattroff(scene->sidebar, A_BOLD | COLOR_PAIR(1));
+	mvwhline(scene->sidebar, y / 6, 1, ACS_HLINE, x - 2);
+	print_status(scene, 0, 0);
 }
 
-void		apply_windows(WINDOW *arena, WINDOW *status)
+void	alloc_window(t_scene *scene)
+{
+	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
+	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
+
+	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
+	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
+	box(scene->memory, ACS_VLINE, ACS_HLINE);
+	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
+	set_delimiters(scene);
+}
+
+void		apply_windows(t_scene *scene)
 {
 	clear();
-	arena = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
-	status = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
-	box(arena, ACS_VLINE, ACS_HLINE);
-	box(status, ACS_VLINE, ACS_HLINE);
-	set_delimiters(status);
+	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
+	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
+	box(scene->memory, ACS_VLINE, ACS_HLINE);
+	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
+	set_delimiters(scene);
 }
