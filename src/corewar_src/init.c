@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 10:17:55 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 13:16:47 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void			alloc_processus(t_arena *arena,
 	ft_bzero(&process.op, sizeof(t_op));
 	ft_bzero(process.param, sizeof(process.param));
 	process.offset = 0;
-	ft_dlstappend(&arena->procs,
+	ft_dlstprepend(&arena->procs,
 		ft_dlstnew(&process, sizeof(t_process)));
 }
 
