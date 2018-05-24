@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 10:37:21 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 15:12:24 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void		print_status(t_scene *scene, int cycle,
 ** @keybinds
 */
 
-void		keybindinds_callback(int c);
+void		keybindinds_callback(unsigned int c);
 
 /*
 ** @checker.c
