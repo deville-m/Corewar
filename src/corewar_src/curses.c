@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 16:28:23 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:56:54 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	alloc_window(t_scene *scene, t_arena *arena)
 	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
 	box(scene->memory, ACS_VLINE, ACS_HLINE);
 	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
+	scene->speed = 10000;
 	set_delimiters(scene, arena);
 }
 

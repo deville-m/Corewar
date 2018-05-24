@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 15:12:24 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:48:28 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct		s_scene
 	WINDOW			*memory;
 	WINDOW			*sidebar;
 	int				key;
+	long long int	speed;
 }					t_scene;
 
 /*
@@ -186,7 +187,7 @@ void		print_status(t_scene *scene, int cycle,
 ** @keybinds
 */
 
-void		keybindinds_callback(unsigned int c);
+void		keybindinds_callback(char c, t_scene *scene);
 
 /*
 ** @checker.c
