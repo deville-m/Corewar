@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/24 13:38:43 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:26:34 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void		apply_memory(WINDOW *mem,
 	while (i < MEM_SIZE)
 	{
 		if (arena->memory[i] == 0xff && !player_ownership(arena->ownership[i]))
-			wattron(mem, COLOR_PAIR(6));
+			wattron(mem, COLOR_PAIR(7));
 		else if (arena->memory[i] == 0x00)
 			wattron(mem, A_BOLD);
 		else

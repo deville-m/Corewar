@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 15:04:54 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 16:28:23 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void		init_curses(void)
 	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	init_pair(5, COLOR_CYAN, COLOR_BLACK);
 	init_pair(6, COLOR_BLACK, COLOR_BLACK);
-	init_pair(7, COLOR_WHITE, COLOR_BLACK);
+	init_pair(7, 8, COLOR_BLACK);
 	timeout(0);
 	atexit((void*)endwin);
 }
