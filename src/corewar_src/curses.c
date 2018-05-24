@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 14:05:55 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:55:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void print_status(t_scene *scene, int cycle,
 		mvwprintw(scene->sidebar, y/6 + 17 + k, x/5,
 			"Player %d: %s", z, arena->players[z].header.prog_name);
 		mvwprintw(scene->sidebar, y/6 + 17 + k + 1, x/5,
-			"  \\_ [ Last Live ] -> %u", z, arena->players[z].last_live);
+			"  \\_ [ Last Live ] -> %u", arena->players[z].last_live);
 		k += 2;
 		z++;
 	}
