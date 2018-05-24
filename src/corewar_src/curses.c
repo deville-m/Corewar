@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 13:24:00 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 14:05:55 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ void print_status(t_scene *scene, int cycle,
 {
 	int x;
 	int y;
-	int z = 0;
+	int z;
+	int k;
 
+	z = 0;
+	k = 0;
 	getmaxyx(scene->sidebar, y, x);
 	wattron(scene->sidebar, A_BOLD);
 	mvwprintw(scene->sidebar, y/6 + 2, x/5, "Cycles: %d", cycle);
@@ -64,8 +67,11 @@ void print_status(t_scene *scene, int cycle,
 	mvwprintw(scene->sidebar, y/6 + 16, x/5, "-----------------");
 	while (z < arena->np)
 	{
-		mvwprintw(scene->sidebar, y/6 + 17 + z, x/5,
+		mvwprintw(scene->sidebar, y/6 + 17 + k, x/5,
 			"Player %d: %s", z, arena->players[z].header.prog_name);
+		mvwprintw(scene->sidebar, y/6 + 17 + k + 1, x/5,
+			"  \\_ [ Last Live ] -> %u", z, arena->players[z].last_live);
+		k += 2;
 		z++;
 	}
 	wattroff(scene->sidebar, A_BOLD);

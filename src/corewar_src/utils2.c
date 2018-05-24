@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:09:41 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 10:39:06 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 13:54:54 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			vm_read(const void *memory, int pc, void *buffer, size_t size)
 	unsigned char	*sbuf;
 	size_t			i;
 
-	if (!memory || !buffer)
+	if (memory == NULL || buffer == NULL)
 		return (-1);
 	sbuf = (unsigned char *)buffer;
 	smem = (unsigned char *)memory;
@@ -48,7 +48,7 @@ int			vm_write(void *memory, int pc, void *buffer, size_t size)
 	unsigned char	*sbuf;
 	size_t			i;
 
-	if (!memory || !buffer)
+	if (memory == NULL || buffer == NULL)
 		return (-1);
 	sbuf = (unsigned char *)buffer;
 	smem = (unsigned char *)memory;
