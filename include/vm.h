@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 16:48:28 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 17:37:46 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,7 @@ void		sub(t_arena *map, t_process *proc);
 void		and(t_arena *map, t_process *proc);
 void		or(t_arena *map, t_process *proc);
 void		xor(t_arena *map, t_process *proc);
+void		zjmp(t_arena *arena, t_process *proc);
 
 void		lld(t_arena *map, t_process *proc);
 

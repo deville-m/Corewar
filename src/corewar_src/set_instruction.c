@@ -6,18 +6,18 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:24:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/22 13:15:43 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/24 17:37:15 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 #include "op.h"
-/*
-int		set_instruction2(t_process *proc, int op_code)
+
+static int	set_instruction2(t_process *proc, int op_code)
 {
 	if (op_code == g_op_tab[8].op_code)
 		proc->instruction = zjmp;
-	else if (op_code == g_op_tab[9].op_code)
+	/*else if (op_code == g_op_tab[9].op_code)
 		proc->instruction = ldi;
 	else if (op_code == g_op_tab[10].op_code)
 		proc->instruction = sti;
@@ -30,13 +30,13 @@ int		set_instruction2(t_process *proc, int op_code)
 	else if (op_code == g_op_tab[14].op_code)
 		proc->instruction = lfork;
 	else if (op_code == g_op_tab[15].op_code)
-		proc->instruction = aff;
+		proc->instruction = aff;*/
 	else
 		return (0);
 	return (1);
 }
-*/
-void	set_instruction(t_process *proc, int op_code)
+
+void		set_instruction(t_process *proc, int op_code)
 {
 	if (op_code == g_op_tab[0].op_code)
 		proc->instruction = live;
@@ -54,7 +54,6 @@ void	set_instruction(t_process *proc, int op_code)
 		proc->instruction = or;
 	else if (op_code == g_op_tab[7].op_code)
 		proc->instruction = xor;
-/*	else if (!set_instruction2(proc, op_code))
+	else if (!set_instruction2(proc, op_code))
 		proc->instruction = NULL;
-*/
 }
