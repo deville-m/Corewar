@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/24 10:37:23 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 13:38:43 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ static void		apply_memory(WINDOW *mem,
 			wattron(mem, A_BOLD);
 		else
 			wattron(mem, COLOR_PAIR(icolors(arena->ownership[i])));
-		if (apply_pc(arena, i) == TRUE)
+		if (apply_pc(arena, i) == TRUE) {
+			wattron(mem, COLOR_PAIR(7));
 			wattron(mem, A_STANDOUT);
+		}
 		mvwprintw(mem, yy, xx, "%.2x", arena->memory[i]);
-		if ((xx % (x - 2) == 0))
+		if ((xx + 7 > x))
 		{
 			xx = 1;
 			yy += 1;
