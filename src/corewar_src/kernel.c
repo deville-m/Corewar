@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 17:45:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/24 19:07:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	{
 		exec_processes(arena);
 		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
-			if (proc_filter(&arena->procs) > NBR_LIVE)
+			if (proc_filter(arena) > NBR_LIVE)
 				arena->cycle_to_die -= CYCLE_DELTA;
 		verbose(arena, 3);
 		++arena->clock;
@@ -74,7 +74,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 		keybindinds_callback(getch(), &scene);
 		exec_processes(arena);
 		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
-			if (proc_filter(&arena->procs) > NBR_LIVE)
+			if (proc_filter(arena) > NBR_LIVE)
 				arena->cycle_to_die -= CYCLE_DELTA;
 		dump_cycle_memory(&scene, arena);
 		refresh();
