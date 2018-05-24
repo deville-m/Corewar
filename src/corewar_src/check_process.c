@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/24 14:50:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/24 18:46:34 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static t_bool	parse_direct(
 	index = (proc->op.index) ? TRUE : FALSE;
 	if (!(proc->op.arg_type[i] & T_DIR))
 		success = FALSE;
+	proc->param[i].type = DIRECT;
 	vm_read(arena->memory, proc->pc + proc->offset,
 			&proc->param[i].data, index ? IND_SIZE : DIR_SIZE);
 	proc->offset += (index) ? IND_SIZE : DIR_SIZE;
@@ -70,10 +71,10 @@ static t_bool	parse_param(
 		success = parse_direct(arena, proc, index);
 	else if (type == (IND_CODE << 6))
 	{
-		if (!(proc->op.arg_type[index] & T_IND))
+		if (!(proc->op.arg_type[index] & T_IND) || !vm_read(arena->memory,
+		proc->pc + proc->offset, &proc->param[index].data.indirect, IND_SIZE))
 			success = FALSE;
-		vm_read(arena->memory, proc->pc + proc->offset,
-				&proc->param[index].data.indirect, IND_SIZE);
+		proc->param[index].type = INDIRECT;
 		proc->offset += IND_SIZE;
 	}
 	else
