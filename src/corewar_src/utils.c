@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 16:07:37 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 10:16:34 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,92 +15,22 @@
 #include <colors.h>
 #include <commons.h>
 
-int			vm_read(const void *memory, int pc, void *buffer, size_t size)
-{
-	unsigned char	*smem;
-	unsigned char	*sbuf;
-	size_t			i;
-
-	if (!memory || !buffer)
-		return (-1);
-	sbuf = (unsigned char *)buffer;
-	smem = (unsigned char *)memory;
-	i = 0;
-	while (i < size)
-	{
-		sbuf[i] = smem[pc % MEM_SIZE];
-		++i;
-		++pc;
-	}
-	return (i);
-}
-
-int			vm_write(void *memory, int pc, void *buffer, size_t size)
-{
-	unsigned char	*smem;
-	unsigned char	*sbuf;
-	size_t			i;
-
-	if (!memory || !buffer)
-		return (-1);
-	sbuf = (unsigned char *)buffer;
-	smem = (unsigned char *)memory;
-	i = 0;
-	while (i < size)
-	{
-		smem[pc % MEM_SIZE] = sbuf[i];
-		++i;
-		++pc;
-	}
-	return (i);
-}
-
 /*
-** @desc print usage and exit;
-** @return Nil (exit)
+** Retrieve ad-hoc colors depending
+** of the player cusor.
 */
 
-void		usage(void)
+char			*jcolors(unsigned char owner, t_bool bold)
 {
-	ft_printf("Usage: ./corewar [OPTS] championXX.cor <...>\n");
-	ft_printf("where options include:\n");
-	ft_printf("    -d <nbr_cycle> :: Int\n");
-	ft_printf("    -n <number>    :: Int\n");
-	ft_printf("    -x             # Ncurses output\n");
-	ft_printf("    -t             # Dump loader init to stdout\n");
-	exit(EXIT_FAILURE);
-}
-
-/*
- * Retrieve ad-hoc colors depending
- * of the player cusor.
- */
-char*	jcolors(unsigned char owner, t_bool bold)
-{
-	if (owner == 0xFF) {
+	if (owner == 0xFF)
 		return ((bold) ? LIGHTGREEN : GREEN);
-	} else if (owner == 0xFE) {
+	else if (owner == 0xFE)
 		return ((bold) ? LIGHTBLUE : BLUE);
-	} else if (owner == 0xFD) {
+	else if (owner == 0xFD)
 		return ((bold) ? LIGHTRED : RED);
-	} else if (owner == 0xFC) {
+	else if (owner == 0xFC)
 		return ((bold) ? LIGHTYELLOW : YELLOW);
-	}
 	return ((bold) ? LIGHTBLACK : BLACK);
-}
-
-uint8_t	icolors(unsigned char owner)
-{
-	if (owner == 0xFF) {
-		return (1);
-	} else if (owner == 0xFE) {
-		return (2);
-	} else if (owner == 0xFD) {
-		return (3);
-	} else if (owner == 0xFC) {
-		return (4);
-	}
-	return (5);
 }
 
 /*
@@ -109,8 +39,8 @@ uint8_t	icolors(unsigned char owner)
 */
 
 void			dump_memory(const unsigned char *memory,
-							const unsigned char *ownership,
-							size_t i)
+						const unsigned char *ownership,
+						size_t i)
 {
 	ft_printf("Dumping memory of size: %d\n", MEM_SIZE);
 	while (i < MEM_SIZE)
@@ -135,10 +65,10 @@ void			dump_memory(const unsigned char *memory,
 ** @return nil
 */
 
-void		dump_player_exec(t_arena *arena)
+void			dump_player_exec(t_arena *arena)
 {
-	size_t	p;
-	size_t	i;
+	size_t		p;
+	size_t		i;
 
 	p = 0;
 	while (p < arena->np)

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:37:24 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/15 17:53:59 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/24 10:09:00 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 
 t_bool	load_instruction(t_arena *arena,
-						 t_process *process)
+				t_process *process)
 {
 	return (TRUE);
 }

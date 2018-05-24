@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 16:27:19 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/24 10:17:55 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void			alloc_processus(t_arena *arena,
 		ft_dlstnew(&process, sizeof(t_process)));
 }
 
-static void 		init_memory(t_arena *arena)
+static void			init_memory(t_arena *arena)
 {
 	unsigned short	actor;
 	size_t			offset;
@@ -58,16 +58,8 @@ static void 		init_memory(t_arena *arena)
 ** and place users memory
 */
 
-void	init_arena(t_arena *arena, struct s_option *opts)
+void				init_arena(t_arena *arena, struct s_option *opts)
 {
-	/*
-	** TODO:
-	** - Dump a equidistance du exec des players
-	**   + set ownership en fct des ID des joueurs
-	** - Spawner 2 proc ou le pc pointe vers le dbt de chq joueurs
-	**   + Initialiser le registre `R1` en fct des id des jrs
-	**   + bzero sur tout les derniers
-	*/
 	arena->clock = 0;
 	arena->procs = NULL;
 	arena->cycle_to_die = CYCLE_TO_DIE;

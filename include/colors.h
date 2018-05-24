@@ -6,12 +6,12 @@
 /*	 By: ctrouill <marvin@42.fr>					+#+	 +:+	   +#+		  */
 /*												  +#+#+#+#+#+	+#+			  */
 /*	 Created: 2018/05/15 10:36:52 by ctrouill		   #+#	  #+#			  */
-/*   Updated: 2018/05/22 12:07:21 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 09:58:57 by ctrouill         ###   ########.fr       */
 /*																			  */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#ifndef COLORS_H
+# define COLORS_H
 
 # define RESET			"\033[0m"
 

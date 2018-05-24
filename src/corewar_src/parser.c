@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 14:58:22 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/24 10:22:40 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 ** @return boolean
 */
 
-static t_bool			xperror(const char *file,
-								const char *message)
+static t_bool				xperror(const char *file,
+							const char *message)
 {
 	ft_fprintf(2, "Error: File \"%s\" %s\n", file, message);
 	exit(EXIT_FAILURE);
@@ -34,12 +34,11 @@ static t_bool			xperror(const char *file,
 ** @return Maybe[Char*] | Nothing[Null]
 */
 
-static t_bool				parse_content(
-										int fd,
-										unsigned char *buffer,
-										unsigned int *prog_size)
+static t_bool				parse_content(int fd,
+								unsigned char *buffer,
+								unsigned int *prog_size)
 {
-	char c;
+	char					c;
 
 	swap_endian(prog_size, sizeof(unsigned int));
 	if ((read(fd, buffer, *prog_size) != *prog_size))
@@ -57,20 +56,20 @@ static t_bool				parse_content(
 ** @return boolean/succes
 */
 
-t_bool					parseplayers(t_arena *arena,
-									 char *argv[],
-									 size_t i)
+t_bool						parseplayers(t_arena *arena,
+								char *argv[],
+								size_t i)
 {
-	int					fd;
-	unsigned int		id;
-	size_t				ret;
+	int						fd;
+	unsigned int			id;
+	size_t					ret;
 
 	id = -1;
 	arena->np = 0;
 	while (argv[i] != NULL)
 	{
 		if ((fd = open(argv[i], O_RDONLY)) < 0)
-			return (xperror(argv[i] ,"is an invalid file"));
+			return (xperror(argv[i], "is an invalid file"));
 		ret = read(fd, &arena->players[i].header, sizeof(t_header));
 		if (ret != sizeof(t_header)
 				|| !parse_content(fd, arena->players[i].exec,

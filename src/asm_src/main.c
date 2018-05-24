@@ -6,15 +6,13 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:05:54 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 15:47:59 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 10:05:40 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int
-main(int argc, char *argv[])
+int		main(int argc, char *argv[])
 {
-	/* TODO: remove this shit befor merge */
 	(void)argc;
 	(void)argv;
-    return (0);
+	return (0);
 }

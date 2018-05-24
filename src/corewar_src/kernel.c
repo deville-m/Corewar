@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 09:47:27 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 10:14:04 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	if (options->trash == TRUE)
 		dump_player_exec(arena);
 	init_arena(arena, options);
-	while (arena->procs && arena->clock < 20) /* TODO: modifier la condition */
+	while (arena->procs && arena->clock < 20)
 	{
 		exec_processes(arena);
 		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
@@ -69,7 +69,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	init_arena(arena, options);
 	init_curses();
 	alloc_window(&scene, arena);
-	while (arena->procs) /* TODO: modifier la condition */
+	while (arena->procs)
 	{
 		keybindinds_callback(wgetch(scene.memory));
 		exec_processes(arena);
