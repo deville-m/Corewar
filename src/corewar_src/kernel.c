@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/23 17:38:34 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/24 09:47:27 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	alloc_window(&scene, arena);
 	while (arena->procs) /* TODO: modifier la condition */
 	{
+		keybindinds_callback(wgetch(scene.memory));
 		exec_processes(arena);
 		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
 			if (proc_filter(&arena->procs) > NBR_LIVE)
