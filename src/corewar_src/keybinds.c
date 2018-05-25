@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:27:54 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 17:01:05 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/25 10:02:44 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,23 @@ void	keybindinds_callback(char input,
 
 	if (input == 0x71)
 		exit(EXIT_SUCCESS);
-	else if (input == 0x20)
+	else if (scene->pause || input == 0x20)
 	{
+		scene->pause = FALSE;
 		while (((c = getch()) != 0x20))
 			if (c == 0x71)
 				exit(EXIT_SUCCESS);
 	}
-	else if (input == 0x3c)
+	else if (input == 0x3c)		/* Reduce Speed */
 	{
-		scene->speed -= 1000;
-		if (scene->speed < 1)
-			scene->speed = 1;
+		scene->speed += STEP_SPEED;
+		if (scene->speed > MIN_SPEED)
+			scene->speed = MIN_SPEED;
 	}
-	else if (input == 0x3e)
+	else if (input == 0x3e)		/* Increase Speed */
 	{
-		scene->speed += 1000;
-		if (scene->speed > 10000)
-			scene->speed = 10000;
+		scene->speed -= STEP_SPEED;
+		if (scene->speed < MAX_SPEED)
+			scene->speed = MAX_SPEED;
 	}
 }

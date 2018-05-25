@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 19:10:57 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/25 10:01:06 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 
 # include <libft.h>
 # include <colors.h>
+
+# define MAX_SPEED 1
+# define MIN_SPEED 50000
+# define STEP_SPEED 5000
 
 struct s_option
 {
@@ -60,6 +64,7 @@ typedef struct		s_scene
 	WINDOW			*sidebar;
 	int				key;
 	long long int	speed;
+	t_bool			pause;
 }					t_scene;
 
 /*
