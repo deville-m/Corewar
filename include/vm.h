@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/25 10:01:06 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/25 12:11:21 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,5 +262,12 @@ void		dump_cycle_memory(t_scene *scene,
 t_bool		player_ownership(unsigned int player);
 void		init_values(size_t *i, int *xx, int *yy);
 t_bool		apply_pc(t_arena *arena, int i);
+
+/*
+** @network.c
+*/
+
+t_bool		is_url(const char *input);
+int			open_remote(const char *url);
 
 #endif
