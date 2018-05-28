@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:51:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/24 19:11:04 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/28 18:40:16 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,21 @@ void			exec_processes(t_arena *arena)
 		check_process(arena, walk);
 		walk = walk->next;
 	}
+}
+
+t_bool			set_op(unsigned char op_code, t_op *op)
+{
+	size_t i;
+
+	i = 0;
+	while (i < INSTRUCTION_NBR)
+	{
+		if (g_op_tab[i].op_code == op_code)
+		{
+			*op = g_op_tab[i];
+			return (TRUE);
+		}
+		i++;
+	}
+	return (FALSE);
 }

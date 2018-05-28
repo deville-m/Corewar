@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 16:25:53 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/28 18:43:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct		s_process
 */
 
 unsigned int	proc_filter(t_arena *arena);
+t_bool			set_op(unsigned char op_code, t_op *op);
 void			check_process(t_arena *arena, t_dlist *elem);
 void			set_instruction(t_process *proc, int op_code);
 
