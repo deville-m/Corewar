@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 14:14:25 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 17:41:20 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 19:34:38 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	lfork(t_arena *map, t_process *proc)
 	new->alive = proc->alive;
 	new->wait = proc->wait;
 	new->instruction = NULL;
-	ind = (int)proc->param[0].data.direct;
+	ind = proc->param[0].data.indirect;
 	swap_endian(&ind, 2);
 	new->offset = (int)ind;
 }

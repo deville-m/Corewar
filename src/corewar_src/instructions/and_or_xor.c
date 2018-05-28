@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 11:29:03 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 18:58:50 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 19:27:55 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static unsigned int	find_bitwise_params(t_arena *map, t_process *proc, int nbr)
 	{
 		ind = proc->param[nbr].data.indirect;
 		swap_endian(&ind, 2);
-		npc = proc->pc + (int)ind;
+		npc = proc->pc + ((int)ind % IDX_MOD);
 		result = go_read_label(map, npc);
 		swap_endian(&result, 4);
 	}

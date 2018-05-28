@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 12:11:01 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 19:26:56 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	live(t_arena *map, t_process *proc)
 	proc->alive += 1;
 	i = 0;
 	value = proc->param[0].data.direct;
-	swap_endian(&value, DIR_SIZE);
+	swap_endian(&value, 4);
 	while (i < map->np)
 	{
 		if (value == map->players[i].id)
