@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 13:51:48 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 16:11:47 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ enum				e_type
 
 union				u_data
 {
-	unsigned int	reg_nbr;
+	unsigned char	reg_nbr;
 	unsigned int	direct;
 	unsigned short	indirect;
 };
