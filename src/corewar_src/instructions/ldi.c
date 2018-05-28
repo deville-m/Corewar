@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 12:27:10 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 17:44:06 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 18:37:11 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,4 @@ void	ldi(t_arena *map, t_process *proc)
 	result = go_read_label(map, npc);
 	swap_endian(&result, 4);
 	proc->reg[proc->param[2].data.reg_nbr] = result;
-	// Epitech precise le carry, pas 42...
-	update_carry(proc, result);
 }

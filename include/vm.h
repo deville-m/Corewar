@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 16:25:53 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/28 17:59:27 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,7 @@ void			lldi(t_arena *map, t_process *proc);
 void			lfork(t_arena *map, t_process *proc);
 void			aff(t_arena *map, t_process *proc);
 
+void			check_reg_range(unsigned char nbr);
 unsigned int	go_read_label(t_arena *map, int npc);
 void			trad_input(unsigned char *src, unsigned int *dest, int len);
 void			update_carry(t_process *proc, unsigned int a);
