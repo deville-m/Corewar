@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 13:51:48 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 14:56:31 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ struct s_option
 	t_bool	trash;
 	size_t	cycles;
 	t_bool	gfx;
+	int		ids[MAX_PLAYERS];
+	t_bool	ids_activated;
 };
 
 /*

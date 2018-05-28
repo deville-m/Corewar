@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:09:41 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 13:54:54 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/28 14:58:54 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void		usage(void)
 {
 	ft_printf("Usage: ./corewar [OPTS] championXX.cor <...>\n");
 	ft_printf("where options include:\n");
-	ft_printf("    -d <nbr_cycle> :: Int\n");
-	ft_printf("    -n <number>    :: Int\n");
+	ft_printf("    -d <nbr_cycle> :: UInt\n");
+	ft_printf("    -n <player_id> :: UInt\n");
 	ft_printf("    -x             # Ncurses output\n");
 	ft_printf("    -t             # Dump loader init to stdout\n");
 	exit(EXIT_FAILURE);
