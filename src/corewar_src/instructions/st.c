@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 16:04:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/23 17:08:46 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 17:10:36 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	st(t_arena *map, t_process *proc)
 	else
 	{
 		ind = proc->param[1].data.indirect;
-		swap_endian(&ind, IND_SIZE);
+		swap_endian(&ind, 2);
 		npc = proc->pc + (ind % IDX_MOD);
 		tmp = proc->reg[proc->param[0].data.reg_nbr];
 		swap_endian(&tmp, 4);

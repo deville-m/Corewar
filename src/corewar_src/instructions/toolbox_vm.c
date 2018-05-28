@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 11:28:44 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 13:29:13 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 17:16:22 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ short			read_whatever_index(t_process *proc, int nbr)
 	if (proc->param[nbr].type == REGISTER)
 		result = (short)proc->reg[proc->param[nbr].data.reg_nbr];
 	else
-		result = proc->param[0].data.indirect;
+		result = proc->param[nbr].data.indirect;
 	return (result);
 }
 
