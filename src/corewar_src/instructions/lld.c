@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ld.c                                               :+:      :+:    :+:   */
+/*   lld.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 16:04:03 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 12:24:58 by rbaraud          ###   ########.fr       */
+/*   Created: 2018/05/28 12:21:09 by rbaraud           #+#    #+#             */
+/*   Updated: 2018/05/28 12:24:57 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	ld(t_arena *map, t_process *proc)
+void	lld(t_arena *map, t_process *proc)
 {
 	unsigned int	dir;
 	short			ind;
@@ -22,7 +22,7 @@ void	ld(t_arena *map, t_process *proc)
 	{
 		ind = proc->param[0].data.indirect;
 		swap_endian(&ind, IND_SIZE);
-		npc = proc->pc + ((int)ind % IDX_MOD);
+		npc = proc->pc + (int)ind;
 		dir = go_read_label(map, npc);
 	}
 	else

@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ld.c                                               :+:      :+:    :+:   */
+/*   sti.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 16:04:03 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 12:24:58 by rbaraud          ###   ########.fr       */
+/*   Created: 2018/05/28 13:46:50 by rbaraud           #+#    #+#             */
+/*   Updated: 2018/05/28 13:49:25 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-void	ld(t_arena *map, t_process *proc)
+void	sti(t_arena *map, t_process *proc)
 {
-	unsigned int	dir;
-	short			ind;
+	unsigned int	result;
+	short			a;
+	short			b;
 	int				npc;
 
-	if (proc->param[0].type == INDIRECT)
-	{
-		ind = proc->param[0].data.indirect;
-		swap_endian(&ind, IND_SIZE);
-		npc = proc->pc + ((int)ind % IDX_MOD);
-		dir = go_read_label(map, npc);
-	}
-	else
-		dir = proc->param[0].data.direct;
-	swap_endian(&dir, 4);
-	proc->reg[proc->param[1].data.reg_nbr] = dir;
-	update_carry(proc, proc->reg[proc->param[1].data.reg_nbr]);
+	a = read_whatever_index(proc, 1);
+	b = read_whatever_index(proc, 2);
+	a = a + b;
+	// le sujet d'Epitech indique le modulo, pas le 42. Je ne sais a quel saint
+	// me vouer.
+	npc = proc->pc + (int)a;
+	result = proc->reg[proc->param[0].data.reg_nbr];
+	swap_endian(&result, 4);
+	vm_write((void *)map->memory, npc, (void *)&result, 4);
 }

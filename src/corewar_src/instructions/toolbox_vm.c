@@ -1,19 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   toolbox.c                                          :+:      :+:    :+:   */
+/*   toolbox_vm.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/22 16:01:46 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/22 16:01:52 by rbaraud          ###   ########.fr       */
+/*   Created: 2018/05/28 11:28:44 by rbaraud           #+#    #+#             */
+/*   Updated: 2018/05/28 13:29:13 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
 #include "vm.h"
 
-void	trad_input(unsigned char *src, unsigned int *dest, int len)
+short			read_whatever_index(t_process *proc, int nbr)
+{
+	short	result;
+
+	if (proc->param[nbr].type == REGISTER)
+		result = (short)proc->reg[proc->param[nbr].data.reg_nbr];
+	else
+		result = proc->param[0].data.indirect;
+	return (result);
+}
+
+unsigned int	go_read_label(t_arena *map, int npc)
+{
+	unsigned char	buf[4];
+	unsigned int	result;
+
+	vm_read((void *)map->memory, npc, buf, 4);
+	trad_input(buf, &result, 4);
+	return (result);
+}
+
+void			update_carry(t_process *proc, unsigned int a)
+{
+	if (a == 0)
+		proc->carry = 1;
+	else
+		proc->carry = 0;
+}
+
+void			trad_input(unsigned char *src, unsigned int *dest, int len)
 {
 	int	i;
 

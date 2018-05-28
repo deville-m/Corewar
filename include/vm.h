@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/25 12:11:21 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/28 13:51:48 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,19 +226,30 @@ void		swap_endian(void *data, size_t size);
 ** @live.c (mess)
 */
 
-void		live(t_arena *map, t_process *proc);
-void		ld(t_arena *map, t_process *proc);
-void		st(t_arena *map, t_process *proc);
-void		add(t_arena *map, t_process *proc);
-void		sub(t_arena *map, t_process *proc);
-void		and(t_arena *map, t_process *proc);
-void		or(t_arena *map, t_process *proc);
-void		xor(t_arena *map, t_process *proc);
-void		zjmp(t_arena *arena, t_process *proc);
+void			live(t_arena *map, t_process *proc);
+void			ld(t_arena *map, t_process *proc);
+void			st(t_arena *map, t_process *proc);
+void			add(t_arena *map, t_process *proc);
+void			sub(t_arena *map, t_process *proc);
+void			and(t_arena *map, t_process *proc);
+void			or(t_arena *map, t_process *proc);
+void			xor(t_arena *map, t_process *proc);
+void			zjmp(t_arena *map, t_process *proc);
 
-void		lld(t_arena *map, t_process *proc);
+void			ldi(t_arena *map, t_process *proc);
+void			sti(t_arena *map, t_process *proc);
+void			vm_fork(t_arena *map, t_process *proc);
 
-void		trad_input(unsigned char *src, unsigned int *dest, int len);
+void			lld(t_arena *map, t_process *proc);
+
+void			lldi(t_arena *map, t_process *proc);
+void			lfork(t_arena *map, t_process *proc);
+void			aff(t_arena *map, t_process *proc);
+
+unsigned int	go_read_label(t_arena *map, int npc);
+void			trad_input(unsigned char *src, unsigned int *dest, int len);
+void			update_carry(t_process *proc, unsigned int a);
+short			read_whatever_index(t_process *proc, int nbr);
 
 /*
 ** verbose.c
