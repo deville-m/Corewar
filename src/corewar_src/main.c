@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 16:46:48 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/28 16:23:22 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int			main(int argc, char *argv[])
 		usage();
 	if ((argc - g_optind) > MAX_PLAYERS
 		|| (argc - g_optind) < 1
-		|| !parseplayers(&arena, &argv[g_optind], 0))
+		|| !parseplayers(&arena, &argv[g_optind], 0, &opts))
 		usage();
+	arena.opts = &opts;
 	if (opts.gfx == TRUE)
 	{
 		if (!(kernel_gfx(&opts, &arena)))

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 14:56:31 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/28 16:22:35 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct		s_arena
 	t_player		players[MAX_PLAYERS];
 	unsigned short	np;			/* Current player numbers */
 	unsigned int	clock;		/* Compteur general de cycle */
+	struct s_option	*opts;
 }					t_arena;
 
 /*
@@ -207,8 +208,9 @@ t_bool		valid_warriors(uint32_t i, char *argv[]);
 */
 
 t_bool		parseplayers(t_arena *arena,
-					char *argv[],
-					 size_t i);
+				char *argv[],
+				size_t i,
+				struct s_option *opts);
 
 /*
 ** @init.c

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/25 12:14:16 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/28 16:12:29 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ** @return boolean
 */
 
-static t_bool				xperror(const char *file,
+static t_bool		xperror(const char *file,
 							const char *message)
 {
 	ft_fprintf(2, "Error: File \"%s\" %s\n", file, message);
@@ -34,11 +34,11 @@ static t_bool				xperror(const char *file,
 ** @return Maybe[Char*] | Nothing[Null]
 */
 
-static t_bool				parse_content(int fd,
-								unsigned char *buffer,
-								unsigned int *prog_size)
+static t_bool		parse_content(int fd,
+						unsigned char *buffer,
+						unsigned int *prog_size)
 {
-	char					c;
+	char			c;
 
 	swap_endian(prog_size, sizeof(unsigned int));
 	if ((read(fd, buffer, *prog_size) != *prog_size))
@@ -56,15 +56,14 @@ static t_bool				parse_content(int fd,
 ** @return boolean/succes
 */
 
-t_bool						parseplayers(t_arena *arena,
-								char *argv[],
-								size_t i)
+t_bool				parseplayers(t_arena *arena,
+						char *argv[],
+						size_t i,
+						struct s_option *opts)
 {
-	int						fd;
-	unsigned int			id;
-	size_t					ret;
+	int				fd;
+	size_t			ret;
 
-	id = -1;
 	arena->np = 0;
 	while (argv[i] != NULL)
 	{
@@ -83,7 +82,7 @@ t_bool						parseplayers(t_arena *arena,
 				|| !parse_content(fd, arena->players[i].exec,
 					&arena->players[i].header.prog_size))
 			return (xperror(argv[i], "have an invalid file size."));
-		arena->players[i].id = id--;
+		arena->players[i].id = opts->ids[i];
 		arena->players[i].last_live = 0;
 		arena->players[i].live_cpt = 0;
 		close(fd);
