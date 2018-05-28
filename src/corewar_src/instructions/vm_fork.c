@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 13:50:28 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 14:45:59 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 17:41:22 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	vm_fork(t_arena *map, t_process *proc)
 	t_process	*new;
 	t_dlist		*tmp;
 	int			i;
+	short		ind;
 
 	tmp = ft_dlstnew((void *)proc, sizeof(t_process));
 	if (!tmp)
@@ -29,7 +30,9 @@ void	vm_fork(t_arena *map, t_process *proc)
 	new->pc = proc->pc;
 	new->carry = proc->carry;
 	new->alive = proc->alive;
-	new->wait = proc->wait;
+	new->wait = proc->wait + 1;
 	new->instruction = NULL;
-	new->offset = (int)proc->param[0].data.direct % IDX_MOD;
+	ind = proc->param[0].data.indirect;
+	swap_endian(&ind, 2);
+	new->offset = (int)ind % IDX_MOD;
 }
