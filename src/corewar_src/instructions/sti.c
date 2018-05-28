@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 13:46:50 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 14:42:33 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/28 16:41:50 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sti(t_arena *map, t_process *proc)
 	a = a + b;
 	// le sujet d'Epitech indique le modulo, pas le 42. Je ne sais a quel saint
 	// me vouer.
-	npc = proc->pc + (int)a;
+	npc = proc->pc + ((int)a % IDX_MOD);
 	result = proc->reg[proc->param[0].data.reg_nbr];
 	swap_endian(&result, 4);
 	vm_write((void *)map->memory, npc, (void *)&result, 4);
