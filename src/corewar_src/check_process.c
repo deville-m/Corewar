@@ -6,28 +6,31 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/24 18:46:34 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/28 18:42:30 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "op.h"
 #include "vm.h"
 
-static t_bool	set_op(unsigned char op_code, t_op *op)
+static t_bool	parse_reg(
+							t_arena *arena,
+							t_process *proc,
+							size_t i)
 {
-	size_t i;
+	t_bool success;
 
-	i = 0;
-	while (i < INSTRUCTION_NBR)
-	{
-		if (g_op_tab[i].op_code == op_code)
-		{
-			*op = g_op_tab[i];
-			return (TRUE);
-		}
-		i++;
-	}
-	return (FALSE);
+	success = TRUE;
+	if (!(proc->op.arg_type[i] & T_REG))
+		success = FALSE;
+	proc->param[i].type = REGISTER;
+	vm_read(arena->memory, proc->pc + proc->offset,
+			&proc->param[i].data.reg_nbr, 1);
+	if (proc->param[i].data.reg_nbr <= 0
+		|| proc->param[i].data.reg_nbr > REG_NUMBER)
+		success = FALSE;
+	++proc->offset;
+	return (success);
 }
 
 static t_bool	parse_direct(
@@ -59,14 +62,7 @@ static t_bool	parse_param(
 
 	success = TRUE;
 	if (type == (REG_CODE << 6))
-	{
-		if (!(proc->op.arg_type[index] & T_REG))
-			success = FALSE;
-		proc->param[index].type = REGISTER;
-		vm_read(arena->memory, proc->pc + proc->offset,
-				&proc->param[index].data.reg_nbr, 1);
-		++proc->offset;
-	}
+		success = parse_reg(arena, proc, index);
 	else if (type == (DIR_CODE << 6))
 		success = parse_direct(arena, proc, index);
 	else if (type == (IND_CODE << 6))
