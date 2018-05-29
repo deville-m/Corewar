@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 15:24:10 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/29 16:54:36 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ void			aff(t_arena *map, t_process *proc);
 unsigned int	go_read_label(t_arena *map, int npc);
 void			trad_input(unsigned char *src, unsigned int *dest, int len);
 void			update_carry(t_process *proc, unsigned int a);
-short			read_whatever_index(t_process *proc, int nbr);
+short			read_whatever_index(t_arena *map, t_process *proc, int nbr);
 
 /*
 ** verbose.c

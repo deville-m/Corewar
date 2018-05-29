@@ -6,18 +6,29 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 11:28:44 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 18:08:22 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/29 16:57:23 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vm.h"
 
-short			read_whatever_index(t_process *proc, int nbr)
+short			read_whatever_index(t_arena *map, t_process *proc, int nbr)
 {
-	short	result;
+	short			result;
+	unsigned int	tmp;
+	int				npc;
 
 	if (proc->param[nbr].type == REGISTER)
 		result = (short)proc->reg[proc->param[nbr].data.reg_nbr];
+	else if (proc->param[nbr].type == INDIRECT)
+	{
+		result = proc->param[nbr].data.indirect;
+		swap_endian(&result, 2);
+		npc = proc->pc + ((int)result % IDX_MOD);
+		tmp = (short)go_read_label(map, npc);
+		swap_endian(&result, 4);
+		result = (short)tmp;
+	}
 	else
 	{
 		result = proc->param[nbr].data.indirect;

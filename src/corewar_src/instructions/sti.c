@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 13:46:50 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/29 15:58:25 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/29 16:59:53 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	sti(t_arena *map, t_process *proc)
 	short			b;
 	int				npc;
 
-	a = read_whatever_index(proc, 1);
-	b = read_whatever_index(proc, 2);
+	a = read_whatever_index(map, proc, 1);
+	b = read_whatever_index(map, proc, 2);
 	a = a + b;
 	npc = proc->pc + ((int)a % IDX_MOD);
 	result = proc->reg[proc->param[0].data.reg_nbr];
