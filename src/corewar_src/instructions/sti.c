@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 13:46:50 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 19:31:11 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/29 15:58:25 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	sti(t_arena *map, t_process *proc)
 	npc = proc->pc + ((int)a % IDX_MOD);
 	result = proc->reg[proc->param[0].data.reg_nbr];
 	swap_endian(&result, 4);
+	own_write(map->ownership, npc, map->ownership[proc->pc], 4);
 	vm_write(map->memory, npc, (void *)&(result), 4);
 }
