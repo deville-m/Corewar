@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 16:24:24 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 09:55:52 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void print_status(t_scene *scene, int cycle,
 	k = 0;
 	getmaxyx(scene->sidebar, y, x);
 	wattron(scene->sidebar, A_BOLD);
-	mvwprintw(scene->sidebar, y/6 + 2, x/5, "Cycles: %d", cycle);
-	mvwprintw(scene->sidebar, y/6 + 4, x/5, "Processes: %d", processes);
-	mvwprintw(scene->sidebar, y/6 + 6, x/5, "-----------------");
-	mvwprintw(scene->sidebar, y/6 + 8, x/5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
-	mvwprintw(scene->sidebar, y/6 + 10, x/5, "CYCLE_DELTA: %d", CYCLE_DELTA);
-	mvwprintw(scene->sidebar, y/6 + 12, x/5, "NBR_LIVE: %d", NBR_LIVE);
-	mvwprintw(scene->sidebar, y/6 + 14, x/5, "MAX_CHECKS: %d", MAX_CHECKS);
-	mvwprintw(scene->sidebar, y/6 + 16, x/5, "-----------------");
+	mvwprintw(scene->sidebar, y / 6 + 2, x / 5, "Cycles: %d", cycle);
+	mvwprintw(scene->sidebar, y / 6 + 4, x / 5, "Processes: %d", processes);
+	mvwprintw(scene->sidebar, y / 6 + 6, x / 5, "-----------------");
+	mvwprintw(scene->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
+	mvwprintw(scene->sidebar, y / 6 + 10, x / 5, "CYCLE_DELTA: %d", CYCLE_DELTA);
+	mvwprintw(scene->sidebar, y / 6 + 12, x / 5, "NBR_LIVE: %d", NBR_LIVE);
+	mvwprintw(scene->sidebar, y / 6 + 14, x / 5, "MAX_CHECKS: %d", MAX_CHECKS);
+	mvwprintw(scene->sidebar, y / 6 + 16, x / 5, "-----------------");
 	while (z < arena->np)
 	{
 		mvwprintw(scene->sidebar, y/6 + 18 + k, x/5,
@@ -81,22 +81,28 @@ void print_status(t_scene *scene, int cycle,
 	wrefresh(scene->sidebar);
 }
 
-static void	set_delimiters(t_scene *scene, t_arena *arena)
+static void	set_delimiters(t_scene *s, t_arena *arena)
 {
 	int x;
 	int y;
 
-	getmaxyx(scene->sidebar, y, x);
-	wattron(scene->sidebar, A_BOLD | COLOR_PAIR(1));
-	mvwprintw(scene->sidebar, 2, x/5, "   ______                                  ");
-	mvwprintw(scene->sidebar, 3, x/5, "  / ____/___  ________ _      ______ ______");
-	mvwprintw(scene->sidebar, 4, x/5, " / /   / __ \\/ ___/ _ \\ | /| / / __ `/ ___/");
-	mvwprintw(scene->sidebar, 5, x/5, "/ /___/ /_/ / /  /  __/ |/ |/ / /_/ / /    ");
-	mvwprintw(scene->sidebar, 6, x/5, "\\____/\\____/_/   \\___/|__/|__/\\__,_/_/");
-	mvwprintw(scene->sidebar, 9, x/5, "      By: mdeville, rbaraud & ctrouill   ");
-	wattroff(scene->sidebar, A_BOLD | COLOR_PAIR(1));
-	mvwhline(scene->sidebar, y / 6, 1, ACS_HLINE, x - 2);
-	print_status(scene, 0, 0, arena);
+	getmaxyx(s->sidebar, y, x);
+	wattron(s->sidebar, A_BOLD | COLOR_PAIR(1));
+	mvwprintw(s->sidebar, 2, x/5,
+		"   ______                                  ");
+	mvwprintw(s->sidebar, 3, x/5,
+		"  / ____/___  ________ _      ______ ______");
+	mvwprintw(s->sidebar, 4, x/5,
+		" / /   / __ \\/ ___/ _ \\ | /| / / __ `/ ___/");
+	mvwprintw(s->sidebar, 5, x/5,
+		"/ /___/ /_/ / /  /  __/ |/ |/ / /_/ / /    ");
+	mvwprintw(s->sidebar, 6, x/5,
+		"\\____/\\____/_/   \\___/|__/|__/\\__,_/_/");
+	mvwprintw(s->sidebar, 9, x/5,
+		"      By: mdeville, rbaraud & ctrouill   ");
+	wattroff(s->sidebar, A_BOLD | COLOR_PAIR(1));
+	mvwhline(s->sidebar, y / 6, 1, ACS_HLINE, x - 2);
+	print_status(s, 0, 0, arena);
 }
 
 void	alloc_window(t_scene *scene, t_arena *arena)

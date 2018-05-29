@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:28:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/24 13:21:13 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 09:50:14 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,18 @@
 ** @return bool
 */
 
-t_bool		player_ownership(unsigned int player)
+t_bool		player_ownership(unsigned int player,
+					t_arena *arena)
 {
-	if (player == 0xFF
-		|| player == 0xFE
-		|| player == 0xFD
-		|| player == 0xFC)
-		return (TRUE);
+	size_t	i;
+
+	i = 0;
+	while (i < arena->np)
+	{
+		if ((unsigned char)arena->players[i].id == player)
+			return (TRUE);
+		i++;
+	}
 	return (FALSE);
 }
 
@@ -67,15 +72,16 @@ t_bool		apply_pc(t_arena *arena,
 	return (FALSE);
 }
 
-uint8_t		icolors(unsigned char owner)
+uint8_t		icolors(unsigned char owner, t_arena *arena)
 {
-	if (owner == 0xFF)
-		return (1);
-	else if (owner == 0xFE)
-		return (2);
-	else if (owner == 0xFD)
-		return (3);
-	else if (owner == 0xFC)
-		return (4);
+	size_t	i;
+
+	i = 0;
+	while (i < arena->np)
+	{
+		if ((unsigned char)arena->players[i].id == owner)
+			return (i + 1);
+		i++;
+	}
 	return (5);
 }

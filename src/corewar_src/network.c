@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 10:56:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/25 12:13:17 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 09:02:30 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ static struct in_addr	*hostname_to_ip(char * hostname)
 
 t_bool		is_url(const char *input)
 {
-	if (ft_strchr(input, ':') != NULL
-		|| ft_strchr(input, '/'))
-		return (TRUE);
+	/* if (ft_strchr(input, ':') != NULL */
+	/* 	|| ft_strchr(input, '/')) */
+	/* 	return (TRUE); */
+	(void)input;				/* TODO: fix me */
 	return (FALSE);
 }
 

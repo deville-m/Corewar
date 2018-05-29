@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 18:47:32 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/29 09:20:45 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ void		dump_memory(const unsigned char *memory,
 						size_t i);
 void		dump_player_exec(t_arena *arena);
 char*		jcolors(unsigned char owner, t_bool bold);
-uint8_t		icolors(unsigned char owner);
+uint8_t		icolors(unsigned char owner, t_arena *arena);
 
 /*
 ** @options
@@ -275,7 +275,7 @@ void		print_winner(t_arena *arena, size_t i);
 
 void		dump_cycle_memory(t_scene *scene,
 					t_arena *arena);
-t_bool		player_ownership(unsigned int player);
+t_bool		player_ownership(unsigned int player, t_arena *arena);
 void		init_values(size_t *i, int *xx, int *yy);
 t_bool		apply_pc(t_arena *arena, int i);
 

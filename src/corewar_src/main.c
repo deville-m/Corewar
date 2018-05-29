@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 16:23:22 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 10:02:42 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int			main(int argc, char *argv[])
 	t_arena			arena;
 
 	if (argc < 2 || !parse_options(argc, argv, &opts)
-		|| valid_warriors(g_optind, argv) == FALSE)
+		|| valid_warriors(g_optind, argv) == FALSE
+		|| MEM_SIZE == 0)
 		usage();
 	if ((argc - g_optind) > MAX_PLAYERS
 		|| (argc - g_optind) < 1
