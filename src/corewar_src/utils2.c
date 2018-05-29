@@ -6,11 +6,32 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:09:41 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/28 14:58:54 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 15:18:49 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
+
+int			own_write(void *memory, int pc, char owner, size_t size)
+{
+	unsigned char	*sbuf;
+	size_t			i;
+
+	if (!memory)
+		return (-1);
+	pc = pc % MEM_SIZE;
+	if (pc < 0)
+		pc = MEM_SIZE - pc;
+	sbuf = (unsigned char *)memory;
+	i = 0;
+	while (i < size)
+	{
+		sbuf[i] = owner;
+		++pc;
+		++i;
+	}
+	return (i);
+}
 
 /*
 ** @desc TODO
@@ -25,6 +46,9 @@ int			vm_read(const void *memory, int pc, void *buffer, size_t size)
 
 	if (memory == NULL || buffer == NULL)
 		return (-1);
+	pc = pc % MEM_SIZE;
+	if (pc < 0)
+		pc = MEM_SIZE - pc;
 	sbuf = (unsigned char *)buffer;
 	smem = (unsigned char *)memory;
 	i = 0;
@@ -50,6 +74,9 @@ int			vm_write(void *memory, int pc, void *buffer, size_t size)
 
 	if (memory == NULL || buffer == NULL)
 		return (-1);
+	pc = pc % MEM_SIZE;
+	if (pc < 0)
+		pc = MEM_SIZE - pc;
 	sbuf = (unsigned char *)buffer;
 	smem = (unsigned char *)memory;
 	i = 0;
