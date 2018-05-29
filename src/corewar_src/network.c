@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 10:56:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 09:02:30 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 11:10:54 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 
-static struct in_addr	*hostname_to_ip(char * hostname)
+static struct in_addr	*hostname_to_ip(char *hostname)
 {
 	struct hostent		*he;
 	struct in_addr		**addr_list;
@@ -40,20 +40,17 @@ static struct in_addr	*hostname_to_ip(char * hostname)
 ** @return boolean/succes
 */
 
-t_bool		is_url(const char *input)
+t_bool					is_url(const char *input)
 {
-	/* if (ft_strchr(input, ':') != NULL */
-	/* 	|| ft_strchr(input, '/')) */
-	/* 	return (TRUE); */
-	(void)input;				/* TODO: fix me */
+	(void)input;
 	return (FALSE);
 }
 
-int			open_remote(const char *url)
+int						open_remote(const char *url)
 {
 	int					sockfd;
 	struct sockaddr_in	cyka;
-	struct in_addr		*tmp = NULL;
+	struct in_addr		*tmp;
 
 	if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) < 0)
 	{

@@ -6,47 +6,39 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 09:55:52 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 11:22:13 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 #include <curses.h>
 
+static void			deploy_informations(t_scene *s,
+							int cycle, int processes)
+{
+	int				x;
+	int				y;
+
+	getmaxyx(s->sidebar, y, x);
+	wattron(s->sidebar, A_BOLD);
+	mvwprintw(s->sidebar, y / 6 + 2, x / 5, "Cycles: %d", cycle);
+	mvwprintw(s->sidebar, y / 6 + 4, x / 5, "Processes: %d", processes);
+	mvwprintw(s->sidebar, y / 6 + 6, x / 5, "-----------------");
+	mvwprintw(s->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
+	mvwprintw(s->sidebar, y / 6 + 10, x / 5, "CYCLE_DELTA: %d", CYCLE_DELTA);
+	mvwprintw(s->sidebar, y / 6 + 12, x / 5, "NBR_LIVE: %d", NBR_LIVE);
+	mvwprintw(s->sidebar, y / 6 + 14, x / 5, "MAX_CHECKS: %d", MAX_CHECKS);
+	mvwprintw(s->sidebar, y / 6 + 16, x / 5, "-----------------");
+}
+
 /*
-** @desc Initialise curses librarie
-**       and set cleanup callback when
-**       exiting.
+** @desc Deploy side bar library
+**       and print status informations.
 ** @return nil
 */
 
-void		init_curses(void)
-{
-	initscr();
-	cbreak();
-	noecho();
-	curs_set(0);
-	keypad(stdscr, TRUE);
-	if (has_colors() == FALSE)
-	{
-		endwin();
-		ft_printf("Your terminal does not support color\n");
-		exit(1);
-	}
-	start_color();
-	init_pair(1, COLOR_GREEN, COLOR_BLACK);
-	init_pair(2, COLOR_BLUE, COLOR_BLACK);
-	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
-	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
-	init_pair(5, COLOR_CYAN, COLOR_BLACK);
-	init_pair(6, COLOR_BLACK, COLOR_BLACK);
-	init_pair(7, 8, COLOR_BLACK);
-	timeout(0);
-	atexit((void*)endwin);
-}
-
-void print_status(t_scene *scene, int cycle,
-			int processes, t_arena *arena)
+void				print_status(t_scene *s, int cycle,
+						int processes, t_arena *arena)
 {
 	int x;
 	int y;
@@ -55,63 +47,54 @@ void print_status(t_scene *scene, int cycle,
 
 	z = 0;
 	k = 0;
-	getmaxyx(scene->sidebar, y, x);
-	wattron(scene->sidebar, A_BOLD);
-	mvwprintw(scene->sidebar, y / 6 + 2, x / 5, "Cycles: %d", cycle);
-	mvwprintw(scene->sidebar, y / 6 + 4, x / 5, "Processes: %d", processes);
-	mvwprintw(scene->sidebar, y / 6 + 6, x / 5, "-----------------");
-	mvwprintw(scene->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
-	mvwprintw(scene->sidebar, y / 6 + 10, x / 5, "CYCLE_DELTA: %d", CYCLE_DELTA);
-	mvwprintw(scene->sidebar, y / 6 + 12, x / 5, "NBR_LIVE: %d", NBR_LIVE);
-	mvwprintw(scene->sidebar, y / 6 + 14, x / 5, "MAX_CHECKS: %d", MAX_CHECKS);
-	mvwprintw(scene->sidebar, y / 6 + 16, x / 5, "-----------------");
+	getmaxyx(s->sidebar, y, x);
+	deploy_informations(s, cycle, processes);
 	while (z < arena->np)
 	{
-		mvwprintw(scene->sidebar, y/6 + 18 + k, x/5,
+		mvwprintw(s->sidebar, y / 6 + 18 + k, x / 5,
 			"Player %d: %s", arena->opts->ids[z],
 				arena->players[z].header.prog_name);
-		mvwprintw(scene->sidebar, y/6 + 18 + k + 1, x/5,
+		mvwprintw(s->sidebar, y / 6 + 18 + k + 1, x / 5,
 			"  \\_ [ Last Live ] -> %u", arena->players[z].last_live);
-		mvwprintw(scene->sidebar, y/6 + 18 + k + 2, x/5,
+		mvwprintw(s->sidebar, y / 6 + 18 + k + 2, x / 5,
 			"  \\_ [ Lives / CYCLE_TO_DIE ] -> %u", arena->players[z].live_cpt);
 		k += 2;
 		z++;
 	}
-	wattroff(scene->sidebar, A_BOLD);
-	wrefresh(scene->sidebar);
+	wattroff(s->sidebar, A_BOLD);
+	wrefresh(s->sidebar);
 }
 
-static void	set_delimiters(t_scene *s, t_arena *arena)
+static void			set_delimiters(t_scene *s, t_arena *arena)
 {
-	int x;
-	int y;
+	int				x;
+	int				y;
 
 	getmaxyx(s->sidebar, y, x);
 	wattron(s->sidebar, A_BOLD | COLOR_PAIR(1));
-	mvwprintw(s->sidebar, 2, x/5,
+	mvwprintw(s->sidebar, 2, x / 5,
 		"   ______                                  ");
-	mvwprintw(s->sidebar, 3, x/5,
+	mvwprintw(s->sidebar, 3, x / 5,
 		"  / ____/___  ________ _      ______ ______");
-	mvwprintw(s->sidebar, 4, x/5,
+	mvwprintw(s->sidebar, 4, x / 5,
 		" / /   / __ \\/ ___/ _ \\ | /| / / __ `/ ___/");
-	mvwprintw(s->sidebar, 5, x/5,
+	mvwprintw(s->sidebar, 5, x / 5,
 		"/ /___/ /_/ / /  /  __/ |/ |/ / /_/ / /    ");
-	mvwprintw(s->sidebar, 6, x/5,
+	mvwprintw(s->sidebar, 6, x / 5,
 		"\\____/\\____/_/   \\___/|__/|__/\\__,_/_/");
-	mvwprintw(s->sidebar, 9, x/5,
+	mvwprintw(s->sidebar, 9, x / 5,
 		"      By: mdeville, rbaraud & ctrouill   ");
 	wattroff(s->sidebar, A_BOLD | COLOR_PAIR(1));
 	mvwhline(s->sidebar, y / 6, 1, ACS_HLINE, x - 2);
 	print_status(s, 0, 0, arena);
 }
 
-void	alloc_window(t_scene *scene, t_arena *arena)
+void				alloc_window(t_scene *scene, t_arena *arena)
 {
 	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
 	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
-
 	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
-	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
+	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
 	box(scene->memory, ACS_VLINE, ACS_HLINE);
 	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
 	scene->speed = MIN_SPEED;
@@ -119,11 +102,11 @@ void	alloc_window(t_scene *scene, t_arena *arena)
 	set_delimiters(scene, arena);
 }
 
-void		apply_windows(t_scene *scene, t_arena *arena)
+void				apply_windows(t_scene *scene, t_arena *arena)
 {
 	clear();
 	scene->memory = subwin(stdscr, LINES, (COLS - COLS / 4), 0, 0);
-	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));;
+	scene->sidebar = subwin(stdscr, LINES, (COLS / 4), 0, (COLS - COLS / 4));
 	box(scene->memory, ACS_VLINE, ACS_HLINE);
 	box(scene->sidebar, ACS_VLINE, ACS_HLINE);
 	set_delimiters(scene, arena);

@@ -6,11 +6,24 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/29 09:27:18 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 10:55:08 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
+
+static void		apply_memory_bis(int *xx, int *yy,
+						int *x, size_t *i)
+{
+	if ((*xx + 7 > *x))
+	{
+		*xx = 1;
+		*yy += 1;
+	}
+	else
+		*xx += 3;
+	*i += 1;
+}
 
 /*
 ** @desc This is the visual meat.
@@ -22,7 +35,7 @@
 */
 
 static void		apply_memory(WINDOW *mem,
-				t_arena *arena, int x, int y)
+				t_arena *a, int x, int y)
 {
 	size_t		i;
 	int			xx;
@@ -32,29 +45,20 @@ static void		apply_memory(WINDOW *mem,
 	getmaxyx(mem, y, x);
 	while (i < MEM_SIZE)
 	{
-		if (arena->memory[i] == 0x00 &&
-			player_ownership(arena->ownership[i], arena) == FALSE)
+		if (a->memory[i] == 0x00 && !player_ownership(a->ownership[i], a))
 			wattron(mem, COLOR_PAIR(7));
-		else if (arena->memory[i] == 0x00
-			&& player_ownership(arena->ownership[i], arena) == TRUE)
+		else if (a->memory[i] == 0x00 && player_ownership(a->ownership[i], a))
 			wattron(mem, A_BOLD);
 		else
-			wattron(mem, COLOR_PAIR(icolors(arena->ownership[i], arena)));
-		if (apply_pc(arena, i) == TRUE)
+			wattron(mem, COLOR_PAIR(icolors(a->ownership[i], a)));
+		if (apply_pc(a, i) == TRUE)
 		{
 			wattron(mem, COLOR_PAIR(7));
 			wattron(mem, A_STANDOUT);
 		}
-		mvwprintw(mem, yy, xx, "%.2x", arena->memory[i]);
-		if ((xx + 7 > x))
-		{
-			xx = 1;
-			yy += 1;
-		}
-		else
-			xx += 3;
+		mvwprintw(mem, yy, xx, "%.2x", a->memory[i]);
+		apply_memory_bis(&xx, &yy, &x, &i);
 		wattroff(mem, A_STANDOUT);
-		i++;
 	}
 	wrefresh(mem);
 	return ;
