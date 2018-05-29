@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/29 10:55:08 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/29 18:14:44 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static void		apply_memory(WINDOW *mem,
 			wattron(mem, COLOR_PAIR(icolors(a->ownership[i], a)));
 		if (apply_pc(a, i) == TRUE)
 		{
-			wattron(mem, COLOR_PAIR(7));
 			wattron(mem, A_STANDOUT);
+			wattron(mem, COLOR_PAIR(0));
 		}
 		mvwprintw(mem, yy, xx, "%.2x", a->memory[i]);
 		apply_memory_bis(&xx, &yy, &x, &i);
