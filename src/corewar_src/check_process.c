@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/28 18:42:30 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/29 19:08:07 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 	return (success);
 }
 
-void			check_process(t_arena *arena, t_dlist *elem)
+/*void			check_process(t_arena *arena, t_dlist *elem)
 {
 	t_process *proc;
 
@@ -128,4 +128,31 @@ void			check_process(t_arena *arena, t_dlist *elem)
 		proc->carry = 0;
 	else
 		set_instruction(proc, proc->op.op_code);
+}*/
+
+void			check_process(t_arena *arena, t_dlist *elem)
+{
+	t_process *proc;
+
+	proc = (t_process *)elem->content;
+	if (arena->clock != proc->wait)
+		return ;
+	proc->wait = arena->clock + 1;
+	if (proc->instruction)
+	{
+		if (!set_params(arena, proc))
+			proc->carry = 0;
+		proc->instruction(arena, proc);
+		proc->instruction = NULL;
+	}
+	if ((proc->pc = (proc->pc + proc->offset) % MEM_SIZE) < 0)
+		proc->pc = MEM_SIZE + proc->pc;
+	if (!set_op(arena->memory[proc->pc], &proc->op))
+	{
+		proc->offset = 1;
+		proc->carry = 0;
+		return ;
+	}
+	proc->wait = proc->op.cycle_cost + arena->clock;
+	set_instruction(proc, proc->op.op_code);
 }
