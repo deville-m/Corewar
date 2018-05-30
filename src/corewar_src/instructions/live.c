@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 14:32:19 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/28 19:26:56 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/30 15:31:34 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void	live(t_arena *map, t_process *proc)
 	while (i < map->np)
 	{
 		if (value == map->players[i].id)
+		{
 			map->players[i].last_live = map->clock;
+			map->players[i].live_cpt += 1;
+		}
 		i += 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 09:20:59 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:00:32 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,24 @@ static void	exec_processes(t_arena *arena)
 	}
 }
 
+static void verif(t_arena *arena)
+{
+	static int nb_check = 0;
+	static int count = 0;
+
+	if (count >= arena->cycle_to_die)
+	{
+		count = 0;
+		nb_check += 1;
+		if (proc_filter(arena) > NBR_LIVE || nb_check == MAX_CHECKS)
+		{
+			nb_check = 0;
+			arena->cycle_to_die -= CYCLE_DELTA;
+		}
+	}
+	count += 1;
+}
+
 /*
 ** @desc monothilic part of the arena
 **       arena.players should be init
@@ -41,10 +59,8 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	init_arena(arena, options);
 	while (arena->procs)
 	{
+		verif(arena);
 		exec_processes(arena);
-		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
-			if (proc_filter(arena) > NBR_LIVE)
-				arena->cycle_to_die -= CYCLE_DELTA;
 		verbose(arena, 3);
 		++arena->clock;
 	}
@@ -73,10 +89,8 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	{
 		dump_cycle_memory(&scene, arena);
 		keybindinds_callback(getch(), &scene);
+		verif(arena);
 		exec_processes(arena);
-		if (arena->clock && arena->clock % arena->cycle_to_die == 0)
-			if (proc_filter(arena) > NBR_LIVE)
-				arena->cycle_to_die -= CYCLE_DELTA;
 		refresh();
 		++arena->clock;
 		usleep(scene.speed);
