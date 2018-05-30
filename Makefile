@@ -16,4 +16,4 @@ include $(RULES)/asm.mk
 include $(RULES)/corewar.mk
 include $(RULES)/clean.mk
 # -------~-------~--~------------------~------
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re banner

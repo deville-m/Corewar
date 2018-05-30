@@ -10,6 +10,7 @@ COREWARSRC   := $(addprefix $(COREWARDIR), $(COREWARSRC))
 INSTRSRC     := $(addprefix $(INSTRDIR), $(COREWARINSTR))
 COREWARSRC   := $(COREWARSRC) $(COMMONSRC) $(INSTRSRC)
 COREWAROBJ   := $(COREWARSRC:.c=.o)
+CWDEPS       =  $(COREWAROBJ:.o=.d)
 
 $(COREWAR): $(COREWAROBJ) $(LIB)
 	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file:$(SILENT_C) %s\n" $@
