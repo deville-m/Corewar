@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 14:24:53 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 15:00:44 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ static void			deploy_informations(t_scene *s, int cycle,
 	getmaxyx(s->sidebar, y, x);
 	wattron(s->sidebar, A_BOLD);
 	mvwprintw(s->sidebar, y / 6 + 2, x / 5, "Cycles: %d", cycle);
-	mvwprintw(s->sidebar, y / 6 + 4, x / 5, "Processes: %d", processes);
+	mvwprintw(s->sidebar, y / 6 + 4, x / 5, "Processes: %-6d", processes);
 	mvwprintw(s->sidebar, y / 6 + 6, x / 5, "-----------------");
-	mvwprintw(s->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %d", arena->cycle_to_die);
+	mvwprintw(s->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %-6d",
+						arena->cycle_to_die);
 	mvwprintw(s->sidebar, y / 6 + 10, x / 5, "CYCLE_DELTA: %d", CYCLE_DELTA);
 	mvwprintw(s->sidebar, y / 6 + 12, x / 5, "NBR_LIVE: %d", NBR_LIVE);
 	mvwprintw(s->sidebar, y / 6 + 14, x / 5, "MAX_CHECKS: %d", MAX_CHECKS);

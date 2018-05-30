@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/29 19:08:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:11:26 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,6 @@ void			check_process(t_arena *arena, t_dlist *elem)
 		proc->carry = 0;
 		return ;
 	}
-	proc->wait = proc->op.cycle_cost + arena->clock;
+	proc->wait = proc->op.cycle_cost + arena->clock - 1;
 	set_instruction(proc, proc->op.op_code);
 }
