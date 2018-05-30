@@ -6,13 +6,13 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:09:41 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 15:38:41 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 15:28:44 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 
-int			own_write(void *memory, int pc, char owner, size_t size)
+int			own_write(void *memory, int pc, unsigned char owner, size_t size)
 {
 	unsigned char	*sbuf;
 	size_t			i;
