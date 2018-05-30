@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:45:55 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 18:57:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 		verif(arena);
 		exec_processes(arena);
 		verbose(arena, arena->opts->verbose);
+		++arena->clock;
 		if (arena->clock == arena->opts->dump)
 			shut_up_and_take_my_memory(arena);
-		++arena->clock;
 	}
 	print_winner(arena, 0);
 	return (TRUE);

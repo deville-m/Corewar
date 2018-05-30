@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/30 16:52:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 21:27:58 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static t_bool	parse_param(
 
 static t_bool	set_params(t_arena *arena, t_process *proc)
 {
-	size_t			i;
+	int				i;
 	unsigned char	encoding_byte;
 	t_bool			success;
 
@@ -94,7 +94,7 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 	}
 	success = TRUE;
 	i = 0;
-	while (encoding_byte)
+	while (i < proc->op.nb_param)
 	{
 		if (!parse_param(arena, proc, encoding_byte & 0XC0, i))
 			success = FALSE;
@@ -129,7 +129,21 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 	else
 		set_instruction(proc, proc->op.op_code);
 }*/
-
+/*
+		else
+		{
+			ft_printf("Executing %s at %d with encoding_byte %#.8hhb and param ", proc->op.name, proc->pc, arena->memory[(proc->pc + 1) % MEM_SIZE]);
+			int i = 0;
+			while (i < proc->op.nb_param)
+			{
+				if (proc->op.index)
+					ft_printf("%#.4hx ", proc->param[i].data.indirect);
+				else
+					ft_printf("%#.8x ", proc->param[i].data.direct);
+				i++;
+			}
+			write(1, "\n", 1);
+		}*/
 void			check_process(t_arena *arena, t_dlist *elem)
 {
 	t_process *proc;
@@ -141,9 +155,21 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	{
 		if (!set_params(arena, proc))
 			proc->carry = 0;
-		proc->instruction(arena, proc);
-		proc->instruction = NULL;
+		else
+			proc->instruction(arena, proc);
+		ft_printf("Trying %s at %d and offset %d with encoding_byte %#.8hhb and param ", proc->op.name, proc->pc, proc->offset, arena->memory[(proc->pc + 1) % MEM_SIZE]);
+		int i = 0;
+		while (i < proc->op.nb_param)
+		{
+			if (proc->op.index)
+				ft_printf("%#.4hx ", proc->param[i].data.indirect);
+			else
+				ft_printf("%#.8x ", proc->param[i].data.direct);
+			i++;
+		}
+		write(1, "\n", 1);
 		proc->wait = arena->clock + 1;
+		proc->instruction = NULL;
 		return ;
 	}
 	if ((proc->pc = (proc->pc + proc->offset) % MEM_SIZE) < 0)
@@ -154,6 +180,7 @@ void			check_process(t_arena *arena, t_dlist *elem)
 		proc->carry = 0;
 		return ;
 	}
+//	set_params(arena, proc);
 	proc->wait = proc->op.cycle_cost + arena->clock - 1;
 	set_instruction(proc, proc->op.op_code);
 }
