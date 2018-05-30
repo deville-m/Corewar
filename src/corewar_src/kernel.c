@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 22:29:08 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 23:02:19 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,12 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	alloc_window(&scene, arena);
 	while (arena->procs)
 	{
+		++arena->clock;
 		dump_cycle_memory(&scene, arena);
 		keybindinds_callback(getch(), &scene);
 		verif(arena);
 		exec_processes(arena);
 		refresh();
-		++arena->clock;
 		usleep(scene.speed);
 	}
 	free(scene.memory);
