@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 16:00:32 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:30:41 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ static void verif(t_arena *arena)
 t_bool		kernel(struct s_option *options, t_arena *arena)
 {
 	print_player_headers(arena, 0);
-	if (options->trash == TRUE)
-		dump_player_exec(arena);
 	init_arena(arena, options);
 	while (arena->procs)
 	{
 		verif(arena);
 		exec_processes(arena);
 		verbose(arena, 3);
+		if (arena->clock == arena->opts->dump)
+			shut_up_and_take_my_memory(arena);
 		++arena->clock;
 	}
 	print_winner(arena, 0);
@@ -80,8 +80,6 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 {
 	t_scene	scene;
 
-	if (options->trash == TRUE)
-		dump_player_exec(arena);
 	init_arena(arena, options);
 	init_curses();
 	alloc_window(&scene, arena);

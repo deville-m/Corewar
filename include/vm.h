@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 15:44:24 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:17:12 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 
 struct s_option
 {
-	size_t	dump;
-	t_bool	trash;
-	size_t	cycles;
-	t_bool	gfx;
-	int		ids[MAX_PLAYERS];
-	t_bool	ids_activated;
+	unsigned int	dump;
+	t_bool			trash;
+	size_t			cycles;
+	t_bool			gfx;
+	int				ids[MAX_PLAYERS];
+	t_bool			ids_activated;
 };
 
 /*
@@ -283,6 +283,7 @@ void		dump_cycle_memory(t_scene *scene,
 t_bool		player_ownership(unsigned int player, t_arena *arena);
 void		init_values(size_t *i, int *xx, int *yy);
 t_bool		apply_pc(t_arena *arena, int i);
+void		shut_up_and_take_my_memory(t_arena *arena);
 
 /*
 ** @network.c

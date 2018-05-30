@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:28:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 09:50:14 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:25:58 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,10 @@ uint8_t		icolors(unsigned char owner, t_arena *arena)
 		i++;
 	}
 	return (5);
+}
+
+void		shut_up_and_take_my_memory(t_arena *arena)
+{
+	dump_memory(arena->memory, arena->ownership, 0);
+	exit(EXIT_SUCCESS);
 }

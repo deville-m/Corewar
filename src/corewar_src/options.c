@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:14:39 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 10:59:56 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:04:08 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		init_defaults(struct s_option *opts)
 	opts->gfx = FALSE;
 	opts->trash = FALSE;
 	opts->ids_activated = FALSE;
-	opts->dump = 0;
+	opts->dump = -1;
 	init_ids(opts->ids, 666, 0);
 }
 
