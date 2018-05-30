@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:36:12 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:54:41 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ void			dump_memory(const unsigned char *memory,
 		i++;
 	}
 	ft_putchar('\n');
-	ft_putstr(RESET);
 }

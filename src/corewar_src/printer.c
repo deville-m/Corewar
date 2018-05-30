@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:23:36 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:41:07 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:51:23 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void				print_player_headers(t_arena *arena,
 	while (i < arena->np)
 	{
 		x = arena->players[i].header.prog_size;
-		ft_printf("* Player %zu, weighing %u bytes, \"%s\" !\n",
-			arena->players[i].id, x,
+		ft_printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !",
+			x,
+			arena->players[i].header.prog_name,
 			arena->players[i].header.comment);
 		i++;
 	}
