@@ -6,7 +6,7 @@
 /*   By: iomonad <iomonad@riseup.net>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 21:18:42 by iomonad           #+#    #+#             */
-/*   Updated: 2018/05/30 14:40:35 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 14:47:32 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,12 @@ static void		apply_memory(WINDOW *mem,
 	getmaxyx(mem, y, x);
 	while (i < MEM_SIZE)
 	{
+		if (a->memory[i] == 0x00)
+			wattron(mem, A_BOLD);
 		if (player_ownership(a->ownership[i], a))
 			wattron(mem, COLOR_PAIR(icolors(a->ownership[i], a)));
 		else
-		{
 			wattron(mem, COLOR_PAIR(7));
-			wattron(mem, A_BOLD);
-		}
 		if (apply_pc(a, i) == TRUE)
 		{
 			wattron(mem, A_STANDOUT);
@@ -60,6 +59,7 @@ static void		apply_memory(WINDOW *mem,
 		mvwprintw(mem, yy, xx, "%.2x", a->memory[i]);
 		apply_memory_bis(&xx, &yy, &x, &i);
 		wattroff(mem, A_STANDOUT);
+		wattroff(mem, A_BOLD);
 	}
 	wrefresh(mem);
 }
