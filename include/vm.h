@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:37:30 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:43:24 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 struct s_option
 {
 	unsigned int	dump;
-	t_bool			trash;
+	unsigned int	verbose;
 	size_t			cycles;
 	t_bool			gfx;
 	int				ids[MAX_PLAYERS];

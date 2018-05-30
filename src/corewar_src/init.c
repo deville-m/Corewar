@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 14:15:35 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:44:36 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ void				init_arena(t_arena *arena, struct s_option *opts)
 	arena->cycle_to_die = CYCLE_TO_DIE;
 	ft_memset(arena->memory, 0xff, MEM_SIZE);
 	init_memory(arena);
-	if (opts->trash)
-		dump_memory(arena->memory, arena->ownership, 0);
+	verbose(arena, opts->verbose);
 }

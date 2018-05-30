@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:14:39 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:04:08 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:43:41 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		init_ids(int *foo,
 static void		init_defaults(struct s_option *opts)
 {
 	opts->gfx = FALSE;
-	opts->trash = FALSE;
+	opts->verbose = 0;
 	opts->ids_activated = FALSE;
 	opts->dump = -1;
 	init_ids(opts->ids, 666, 0);
@@ -53,8 +53,8 @@ t_bool			parse_options(int argc, char *argv[],
 			opts->dump = ft_atoi(g_optarg);
 		else if (c == 'x')
 			opts->gfx = TRUE;
-		else if (c == 't')
-			opts->trash = TRUE;
+		else if (c == 'v')
+			opts->verbose = ft_atoi(g_optarg);
 		else if (c == 'n')
 		{
 			if (i > MAX_PLAYERS)

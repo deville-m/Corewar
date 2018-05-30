@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:30:41 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:45:08 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	{
 		verif(arena);
 		exec_processes(arena);
-		verbose(arena, 3);
+		verbose(arena, arena->opts->verbose);
 		if (arena->clock == arena->opts->dump)
 			shut_up_and_take_my_memory(arena);
 		++arena->clock;
