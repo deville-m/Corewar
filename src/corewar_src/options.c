@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:14:39 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:43:41 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:47:39 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_bool			parse_options(int argc, char *argv[],
 
 	i = 0;
 	init_defaults(opts);
-	while ((c = ft_getopt(argc, argv, "hxtd:n:")) != -1)
+	while ((c = ft_getopt(argc, argv, "hxtd:n:v:")) != -1)
 	{
 		if (c == 'd')
 			opts->dump = ft_atoi(g_optarg);
