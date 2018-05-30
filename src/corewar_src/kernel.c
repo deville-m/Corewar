@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/25 10:03:58 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 09:20:59 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	}
 	free(scene.memory);
 	free(scene.sidebar);
+	endwin();
+	print_winner(arena, 0);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:23:36 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/22 15:56:27 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 09:16:45 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void				print_player_headers(t_arena *arena,
 	{
 		x = arena->players[i].header.prog_size;
 		swap_endian(&x, sizeof(x));
-		ft_printf("* Player %zu, weighing %u bytes, \"%s\" !\n", i, x,
+		ft_printf("* Player %zu, weighing %u bytes, \"%s\" !\n",
+			arena->players[i].id, x,
 			arena->players[i].header.comment);
 		i++;
 	}
@@ -59,7 +60,8 @@ void				print_winner(t_arena *arena,
 		}
 		i++;
 	}
-	ft_printf("Contestants %zu, \"%s\", \"%s\", has won !\n", aref,
+	ft_printf("Contestants %zu, \"%s\", \"%s\", has won !\n",
+		arena->players[aref].id,
 		arena->players[aref].header.prog_name,
 		arena->players[aref].header.comment);
 }

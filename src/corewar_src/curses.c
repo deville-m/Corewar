@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 11:22:13 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 09:25:50 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void				print_status(t_scene *s, int cycle,
 	while (z < arena->np)
 	{
 		mvwprintw(s->sidebar, y / 6 + 18 + k, x / 5,
-			"Player %d: %s", arena->opts->ids[z],
+			"Player %d: %.37s", arena->opts->ids[z],
 				arena->players[z].header.prog_name);
 		mvwprintw(s->sidebar, y / 6 + 18 + k + 1, x / 5,
 			"  \\_ [ Last Live ] -> %u", arena->players[z].last_live);
 		mvwprintw(s->sidebar, y / 6 + 18 + k + 2, x / 5,
 			"  \\_ [ Lives / CYCLE_TO_DIE ] -> %u", arena->players[z].live_cpt);
-		k += 2;
+		k += 4;
 		z++;
 	}
 	wattroff(s->sidebar, A_BOLD);
