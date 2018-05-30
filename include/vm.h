@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 17:17:12 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 17:37:30 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,10 +154,10 @@ void			set_instruction(t_process *proc, int op_code);
 */
 
 int			own_write(
-			void *memory,
-			int pc,
-			char owner,
-			size_t size);
+				void *memory,
+				int pc,
+				unsigned char owner,
+				size_t size);
 int			vm_read(const void *memory,
 				int pc,
 				void *buffer,

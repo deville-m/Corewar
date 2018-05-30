@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/30 16:11:26 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:52:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,14 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	proc = (t_process *)elem->content;
 	if (arena->clock != proc->wait)
 		return ;
-	proc->wait = arena->clock + 1;
 	if (proc->instruction)
 	{
 		if (!set_params(arena, proc))
 			proc->carry = 0;
 		proc->instruction(arena, proc);
 		proc->instruction = NULL;
+		proc->wait = arena->clock + 1;
+		return ;
 	}
 	if ((proc->pc = (proc->pc + proc->offset) % MEM_SIZE) < 0)
 		proc->pc = MEM_SIZE + proc->pc;
