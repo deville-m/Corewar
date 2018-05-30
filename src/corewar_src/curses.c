@@ -6,15 +6,15 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 09:25:50 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/05/30 14:24:53 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
 #include <curses.h>
 
-static void			deploy_informations(t_scene *s,
-							int cycle, int processes)
+static void			deploy_informations(t_scene *s, int cycle,
+							int processes, t_arena *arena)
 {
 	int				x;
 	int				y;
@@ -24,7 +24,7 @@ static void			deploy_informations(t_scene *s,
 	mvwprintw(s->sidebar, y / 6 + 2, x / 5, "Cycles: %d", cycle);
 	mvwprintw(s->sidebar, y / 6 + 4, x / 5, "Processes: %d", processes);
 	mvwprintw(s->sidebar, y / 6 + 6, x / 5, "-----------------");
-	mvwprintw(s->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %d", CYCLE_TO_DIE);
+	mvwprintw(s->sidebar, y / 6 + 8, x / 5, "CYCLE_TO_DIE: %d", arena->cycle_to_die);
 	mvwprintw(s->sidebar, y / 6 + 10, x / 5, "CYCLE_DELTA: %d", CYCLE_DELTA);
 	mvwprintw(s->sidebar, y / 6 + 12, x / 5, "NBR_LIVE: %d", NBR_LIVE);
 	mvwprintw(s->sidebar, y / 6 + 14, x / 5, "MAX_CHECKS: %d", MAX_CHECKS);
@@ -48,7 +48,7 @@ void				print_status(t_scene *s, int cycle,
 	z = 0;
 	k = 0;
 	getmaxyx(s->sidebar, y, x);
-	deploy_informations(s, cycle, processes);
+	deploy_informations(s, cycle, processes, arena);
 	while (z < arena->np)
 	{
 		mvwprintw(s->sidebar, y / 6 + 18 + k, x / 5,
