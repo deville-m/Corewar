@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:51:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/28 18:40:16 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 15:48:42 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int		dead_process(t_dlist *elem)
 	t_process *proc;
 
 	proc = (t_process *)elem->content;
-	if (proc->alive == FALSE)
+	if (proc->alive == 0)
 		return (0);
 	else
 		return (1);

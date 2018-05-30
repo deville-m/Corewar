@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 14:14:25 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/29 20:14:23 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/30 16:55:12 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	lfork(t_arena *map, t_process *proc)
 		return ;
 	ft_dlstprepend(&(map->procs), tmp);
 	new = (t_process *)map->procs->content;
-	new->wait = proc->wait + 1;
+	new->wait = map->clock + 1;
 	new->instruction = NULL;
 	ind = proc->param[0].data.indirect;
 	swap_endian(&ind, 2);
