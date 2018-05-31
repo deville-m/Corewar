@@ -7,20 +7,22 @@
 	.comment "╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳"
 
 _stub:  sti r1,%:b0i,%1         ; .eh_frame_hdr
-    	ld %0, r16
-		ld %10, r8
-		xor r2,r2,r2
+		sti r11, %:l1v3, %1
+        ld %0, r16
+        ld %10, r8
+        xor r2,r2,r2
 
 w00t:	zjmp %:p0p              ; .init ──────┐
 p0p:    zjmp %:t3k0             ; .fortress_start
 
-t3k0:	ld 9,r4
-		ld 900,r5
-		sti r4,r5,%0
-		sub r5,r8,r5
-		ld 0,r2
-		fork %:b0i
-		zjmp %:t3k0
+t3k0:	fork %:l1v3
+		fork %:t0rp
+		zjmp %:b0i
 
-b0i:    live %1337
+t0rp:							; Todo launch torpille
+
+l1v3:   live %1337
+		zjmp %:l1v3
+
+b0i:    fork %:l1v3
         zjmp %:w00t             ; .init ──────╯
