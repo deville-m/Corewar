@@ -15,5 +15,6 @@ include $(RULES)/commons.mk
 include $(RULES)/asm.mk
 include $(RULES)/corewar.mk
 include $(RULES)/clean.mk
+include $(RULES)/warrior.mk
 # -------~-------~--~------------------~------
 .PHONY: all clean fclean re banner
