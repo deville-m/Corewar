@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 13:34:39 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/30 23:13:28 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 16:48:35 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,10 @@ void	zjmp(t_arena *map, t_process *proc)
 	value = proc->param[0].data.indirect;
 	swap_endian(&value, 2);
 	if (proc->carry == 1)
-		proc->offset = value;
+	{
+		proc->offset = value % IDX_MOD;
+//		ft_printf("Such a value: %d\n", value);
+	}
+//	else
+//		ft_printf("Fuck that shit\n");
 }

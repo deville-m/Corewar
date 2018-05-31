@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 14:01:36 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 14:40:21 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	exec_processes(t_arena *arena)
 
 static void verif(t_arena *arena)
 {
-	static int nb_check = 0;
+	static int nb_check = 1;
 	static int count = 0;
 
 	if (count >= arena->cycle_to_die)
@@ -38,6 +38,7 @@ static void verif(t_arena *arena)
 		{
 			nb_check = 0;
 			arena->cycle_to_die -= CYCLE_DELTA;
+//			ft_printf("YOYO %d, cycle: %d\n", arena->cycle_to_die, arena->clock);
 		}
 	}
 	count += 1;

@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/31 13:59:52 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 16:48:13 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,9 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	{
 		if (set_params(arena, proc))
 		{
-			/*ft_printf("Trying %s at %.4x and offset %d with encoding_byte %#.8hhb and param ", proc->op.name, proc->pc, proc->offset, arena->memory[(proc->pc + 1) % MEM_SIZE]);
+/*
+
+			ft_printf("Trying %s at %.4x and offset %d with encoding_byte %#.8hhb and param ", proc->op.name, proc->pc, proc->offset, arena->memory[(proc->pc + 1) % MEM_SIZE]);
 			int i = 0;
 			while (i < proc->offset)
 			{
@@ -166,7 +168,9 @@ void			check_process(t_arena *arena, t_dlist *elem)
 					ft_printf("%.2hhx ", arena->memory[ABS(proc->pc + i) % MEM_SIZE]);
 				i++;
 			}
-			write(1, "\n", 1);*/
+			write(1, "\n", 1);
+
+*/
 			proc->instruction(arena, proc);
 		}
 		proc->wait = arena->clock + 1;
@@ -181,6 +185,8 @@ void			check_process(t_arena *arena, t_dlist *elem)
 		proc->wait = arena->clock + 1;
 		return ;
 	}
+//	else if (proc->op.cycle_cost)
+//		ft_printf("Charging a %s with: %d\n", proc->op.name, proc->pc);
 	proc->wait = proc->op.cycle_cost + arena->clock - 1;
 	set_instruction(proc, proc->op.op_code);
 }
