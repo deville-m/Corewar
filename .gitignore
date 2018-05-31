@@ -7,3 +7,5 @@ test*
 libft.a
 .syntastic_c_config
 libft/.obj
+a.bite
+b.bite
