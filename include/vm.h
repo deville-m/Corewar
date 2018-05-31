@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 13:43:58 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:53:55 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@
 # define MAX_SPEED 1
 # define MIN_SPEED 50000
 # define STEP_SPEED 5000
+
+
+# define V_BASIC 1
+# define V_CLOCK 2
+# define V_DEATH 4
+# define V_OP    8
+# define V_ALL   16
 
 struct s_option
 {

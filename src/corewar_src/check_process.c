@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/31 16:48:13 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:28:52 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,31 +104,6 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 	return (success);
 }
 
-/*void			check_process(t_arena *arena, t_dlist *elem)
-{
-	t_process *proc;
-
-	proc = (t_process *)elem->content;
-	if (arena->clock != proc->wait)
-		return ;
-	proc->wait = arena->clock + 1;
-	if (proc->instruction)
-		proc->instruction(arena, proc);
-	proc->instruction = NULL;
-	if ((proc->pc = (proc->pc + proc->offset) % MEM_SIZE) < 0)
-		proc->pc = MEM_SIZE + proc->pc;
-	if (!set_op(arena->memory[proc->pc], &proc->op))
-	{
-		proc->offset = 1;
-		proc->carry = 0;
-		return ;
-	}
-	proc->wait = proc->op.cycle_cost + arena->clock;
-	if (set_params(arena, proc) == FALSE)
-		proc->carry = 0;
-	else
-		set_instruction(proc, proc->op.op_code);
-}*/
 /*
 		else
 		{
@@ -145,8 +120,6 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 			write(1, "\n", 1);
 		}*/
 
-#define ABS(x) (x < 0) ? -x : x
-
 void			check_process(t_arena *arena, t_dlist *elem)
 {
 	t_process *proc;
@@ -157,22 +130,7 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	if (proc->instruction)
 	{
 		if (set_params(arena, proc))
-		{
-/*
-
-			ft_printf("Trying %s at %.4x and offset %d with encoding_byte %#.8hhb and param ", proc->op.name, proc->pc, proc->offset, arena->memory[(proc->pc + 1) % MEM_SIZE]);
-			int i = 0;
-			while (i < proc->offset)
-			{
-				if (proc->op.index)
-					ft_printf("%.2hhx ", arena->memory[ABS(proc->pc + i) % MEM_SIZE]);
-				i++;
-			}
-			write(1, "\n", 1);
-
-*/
 			proc->instruction(arena, proc);
-		}
 		proc->wait = arena->clock + 1;
 		proc->instruction = NULL;
 		return ;
@@ -185,8 +143,6 @@ void			check_process(t_arena *arena, t_dlist *elem)
 		proc->wait = arena->clock + 1;
 		return ;
 	}
-//	else if (proc->op.cycle_cost)
-//		ft_printf("Charging a %s with: %d\n", proc->op.name, proc->pc);
 	proc->wait = proc->op.cycle_cost + arena->clock - 1;
 	set_instruction(proc, proc->op.op_code);
 }
