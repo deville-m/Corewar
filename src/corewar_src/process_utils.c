@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 16:51:55 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/31 16:50:10 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 17:27:42 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ static int		dead_process(t_dlist *elem)
 
 	proc = (t_process *)elem->content;
 	if (proc->alive == 0)
-	{
-//		ft_printf("Yoyoyo, pc : %d is dead\n", proc->pc);
 		return (0);
-	}
 	else
 		return (1);
 }
@@ -40,7 +37,6 @@ unsigned int	proc_filter(t_arena *arena)
 	unsigned int	total;
 	size_t			i;
 
-//	ft_printf("Turn %d\n", arena->clock);
 	ft_dlstfilter(&arena->procs, dead_process, del_process);
 	total = 0;
 	walk = arena->procs;

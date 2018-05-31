@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 22:44:30 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 17:47:57 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void			dump_memory(const unsigned char *memory,
 						size_t i)
 {
 	(void)ownership;
+	ft_printf("0x0%.3x : ", i);
+	ft_printf("%.2x ", memory[i++]);
 	while (i < MEM_SIZE)
 	{
 		if ((i + 1) != MEM_SIZE && (i % 64) == 0)
