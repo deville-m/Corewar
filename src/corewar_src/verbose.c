@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:22:21 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/30 18:58:36 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 12:15:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void		verbose(t_arena *arena, int level)
 {
 	if (level == 0)
 		return ;
-	if (level >= 1)
+	if (level >= 2)
 		ft_printf("-------------------------\nIt's now cycle %u\n", arena->clock);
-	if (level == 2)
+	if (level == 3)
 		ft_dlstiter(arena->procs, instruction);
-	if (level >= 3)
+	if (level >= 4)
 		ft_dlstiter(arena->procs, instruction_pc);
 }
