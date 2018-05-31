@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 17:27:26 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 18:02:24 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	exec_processes(t_arena *arena)
 	}
 }
 
-static void verif(t_arena *arena)
+static void	verif(t_arena *arena)
 {
 	static int nb_check = 1;
 	static int count = 0;

@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 17:53:55 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 18:16:14 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,7 @@ void		print_winner(t_arena *arena, size_t i);
 ** @dump.c
 */
 
+void		print_exec(t_arena *arena, t_process *process);
 void		dump_cycle_memory(t_scene *scene,
 					t_arena *arena);
 t_bool		player_ownership(unsigned int player, t_arena *arena);

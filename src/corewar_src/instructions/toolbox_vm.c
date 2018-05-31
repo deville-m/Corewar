@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 11:28:44 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/31 13:43:45 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 18:02:42 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ short			read_whatever_index(t_arena *map, t_process *proc, int nbr)
 		swap_endian(&result, 2);
 		npc = proc->pc + ((int)result % IDX_MOD);
 		tmp = go_read_label(map, npc);
-//		swap_endian(&result, 4);
 		swap_endian(&tmp, 4);
 		result = (short)tmp;
 	}

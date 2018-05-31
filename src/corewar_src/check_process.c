@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:54:39 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/31 17:28:52 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 18:42:58 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,24 +101,10 @@ static t_bool	set_params(t_arena *arena, t_process *proc)
 		++i;
 		encoding_byte <<= 2;
 	}
+	if (success && arena->opts->verbose & V_OP)
+		print_exec(arena, proc);
 	return (success);
 }
-
-/*
-		else
-		{
-			ft_printf("Executing %s at %d with encoding_byte %#.8hhb and param ", proc->op.name, proc->pc, arena->memory[(proc->pc + 1) % MEM_SIZE]);
-			int i = 0;
-			while (i < proc->op.nb_param)
-			{
-				if (proc->op.index)
-					ft_printf("%#.4hx ", proc->param[i].data.indirect);
-				else
-					ft_printf("%#.8x ", proc->param[i].data.direct);
-				i++;
-			}
-			write(1, "\n", 1);
-		}*/
 
 void			check_process(t_arena *arena, t_dlist *elem)
 {
@@ -145,4 +131,6 @@ void			check_process(t_arena *arena, t_dlist *elem)
 	}
 	proc->wait = proc->op.cycle_cost + arena->clock - 1;
 	set_instruction(proc, proc->op.op_code);
+	if (arena->opts->verbose & V_OP)
+		ft_printf("%s at %d, wait = %u\n", proc->op.name, proc->pc, proc->wait);
 }

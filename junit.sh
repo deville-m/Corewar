@@ -10,7 +10,7 @@ if [ $# -eq 0 ]
 	  exit 1
 fi
 for i in `seq $3 $SEQ`; do
-	$OUR -d $i -n -1 -n -2 "$1" "$2" > a.bite
+	$OUR -d $i -v 0 -n -1 -n -2 "$1" "$2" > a.bite
 	$ZAZ -d $i "$1" "$2" > b.bite
 	diff a.bite b.bite
 #	diff <( $OUR -d $i -n -1 -n -2 "$1" "$2" ) <( $ZAZ -d $i "$1" "$2" )
