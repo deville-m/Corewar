@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:23:36 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 22:44:39 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 08:03:07 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void				print_player_headers(t_arena *arena,
 {
 	uint32_t x;
 
-	ft_printf("Introducing contestants...\n");
+	ft_printf("Introducing contestants...");
 	while (i < arena->np)
 	{
 		x = arena->players[i].header.prog_size;
-		ft_printf("* Player 1, weighing %u bytes, \"%s\" (\"%s\") !",
+		ft_printf("\n* Player %d, weighing %u bytes, \"%s\" (\"%s\") !",
+			i + 1,
 			x,
 			arena->players[i].header.prog_name,
 			arena->players[i].header.comment);

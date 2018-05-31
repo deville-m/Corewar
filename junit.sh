@@ -9,8 +9,11 @@ if [ $# -eq 0 ]
       echo "Usage: <champs> <opts: start>"
 	  exit 1
 fi
-for i in `seq $2 $SEQ`; do
-	diff <($OUR -d $i -n -1 "$1") <($ZAZ -d $i "$1")
+for i in `seq $3 $SEQ`; do
+	A=`$OUR -d $i -n -1 -n -2 "$1" "$2"`
+	B=`$ZAZ -d $i "$1" "$2"`
+	diff $A $B
+#	diff <( $OUR -d $i -n -1 -n -2 "$1" "$2" ) <( $ZAZ -d $i "$1" "$2" )
 	if [ $? != 0 ]
 	then
 	   exit 1
