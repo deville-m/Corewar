@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 18:38:52 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 19:13:17 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void			dump_memory(const unsigned char *memory,
 	}
 	ft_putchar('\n');
 }
-
 
 void			print_exec(t_arena *arena, t_process *proc)
 {
