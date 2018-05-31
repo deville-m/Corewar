@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 13:46:50 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/30 15:28:40 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 13:54:19 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,20 @@
 void	sti(t_arena *map, t_process *proc)
 {
 	unsigned int	result;
-	short			a;
-	short			b;
+	int				a;
+	int				b;
 	int				npc;
 
-	a = read_whatever_index(map, proc, 1);
-	b = read_whatever_index(map, proc, 2);
+	if (proc->param[1].type == REGISTER)
+		a = proc->reg[proc->param[1].data.reg_nbr];
+	else
+		a = (int)read_whatever_index(map, proc, 1);
+	if (proc->param[2].type == REGISTER)
+		b = proc->reg[proc->param[2].data.reg_nbr];
+	else
+		b = (int)read_whatever_index(map, proc, 2);
 	a = a + b;
-	npc = proc->pc + ((int)a % IDX_MOD);
+	npc = proc->pc + (a % IDX_MOD);
 	result = proc->reg[proc->param[0].data.reg_nbr];
 	swap_endian(&result, 4);
 	own_write(map->ownership, npc, map->ownership[proc->pc], 4);
