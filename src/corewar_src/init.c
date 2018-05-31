@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 18:33:29 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 22:26:57 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 10:21:47 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ static void			alloc_processus(t_arena *arena,
 {
 	t_process		process;
 
+	ft_bzero(&process.reg, sizeof(process.reg));
 	process.pc = offset;
 	process.carry = FALSE;
 	process.alive = FALSE;
 	process.wait = 1;
 	process.reg[1] = arena->players[actor].id;
 	process.instruction = NULL;
-	ft_bzero(&process.op, sizeof(t_op));
-	ft_bzero(process.param, sizeof(process.param));
+	ft_bzero(&process.op, sizeof(process.op));
+	ft_bzero(&process.param, sizeof(process.param));
 	process.offset = 0;
 	ft_dlstprepend(&arena->procs,
 		ft_dlstnew(&process, sizeof(t_process)));
@@ -64,6 +65,5 @@ void				init_arena(t_arena *arena, struct s_option *opts)
 	arena->clock = 0;
 	arena->procs = NULL;
 	arena->cycle_to_die = CYCLE_TO_DIE;
-	ft_memset(arena->memory, 0xff, MEM_SIZE);
 	init_memory(arena);
 }
