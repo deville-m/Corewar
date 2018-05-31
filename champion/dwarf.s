@@ -1,17 +1,16 @@
 	;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
 	;;          File: dwarf.s             ;;
-	;;        Desc: 42  Team warrior      ;;
+	;;        Desc: 42 Team warrior       ;;
 	;;        Created: May 31, 2018       ;;
 	;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
 	.name "dwarf"
-	.comment " 🤔 "
+	.comment "╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳"
 
-	sti r1,%:b0i,%1
-    ld %0,r16					; Update carry
+_stub:  sti r1,%:b0i,%1         ; .eh_frame_hdr
+        ld %0, r16
 
-w00t:	zjmp %:p0p				; Kernel
+w00t:	zjmp %:p0p              ; .init ──────┐
+p0p:    zjmp %:b0i
 
-p0p:	zjmp %:b0i
-								; Fork aref
-b0i:	live %1337				; Live reference
-		zjmp %:w00t				; Return main thread
+b0i:    live %1337              ;
+        zjmp %:w00t             ; .init ──────╯
