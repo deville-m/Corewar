@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 13:39:12 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 14:01:36 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 	init_arena(arena, options);
 	init_curses();
 	alloc_window(&scene, arena);
+	arena->opts->verbose = 0;
 	while (arena->procs)
 	{
 		++arena->clock;
