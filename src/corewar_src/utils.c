@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:20:10 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 19:13:17 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 19:57:04 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,25 @@ void			print_exec(t_arena *arena, t_process *proc)
 	int i;
 
 	if (proc->op.coding_byte)
-		ft_printf("Exec %s at %d with encoding_byte %#.8hhb and param ",
+		ft_printf("Exec %s at %#.3x with encoding_byte %#.8hhb and param ",
 				proc->op.name,
 				proc->pc,
 				arena->memory[(proc->pc + 1) % MEM_SIZE]);
 	else
-		ft_printf("Exec %s at %d and param ",
+		ft_printf("Exec %s at %#.3x and param ",
 				proc->op.name,
 				proc->pc,
 				arena->memory[(proc->pc + 1) % MEM_SIZE]);
 	i = 0;
 	while (i < proc->op.nb_param)
 	{
-		if (proc->op.index)
-			ft_printf("%#.4hx ", proc->param[i].data.indirect);
+		if (proc->param[i].type == REGISTER)
+			ft_printf("r%.2hhu -- > %#.8x | ", proc->param[i].data.reg_nbr,
+					proc->reg[proc->param[i].data.reg_nbr]);
+		else if (proc->param[i].type == DIRECT)
+			ft_printf("%#.4hx | ", proc->param[i].data.indirect);
 		else
-			ft_printf("%#.8x ", proc->param[i].data.direct);
+			ft_printf("%#.8x | ", proc->param[i].data.direct);
 		i++;
 	}
 	write(1, "\n", 1);

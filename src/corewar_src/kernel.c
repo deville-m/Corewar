@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 18:02:24 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/05/31 20:17:59 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void	exec_processes(t_arena *arena)
 	}
 }
 
-static void	verif(t_arena *arena)
+static void	verif(t_arena *arena, int verbose)
 {
 	static int nb_check = 1;
-	static int count = 0;
+	static int count = 1;
 
 	if (count >= arena->cycle_to_die)
 	{
@@ -38,6 +38,9 @@ static void	verif(t_arena *arena)
 		{
 			nb_check = 0;
 			arena->cycle_to_die -= CYCLE_DELTA;
+			if (verbose & V_CLOCK)
+				ft_printf("Cycle to die is now %d\n",
+						arena->cycle_to_die);
 		}
 	}
 	count += 1;
@@ -59,7 +62,7 @@ t_bool		kernel(struct s_option *options, t_arena *arena)
 	{
 		++arena->clock;
 		verbose(arena, arena->opts->verbose);
-		verif(arena);
+		verif(arena, arena->opts->verbose);
 		exec_processes(arena);
 		if (arena->clock >= arena->opts->dump)
 			shut_up_and_take_my_memory(arena);
@@ -89,7 +92,7 @@ t_bool		kernel_gfx(struct s_option *options, t_arena *arena)
 		++arena->clock;
 		dump_cycle_memory(&scene, arena);
 		keybindinds_callback(getch(), &scene);
-		verif(arena);
+		verif(arena, arena->opts->verbose);
 		exec_processes(arena);
 		refresh();
 		usleep(scene.speed);
