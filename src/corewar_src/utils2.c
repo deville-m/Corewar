@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:09:41 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 15:28:44 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/05/31 19:08:47 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,12 @@ void		usage(void)
 	ft_printf("where options include:\n");
 	ft_printf("    -d <nbr_cycle> :: UInt\n");
 	ft_printf("    -n <player_id> :: UInt\n");
+	ft_printf("    -v <verbose>   :: Can be OR'd\n");
+	ft_printf("         %d  # Aff and Live\n", V_BASIC);
+	ft_printf("         %d  # Clock counter\n", V_CLOCK);
+	ft_printf("         %d  # Death events\n", V_DEATH);
+	ft_printf("         %d  # Instruction events\n", V_OP);
+	ft_printf("         %d # Environnement\n", V_ALL);
 	ft_printf("    -x             # Ncurses output\n");
 	ft_printf("    -t             # Dump loader init to stdout\n");
 	exit(EXIT_FAILURE);

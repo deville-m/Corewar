@@ -10,6 +10,7 @@ _stub:  sti r1,%:b0i,%1         ; .eh_frame_hdr
         sti r11, %:l1v3, %1
         ld %0, r16
         ld %10, r8
+        ld %4398, r5
         xor r2,r2,r2
 
 w00t:	zjmp %:p0p              ; .init ──────┐
@@ -19,8 +20,11 @@ t3k0:	fork %:l1v3
         fork %:t0rp
         zjmp %:b0i
 
-t0rp:   sti r4, r5, r7
-        zjmp %:t0rp
+t0rp:   st r5, 200
+        st r5, 200
+        st r5, 200
+        st r5, 200
+        zjmp %24
 
 l1v3:   live %1337
         zjmp %:l1v3
