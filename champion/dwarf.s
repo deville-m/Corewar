@@ -1,33 +1,44 @@
-	;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
-	;;          File: dwarf.s             ;;
-	;;        Desc: 42 Team warrior       ;;
-	;;        Created: May 31, 2018       ;;
-	;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
-	.name "dwarf"
-	.comment "╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳"
+    ;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
+    ;;          File: dwarf.s             ;;
+    ;;        Desc: 42 Team warrior       ;;
+    ;;        Created: May 31, 2018       ;;
+    ;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
+    .name "dwarf"
+    .comment "╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳"
 
-_stub:  sti r1,%:b0i,%1         ; .eh_frame_hdr
-        sti r11, %:l1v3, %1
-        ld %0, r16
-        ld %10, r8
-        ld %4398, r5
-        xor r2,r2,r2
+_stub:   st     r1,6            ; .eh_frame_hdr
+         live   %42
+         ld     %480,r10
+         ld     %478,r14
+         fork   %:0x02
+         fork   %:0x04
 
-w00t:	zjmp %:p0p              ; .init ──────┐
-p0p:    zjmp %:t3k0             ; .fortress_start
+0x01:    st     r1,95           ; .init ──────┐
+         ldi    %:l1v3,%-3,r5   ; .fortress_start
+         and    r16,r16,r16
+         zjmp   %:l1v3
 
-t3k0:	fork %:l1v3
-        fork %:t0rp
-        zjmp %:b0i
+0x02:    fork   %:0x03          ; mmmmmh
+         ld     %4,r11
+         ldi    %:l1v3,%1,r5
+         and    r16,r16,r16
+         zjmp   %:l1v3
 
-t0rp:   st r5, 200
-        st r5, 200
-        st r5, 200
-        st r5, 200
-        zjmp %24
+0x03:    ld     %8,r11
+         ldi    %:l1v3,%5,r5
+         and    r16,r16,r16
+         zjmp   %:l1v3
 
-l1v3:   live %1337
-        zjmp %:l1v3
+0x04:    ld     %12,r11
+         ldi    %:l1v3,%9,r5
+         and    r16,r16,r16
+         zjmp   %:l1v3
+         fork   %:parasite      ; Apply parasite
 
-b0i:    fork %:l1v3
-        zjmp %:w00t             ; .init ──────╯
+parasite: live  %1337
+          fork  %:parasite
+          zjmp  %:parasite
+
+l1v3:     live  %1337
+          sti   r5,r10,r11
+          zjmp  %478            ; 0x478

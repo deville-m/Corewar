@@ -1,24 +1,15 @@
-.name 		"dtonc v1.0pl4"
-.comment	"ta mere elle fait du rodeo sur les kfar"
-.extend
+.name "foo"
+.comment "bar"
+start:	st		r1,13
+		ld		%4,r7
 
+live:	live	%1
+		ld		%0,r3
 
-debut:	
-	st	r1, :li1+1
-	st	r1, :li2+1
-	ld	%100, r4
-	ld	%4, r6
-	ld	%0, r3
-li1:	
-	live	%1
-	
-cp:	
-	ldi	%:debut, r3, r2
-	sti	r2, %400, r3
-	add	r3, r6, r3
-	sub	r3, r4, r5
-li2:	
-	live	%1
-	zjmp	%:debut+400
-	ld	%0, r5
-	zjmp	%:cp
+while:	ldi		%:live,r3,r9
+		sub		r9,r5,r6
+		zjmp	%412
+		add		r3,r7,r3
+		sti		r9,%400,r3
+		add		r8,r8,r8
+zjmp %:while
