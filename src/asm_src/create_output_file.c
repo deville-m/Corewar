@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:34:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/13 13:39:39 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/01 16:22:09 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		create_output_file(t_env *env)
 	new = ft_strjoin(env->input_name, ".cor");
 	if (!new)
 		bug_err("Error while malloc new file name\n");
-	if ((fd = open(new, O_CREAT | O_EXLOCK | O_TRUNC | O_WRONLY, 0711)) == -1)
+	if ((fd = open(new, O_CREAT | O_TRUNC | O_WRONLY, 0711)) == -1)
 		bug_err("Error while create new file\n");
 	free(env->input_name);
 	env->input_name = new;
