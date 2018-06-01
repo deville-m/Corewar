@@ -40,7 +40,7 @@ ASMDIR:= $(addprefix $(SRCDIR), $(ASMDIR))
 COREWARDIR:= $(addprefix $(SRCDIR), $(COREWARDIR))
 
 COMMONSRC:= $(addprefix $(COMMONDIR), $(COMMONSRC))
-COMMONOBJ:= $(COMMONOBJ:.c=.o)
+COMMONOBJ:= $(COMMONSRC:.c=.o)
 
 ASMSRC:= $(addprefix $(ASMDIR), $(ASMSRC))
 ASMSRC:= $(ASMSRC) $(COMMONSRC)
@@ -88,7 +88,7 @@ $(ASM): $(ASMOBJ) $(LIB)
 
 $(COREWAR): $(COREWAROBJ) $(LIB)
 	printf "\n$(LOG_U)$(OK_C)[$(_LD_)]$(NO_C) Linking file: $(SILENT_C) %s\n" $@
-	$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^
+	$(CC) $(CFLAGS) -I$(INCLUDES) -o $@ $^ 
 
 clean:
 	rm -rf $(OBJDIR)

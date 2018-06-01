@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/13 16:48:19 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/01 18:45:59 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ int				craft_values(t_env *env, t_asm_token *tok, int offset)
 	return (offset);
 }
 
-// attention, tmp a supprimer ci-dessous
 int				craft_prog(t_env *env, t_list *tmp)
 {
 	t_asm_token		*tok;
@@ -134,8 +133,6 @@ int				craft_prog(t_env *env, t_list *tmp)
 				offset = craft_labels(env, tok, offset, instr_offset);
 			else if (tok->type == DIRECT || tok->type == INDIRECT)
 				offset = craft_values(env, tok, offset);
-			else //tmp
-				bug_err("Token list have wrong format\n");//tmp
 		}
 		tmp = tmp->next;
 	}

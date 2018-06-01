@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 19:06:59 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/14 14:12:59 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:01:51 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 #include "dlst.h"
 
-int		filter_token(t_dlist *elem)
+int			filter_token(t_dlist *elem)
 {
 	t_asm_token *token;
 
@@ -75,7 +75,7 @@ t_asm_token	*get_token(t_dlist *elem)
 		return ((t_asm_token *)elem->content);
 }
 
-void	print_tokens(t_dlist *elem)
+void		print_tokens(t_dlist *elem)
 {
 	t_asm_token *token;
 

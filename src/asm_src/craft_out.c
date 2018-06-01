@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 19:02:52 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/13 15:29:23 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/01 18:46:35 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ static void		fill_label_gaps(t_env *env, int offset, t_list *haystack)
 	t_lab	*elem;
 	t_lab	*needle;
 	short	result;
-//	int		found;
 
 	env->header->prog_size = offset;
 	tmp = env->to_do;
 	while (tmp)
 	{
-//		found = 0;
 		needle = (t_lab *)tmp->content;
 		haystack = env->lab_h;
 		while (haystack)
@@ -71,7 +69,6 @@ static void		fill_label_gaps(t_env *env, int offset, t_list *haystack)
 			elem = (t_lab *)haystack->content;
 			if (ft_strcmp(elem->name, needle->name) == 0)
 			{
-//				found = 1;
 				lseek(env->fd, needle->offset - offset, SEEK_END);
 				result = (short)(elem->offset - needle->instr_offset);
 				swap_endian(&(result), 2);
@@ -79,7 +76,6 @@ static void		fill_label_gaps(t_env *env, int offset, t_list *haystack)
 			}
 			haystack = haystack->next;
 		}
-//		found ? bug_err("Called label doesn't exist\n") : found = 0;
 		tmp = tmp->next;
 	}
 }
