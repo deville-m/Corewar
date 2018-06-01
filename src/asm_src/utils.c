@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 14:35:52 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 18:14:51 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:02:30 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <stdint.h>
 
-t_bool			multiline_string(const char *line)
+t_bool		multiline_string(const char *line)
 {
 	t_bool state;
 
@@ -58,7 +58,7 @@ void		update_token(t_asm_token *token)
 ** @return size of tabs
 */
 
-uint8_t			arguments_size(const char **args)
+uint8_t		arguments_size(const char **args)
 {
 	uint8_t		i;
 
@@ -74,7 +74,7 @@ uint8_t			arguments_size(const char **args)
 ** @return len of op array
 */
 
-uint16_t		operator_tsize(void)
+uint16_t	operator_tsize(void)
 {
 	return (sizeof(g_op_tab) / sizeof(g_op_tab[0]));
 }

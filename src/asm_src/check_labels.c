@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 17:02:21 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/01 20:16:42 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 20:18:16 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,14 @@ static int	find_label(t_dlist *tokens, t_asm_token *tmp)
 	{
 		tmp2 = get_token(tokens);
 		if (tmp2->type == LABEL && ft_strnequ(to_find, tmp2->raw, len))
+<<<<<<< HEAD
 			return (1);
+=======
+//		{
+//			ft_printf("%s -- %s", to_find, tmp2->raw);
+			return (1);
+//		}
+>>>>>>> c5e5cdb3ce3a22fb69334162642f82ac4a2ab88e
 		tokens = tokens->next;
 	}
 	return (0);

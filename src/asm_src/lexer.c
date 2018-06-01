@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 16:06:01 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/14 14:16:23 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:00:54 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ size_t		is_indirect(const char *arg)
 
 size_t		is_label(const char *arg)
 {
-	size_t  i;
+	size_t	i;
 
 	i = 0;
 	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))

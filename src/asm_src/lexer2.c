@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/14 18:13:14 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:01:36 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ size_t		is_comment(const char *arg)
 ** @params arg current curs
 ** @return boolean
 */
-
 
 size_t		is_name(const char *arg)
 {

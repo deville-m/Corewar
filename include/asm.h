@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/21 17:20:51 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 18:30:27 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "ft_ctype.h"
 # include "dlst.h"
 # include "lst.h"
+# include "commons.h"
 # include "libft.h"
 
 enum			e_type
@@ -180,9 +181,5 @@ int				create_output_file(t_env *env);
 */
 void			ft_lstinsert(t_list **head, void *content, int content_size);
 void			bug_err(char *mess);
-void			swap_endian(void *data, size_t size);
-
-
-
 
 #endif
