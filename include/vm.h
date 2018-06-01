@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 18:16:14 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 13:56:22 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,7 @@ void		verbose(t_arena *arena, int level);
 
 void		print_player_headers(t_arena *arena, size_t i);
 void		print_winner(t_arena *arena, size_t i);
+void		print_winner_gfx(t_arena *arena, size_t i, t_scene *scn);
 
 /*
 ** @dump.c

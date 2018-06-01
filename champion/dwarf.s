@@ -4,8 +4,7 @@
     ;;        Created: May 31, 2018       ;;
     ;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
     .name "dwarf"
-    .comment "╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳╳"
-
+    .comment "( ͡° ͜ʖ ͡°)"
 _stub:   st     r1,6            ; .eh_frame_hdr
          live   %42
          ld     %480,r10		; Const offset
