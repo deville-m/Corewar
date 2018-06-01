@@ -13,3 +13,4 @@ asm
 corewar
 libft/.obj
 *.dSYM
+*.bite
