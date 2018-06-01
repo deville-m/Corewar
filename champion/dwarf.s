@@ -1,8 +1,12 @@
-    ;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
-    ;;          File: dwarf.s             ;;
-    ;;        Desc: 42 Team warrior       ;;
-    ;;        Created: May 31, 2018       ;;
-    ;; -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ ;;
+;                                   D O O M
+;%%%%%  %%%%%  %%%%  %%%%%% %%  %%   _---_   %%%  %%%  %%%%  %%%%%%  %%%% %%  %%
+;%%  %% %%    %%  %%   %%   %%  %% ."     ". %%%%%%%% %%  %%   %%   %%    %%  %%
+;%%  ## ####  ######   ##   ###%%% | () () | %% %# ## ######   ##   ##    ###%%%
+;## ,## ##    ##  ##   ##   ## `##  \  A  /  ## #= ## ##  ##   ##   ##    ## `##
+;####=  =###= =#  #=   =#   =#  ##  |"+++"|  ## =- #= =#  #=   =#    ###= =#  ##
+;##=                            =#   "---"   #=                               =#
+;                                 WAD RANKING
+
     .name "dwarf"
     .comment "
 ░░░░░▄▀▀▀▄░░░░░░░░░░░░░░░░░
@@ -19,7 +23,18 @@
 ░░░░░░░░░░░▌▌░▌▌░░░░░░░░░░░
 ░░░░░░░░░▄▄▌▌▄▌▌░░░░░░░░░░░"
 
-_stub:   st     r1,6            ; .eh_frame_hdr
+    ;; Specs:
+    ;;   - Load offset in register 10 for padding
+    ;;   - The program is divided in 0x04 parts
+    ;;     - Each parts represent 4 bytes in the
+    ;;       torpedo.
+    ;;     - Using ldi and offset, we can apply severals
+    ;;       parts in these dedicated bytes.
+    ;;   - Once running last thread, we jump to 0x478,
+    ;;     our symmetrical offset.
+    ;;   - recurse, for fun and profit.
+
+_stub:   #st     r1,6            ;.eh_frame_hdr
          live   %42
          ld     %480,r10        ; const offset
          fork   %:0x02          ; ──────╮
