@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:05:09 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 15:00:44 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/01 13:56:49 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void			set_delimiters(t_scene *s, t_arena *arena)
 	mvwprintw(s->sidebar, 6, x / 5,
 		"\\____/\\____/_/   \\___/|__/|__/\\__,_/_/");
 	mvwprintw(s->sidebar, 9, x / 5,
-		"      By: mdeville, rbaraud & ctrouill   ");
+		"By: mdeville, rbaraud, ctrouill & dchiche  ");
 	wattroff(s->sidebar, A_BOLD | COLOR_PAIR(1));
 	mvwhline(s->sidebar, y / 6, 1, ACS_HLINE, x - 2);
 	print_status(s, 0, 0, arena);
