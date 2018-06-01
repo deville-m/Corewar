@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:23:36 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/01 14:42:38 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/01 15:30:01 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void				print_winner_gfx(t_arena *arena,
 			  arena->players[aref].header.prog_name);
 	mvwprintw(scn->sidebar, 31, 10, "\"%s\"",
 		arena->players[aref].header.comment);
-	mvwprintw(scn->sidebar, 32, 8, "WON !\n",
+	mvwprintw(scn->sidebar, 32, 20, "WON !\n",
 		arena->players[aref].id);
 	wrefresh(scn->sidebar);
 	getch();
