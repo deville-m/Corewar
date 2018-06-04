@@ -6,18 +6,34 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:27:54 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/01 12:12:50 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 10:01:52 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vm.h>
+
+static void	apply_speed(char input, t_scene *scene)
+{
+	if (input == 0x3c)
+	{
+		scene->speed += STEP_SPEED;
+		if (scene->speed > MIN_SPEED)
+			scene->speed = MIN_SPEED;
+	}
+	else if (input == 0x3e)
+	{
+		scene->speed -= STEP_SPEED;
+		if (scene->speed < MAX_SPEED)
+			scene->speed = MAX_SPEED;
+	}
+}
 
 /*
 ** @desc keybind callback
 ** @return nil
 */
 
-void	keybindinds_callback(char input,
+void		keybindinds_callback(char input,
 					t_scene *scene)
 {
 	char	c;
@@ -38,16 +54,6 @@ void	keybindinds_callback(char input,
 			}
 		}
 	}
-	else if (input == 0x3c)
-	{
-		scene->speed += STEP_SPEED;
-		if (scene->speed > MIN_SPEED)
-			scene->speed = MIN_SPEED;
-	}
-	else if (input == 0x3e)
-	{
-		scene->speed -= STEP_SPEED;
-		if (scene->speed < MAX_SPEED)
-			scene->speed = MAX_SPEED;
-	}
+	else
+		apply_speed(input, scene);
 }
