@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 15:33:31 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 16:20:08 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ unsigned char	craft_coding_byte(t_list *head)
 		result <<= 2;
 		i -= 1;
 		head = head->next;
-		tmp = (t_asm_token *)head->content;
+		if (head)
+			tmp = (t_asm_token *)head->content;
 	}
 	while (i-- >= 0)
 		result <<= 2;
