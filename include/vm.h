@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 13:34:35 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:12:13 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # define V_DEATH 4
 # define V_OP    8
 # define V_ALL   16
-
-# define COR_PORT 4242
 
 struct				s_option
 {
@@ -287,12 +285,5 @@ t_bool				player_ownership(unsigned int player, t_arena *arena);
 void				init_values(size_t *i, int *xx, int *yy);
 t_bool				apply_pc(t_arena *arena, int i);
 void				shut_up_and_take_my_memory(t_arena *arena);
-
-/*
-** @network.c
-*/
-
-t_bool				is_url(const char *input);
-int					open_remote(const char *url);
 
 #endif

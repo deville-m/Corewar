@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:42:25 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 12:25:59 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:11:47 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,11 @@ static t_bool	is_valid_warrior(const char *filename)
 {
 	int			fd;
 
-	if (!is_url(filename))
-	{
-		if ((fd = open(filename, O_RDONLY)) < 0)
-			return (xperror(filename, " doesn't exists"));
-		if (!(check_magic(fd)))
-			return (xperror(filename, "have an invalid magic number"));
-		close(fd);
-	}
+	if ((fd = open(filename, O_RDONLY)) < 0)
+		return (xperror(filename, " doesn't exists"));
+	if (!(check_magic(fd)))
+		return (xperror(filename, "have an invalid magic number"));
+	close(fd);
 	return (TRUE);
 }
 

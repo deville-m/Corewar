@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 14:34:35 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:11:30 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,8 @@ t_bool				parseplayers(t_arena *arena,
 	arena->np = 0;
 	while (argv[i] != NULL)
 	{
-		if (is_url(argv[i]))
-		{
-			if ((fd = open_remote(argv[i])) < 0)
-				return (xperror(argv[i], "is an invalid remote file", fd));
-		}
-		else
-			if ((fd = open(argv[i], O_RDONLY)) < 0)
-				return (xperror(argv[i], "is an invalid file", fd));
+		if ((fd = open(argv[i], O_RDONLY)) < 0)
+			return (xperror(argv[i], "is an invalid file", fd));
 		ret = read(fd, &arena->players[i].header, sizeof(t_header));
 		printf("ret; %zu\n", ret);
 		if (ret != sizeof(t_header)
