@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/01 18:45:59 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 14:42:28 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ int				craft_instru(t_env *env,
 	return (offset);
 }
 
-// ici je dois utiliser IND_SIZE & DIR_SIZE mais je n'ai pas
-// la moindre idee de comment adapter cela aux short et int
 int				craft_labels(t_env *env,
 					t_asm_token *tok, int offset, int instr_offset)
 {
@@ -90,7 +88,6 @@ int				craft_labels(t_env *env,
 	return (offset);
 }
 
-// meme probleme de modularite que ci-dessus
 int				craft_values(t_env *env, t_asm_token *tok, int offset)
 {
 	short	tmp;

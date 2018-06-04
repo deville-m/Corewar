@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/14 14:14:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 14:50:05 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int			main(int argc, char **argv)
 	env.tok_head = (t_list *)syntax_check((t_dlist *)env.tok_head);
 	craft_file(&env);
 	ft_printf("Writing output program to %s\n", env.input_name);
-//	ft_dlstiter((t_dlist *)env.tok_head, print_tokens);
-//	ft_dlstdel(&((t_dlist *)env.tok_head), del_token);
+	ft_dlstdel((t_dlist **)&env.tok_head, del_token);
 	close(fd);
 	return (0);
 }

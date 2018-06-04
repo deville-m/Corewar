@@ -28,10 +28,10 @@ OBJDIR=         .objs
 # -------~-------~--~------------------~------
 COMMONSRC=		op.c swap_endian.c
 
-ASMSRC=			asm.c tokenize.c utils.c lexer.c lexer2.c syntax_check.c \
-				check_instruction.c token_utils.c craft_out.c crafting.c \
-				crafting_tools.c create_output_file.c toolbox.c collision.c \
-				check_labels.c
+ASMSRC=			asm.c tokenize.c utils.c lexer.c lexer2.c lexer3.c \
+				syntax_check.c check_instruction.c token_utils.c craft_out.c \
+				crafting.c crafting_tools.c create_output_file.c toolbox.c \
+				collision.c check_labels.c
 
 COREWARSRC=		main.c
 

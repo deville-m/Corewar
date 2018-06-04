@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:04:07 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/30 13:55:14 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 14:43:02 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int		main(int argc, char *argv[])
 {
 	(void)argc;
 	(void)argv;
-    return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
