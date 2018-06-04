@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 18:00:01 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:48:37 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ typedef struct	s_env
 typedef struct	s_lab
 {
 	char		*name;
-	int			offset;
-	int			instr_offset;
+	intmax_t	offset;
+	intmax_t	instr_offset;
 }				t_lab;
 
 /*
@@ -171,13 +171,14 @@ intmax_t		craft_prog(t_env *env, t_list *tmp);
 ** @crafting_tools.c
 */
 
-t_lab			*new_t_lab(char *name, int offset, int instr_offset);
+t_lab			*new_t_lab(char *name, intmax_t offset, intmax_t instr_offset);
 t_lab			*is_labelled(t_env *env, t_asm_token *tok);
-void			add_lab_elem(t_env *env, t_asm_token *tok, int offset);
+void			add_lab_elem(t_env *env, t_asm_token *tok, intmax_t offset);
 
 /*
-** @create_output_file.c
+** @create_out.c
 */
+intmax_t		modular_ind_write(t_env *env, intmax_t result);
 int				create_output_file(t_env *env);
 
 /*

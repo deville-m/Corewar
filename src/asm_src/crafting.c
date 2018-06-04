@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 16:20:08 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 19:13:51 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ unsigned char	craft_coding_byte(t_list *head)
 		result <<= 2;
 		i -= 1;
 		head = head->next;
-		if (head)
-			tmp = (t_asm_token *)head->content;
+		tmp = head ? (t_asm_token *)head->content : NULL;
 	}
 	while (i-- >= 0)
 		result <<= 2;
@@ -69,28 +68,27 @@ int				craft_labels(t_env *env,
 					t_asm_token *tok, intmax_t offset, intmax_t instr_offset)
 {
 	t_lab			*tmp;
-	unsigned char	result[IND_SIZE];
 	intmax_t		i;
 
 	i = 0;
 	if ((tmp = is_labelled(env, tok)))
 	{
-		while (i++ < IND_SIZE && tok->type == DIRECT_LABEL && !tok->option)
+		while (i++ < DIR_SIZE - IND_SIZE
+				&& tok->type == DIRECT_LABEL && !tok->option)
 			offset += write(env->fd, "\0", 1);
 		i = tmp->offset - instr_offset;
-		ft_memcpy(result, &i, IND_SIZE);
-		swap_endian(&(result), IND_SIZE);
-		offset += write(env->fd, &result, IND_SIZE);
+		offset += modular_ind_write(env, i);
 	}
 	else
 	{
-		while (i++ < IND_SIZE && tok->type == DIRECT_LABEL && !tok->option)
+		while (i++ < DIR_SIZE - IND_SIZE
+				&& tok->type == DIRECT_LABEL && !tok->option)
 			offset += write(env->fd, "\0", 1);
 		tmp = new_t_lab(tok->raw, offset, instr_offset);
 		ft_lstinsert(&(env->to_do), tmp, sizeof(t_lab));
 		i = 0;
 		while (i++ < IND_SIZE)
-			offset += write(env->fd, "a", 1);
+			offset += write(env->fd, "*", 1);
 	}
 	return (offset);
 }

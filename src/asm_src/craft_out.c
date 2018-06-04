@@ -6,13 +6,25 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 19:02:52 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/01 18:46:35 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 19:13:56 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "memory.h"
 #include "ft_string.h"
+
+intmax_t		modular_ind_write(t_env *env, intmax_t result)
+{
+	unsigned char	tmpind[IND_SIZE];
+	intmax_t		offset;
+
+	offset = 0;
+	ft_memcpy(tmpind, &result, IND_SIZE);
+	swap_endian(tmpind, IND_SIZE);
+	offset += write(env->fd, tmpind, IND_SIZE);
+	return (offset);
+}
 
 static void		clean_copy_into(char *dst, t_list *elem)
 {
@@ -51,12 +63,12 @@ static t_list	*parse_header(t_env *env)
 	return (tmp);
 }
 
-static void		fill_label_gaps(t_env *env, int offset, t_list *haystack)
+static void		fill_label_gaps(t_env *env, intmax_t offset, t_list *haystack)
 {
-	t_list	*tmp;
-	t_lab	*elem;
-	t_lab	*needle;
-	short	result;
+	t_list			*tmp;
+	t_lab			*elem;
+	t_lab			*needle;
+	intmax_t		result;
 
 	env->header->prog_size = offset;
 	tmp = env->to_do;
@@ -70,9 +82,8 @@ static void		fill_label_gaps(t_env *env, int offset, t_list *haystack)
 			if (ft_strcmp(elem->name, needle->name) == 0)
 			{
 				lseek(env->fd, needle->offset - offset, SEEK_END);
-				result = (short)(elem->offset - needle->instr_offset);
-				swap_endian(&(result), 2);
-				write(env->fd, &result, 2);
+				result = elem->offset - needle->instr_offset;
+				modular_ind_write(env, result);
 			}
 			haystack = haystack->next;
 		}

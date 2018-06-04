@@ -6,14 +6,14 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:32:21 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/05/10 19:42:42 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 18:27:13 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include "ft_string.h"
 
-t_lab	*new_t_lab(char *name, int offset, int instr_offset)
+t_lab	*new_t_lab(char *name, intmax_t offset, intmax_t instr_offset)
 {
 	t_lab	*new;
 
@@ -42,7 +42,7 @@ t_lab	*is_labelled(t_env *env, t_asm_token *tok)
 	return (NULL);
 }
 
-void	add_lab_elem(t_env *env, t_asm_token *tok, int offset)
+void	add_lab_elem(t_env *env, t_asm_token *tok, intmax_t offset)
 {
 	t_lab	*new;
 
