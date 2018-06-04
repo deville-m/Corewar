@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 14:42:34 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 11:25:50 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 14:34:35 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@
 */
 
 static t_bool		xperror(const char *file,
-							const char *message)
+							const char *message,
+							int fd)
 {
 	ft_fprintf(2, "Error: File \"%s\" %s\n", file, message);
+	if (fd >= 0)
+		close(fd);
 	exit(EXIT_FAILURE);
 }
 
@@ -70,16 +73,17 @@ t_bool				parseplayers(t_arena *arena,
 		if (is_url(argv[i]))
 		{
 			if ((fd = open_remote(argv[i])) < 0)
-				return (xperror(argv[i], "is an invalid remote file"));
+				return (xperror(argv[i], "is an invalid remote file", fd));
 		}
 		else
 			if ((fd = open(argv[i], O_RDONLY)) < 0)
-				return (xperror(argv[i], "is an invalid file"));
+				return (xperror(argv[i], "is an invalid file", fd));
 		ret = read(fd, &arena->players[i].header, sizeof(t_header));
+		printf("ret; %zu\n", ret);
 		if (ret != sizeof(t_header)
-				|| !parse_content(fd, arena->players[i].exec,
+			|| !parse_content(fd, arena->players[i].exec,
 					&arena->players[i].header.prog_size))
-			return (xperror(argv[i], "have an invalid file size."));
+			return (xperror(argv[i], "have an invalid file size.", fd));
 		arena->players[i].id = opts->ids[i];
 		arena->players[i].last_live = 0;
 		arena->players[i].live_cpt = 0;
