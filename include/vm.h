@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 10:17:28 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 13:34:35 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 # define V_DEATH 4
 # define V_OP    8
 # define V_ALL   16
+
+# define COR_PORT 4242
 
 struct				s_option
 {
@@ -205,6 +207,7 @@ void				keybindinds_callback(char c, t_scene *scene);
 */
 
 t_bool				valid_warriors(uint32_t i, char *argv[]);
+t_bool				check_magic(int fd);
 
 /*
 ** @parser.c
