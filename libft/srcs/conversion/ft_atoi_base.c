@@ -6,22 +6,23 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 18:13:34 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/07 18:14:49 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:58:54 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdint.h>
 #include "ft_string.h"
 
-int	ft_atoi_base(
-		const char *str,
-		const char *base,
-		const char *whitespace,
-		char minus)
+intmax_t	ft_atoi_base(
+						const char *str,
+						const char *base,
+						const char *whitespace,
+						char minus)
 {
-	int		res;
-	int		neg;
-	size_t	len;
-	char	*index;
+	intmax_t	res;
+	intmax_t	neg;
+	size_t		len;
+	char		*index;
 
 	res = 0;
 	neg = 1;

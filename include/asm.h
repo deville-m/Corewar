@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 14:45:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:57:39 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct	s_asm_token
 	int			line;
 	int			column;
 	char		*raw;
-	int			data;
+	intmax_t	data;
 	t_bool		option;
 }				t_asm_token;
 
