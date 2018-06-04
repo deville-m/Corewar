@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_endian.c                                      :+:      :+:    :+:   */
+/*   lexer3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 19:32:25 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/04 14:42:46 by mdeville         ###   ########.fr       */
+/*   Created: 2018/06/04 14:46:05 by mdeville          #+#    #+#             */
+/*   Updated: 2018/06/04 14:47:03 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <commons.h>
+#include "op.h"
+#include "asm.h"
 
-void	swap_endian(void *data, size_t size)
+/*
+** @desc predicate for string typep
+** @params arg current curs
+** @return boolean
+*/
+
+size_t		is_string(const char *arg)
 {
-	char	tmpdata;
-	char	*tmp;
 	size_t	i;
 
-	if (!data)
-		return ;
-	tmp = (char *)data;
-	i = 0;
-	--size;
-	while (i < size)
-	{
-		tmpdata = tmp[i];
-		tmp[i] = tmp[size];
-		tmp[size] = tmpdata;
+	if (arg[0] != STRING_CHAR)
+		return (0);
+	i = 1;
+	while (arg[i] && arg[i] != STRING_CHAR)
 		++i;
-		--size;
-	}
+	if (arg[i] != STRING_CHAR)
+		return (0);
+	return (i + 1);
 }

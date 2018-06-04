@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 15:18:22 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 15:33:04 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,23 @@ typedef struct	s_lab
 
 char			is_instruct(const char *line);
 t_bool			is_empty(const char *line);
-unsigned char	craft_op_byte(const char opcode,
-							  const char *params,
-							  t_bool *status);
+unsigned char	craft_op_byte(
+							const char opcode,
+							const char *params,
+							t_bool *status);
+
 /*
 ** @rules.c
 */
 
-void			transpose(t_tok *transpose,
-						  const char **split,
-						  char opcode,
-						  uint8_t i);
+void			transpose(
+							t_tok *transpose,
+							const char **split,
+							char opcode,
+							uint8_t i);
 t_tok			tokenize_args(const char *occur);
-t_bool			check_rules(const char opcode,
+t_bool			check_rules(
+							const char opcode,
 							t_tok *transpose,
 							uint8_t i);
 
@@ -131,8 +135,8 @@ size_t			is_separator(const char *arg);
 
 t_bool			check_collisions(const char	*base,
 								const char	*labels,
-								const char  *n_cmd,
-								const char  *c_cmd);
+								const char	*n_cmd,
+								const char	*c_cmd);
 
 /*
 ** @tokenize.c

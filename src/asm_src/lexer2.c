@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/01 18:01:36 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 14:47:02 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,6 @@ size_t		is_direct_label(const char *arg)
 		return (1 + tmp);
 	else
 		return (0);
-}
-
-/*
-** @desc predicate for string typep
-** @params arg current curs
-** @return boolean
-*/
-
-size_t		is_string(const char *arg)
-{
-	size_t	i;
-
-	if (arg[0] != STRING_CHAR)
-		return (0);
-	i = 1;
-	while (arg[i] && arg[i] != STRING_CHAR)
-		++i;
-	if (arg[i] != STRING_CHAR)
-		return (0);
-	return (i + 1);
 }
 
 /*
