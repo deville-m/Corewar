@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 14:02:42 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/29 10:02:42 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 19:17:11 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int			main(int argc, char *argv[])
 		|| !parseplayers(&arena, &argv[g_optind], 0, &opts))
 		usage();
 	arena.opts = &opts;
+	if (opts.audio == TRUE)
+		play_voice("Welcome to Corewar&");
 	if (opts.gfx == TRUE)
 	{
 		if (!(kernel_gfx(&opts, &arena)))

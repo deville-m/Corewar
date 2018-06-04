@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 15:14:39 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 11:49:09 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 19:20:13 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,17 @@ static void		init_defaults(struct s_option *opts)
 	opts->verbose = 1;
 	opts->ids_activated = FALSE;
 	opts->dump = -1;
+	opts->audio = FALSE;
 	init_ids(opts->ids, 666, 0);
+}
+
+static void		apply_n(int *i, struct s_option *opts)
+{
+	if (*i > MAX_PLAYERS)
+		usage();
+	opts->ids_activated = TRUE;
+	opts->ids[*i] = ft_atoi(g_optarg);
+	(*i)++;
 }
 
 /*
@@ -47,22 +57,18 @@ t_bool			parse_options(int argc, char *argv[],
 
 	i = 0;
 	init_defaults(opts);
-	while ((c = ft_getopt(argc, argv, "hxtd:n:v:")) != -1)
+	while ((c = ft_getopt(argc, argv, "ahxtd:n:v:")) != -1)
 	{
 		if (c == 'd')
 			opts->dump = ft_atoi(g_optarg);
+		else if (c == 'a')
+			opts->audio = TRUE;
 		else if (c == 'x')
 			opts->gfx = TRUE;
 		else if (c == 'v')
 			opts->verbose = ft_atoi(g_optarg);
 		else if (c == 'n')
-		{
-			if (i > MAX_PLAYERS)
-				usage();
-			opts->ids_activated = TRUE;
-			opts->ids[i] = ft_atoi(g_optarg);
-			i++;
-		}
+			apply_n(&i, opts);
 		else if (c == 'h')
 			usage();
 	}

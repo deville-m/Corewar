@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/22 14:23:36 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 10:04:31 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 19:37:03 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,21 @@ void				print_player_headers(t_arena *arena,
 			arena->players[i].header.prog_name,
 			arena->players[i].header.comment);
 		i++;
+	}
+}
+
+static void			audio_winner(char *user, t_arena *arena)
+{
+	char			mes[400];
+
+	if (arena->opts->audio)
+	{
+		ft_memset(mes, 0x00, 400);
+		ft_strcat(mes, "And the winner is: ");
+		ft_strcat(mes, user);
+		ft_strcat(mes, " !");
+		ft_strcat(mes, "Congratulations !&");
+		play_voice(mes);
 	}
 }
 
@@ -65,6 +80,7 @@ void				print_winner(t_arena *arena,
 		arena->players[aref].id,
 		arena->players[aref].header.prog_name,
 		arena->players[aref].header.comment);
+	audio_winner(arena->players[aref].header.prog_name, arena);
 }
 
 /*
@@ -93,13 +109,13 @@ void				print_winner_gfx(t_arena *arena,
 		}
 		i++;
 	}
+	audio_winner(arena->players[aref].header.prog_name, arena);
 	mvwprintw(scn->sidebar, 30, 10, "Contestants %zu, \"%s\"\n",
 		arena->players[aref].id,
 		arena->players[aref].header.prog_name);
 	mvwprintw(scn->sidebar, 31, 10, "\"%s\"",
 		arena->players[aref].header.comment);
-	mvwprintw(scn->sidebar, 32, 20, "WON !\n",
-		arena->players[aref].id);
+	mvwprintw(scn->sidebar, 32, 20, "WON !\n", arena->players[aref].id);
 	wrefresh(scn->sidebar);
 	getch();
 }

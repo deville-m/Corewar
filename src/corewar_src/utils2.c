@@ -6,7 +6,7 @@
 /*   By: ctrouill <iomonad@riseup.net>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/24 10:09:41 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/05/31 19:08:47 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:55:02 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void		usage(void)
 	ft_printf("         %d # Environnement\n", V_ALL);
 	ft_printf("    -x             # Ncurses output\n");
 	ft_printf("    -t             # Dump loader init to stdout\n");
+	ft_printf("    -a             # Enable audio experience\n");
 	exit(EXIT_FAILURE);
 }

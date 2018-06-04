@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 10:13:40 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/04 18:12:13 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:53:12 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ struct				s_option
 	t_bool			gfx;
 	int				ids[MAX_PLAYERS];
 	t_bool			ids_activated;
+	t_bool			audio;
 };
 
 /*
@@ -285,5 +286,12 @@ t_bool				player_ownership(unsigned int player, t_arena *arena);
 void				init_values(size_t *i, int *xx, int *yy);
 t_bool				apply_pc(t_arena *arena, int i);
 void				shut_up_and_take_my_memory(t_arena *arena);
+
+/*
+** @sound.c
+*/
+
+void				play_voice(const char *message);
+void				play_sound(const char *file);
 
 #endif
