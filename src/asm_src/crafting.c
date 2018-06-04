@@ -6,12 +6,13 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:50:51 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 14:42:28 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:20:08 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 #include <stdlib.h>
+#include <stdint.h>
 
 unsigned char	craft_coding_byte(t_list *head)
 {
@@ -35,15 +36,16 @@ unsigned char	craft_coding_byte(t_list *head)
 		result <<= 2;
 		i -= 1;
 		head = head->next;
-		tmp = (t_asm_token *)head->content;
+		if (head)
+			tmp = (t_asm_token *)head->content;
 	}
 	while (i-- >= 0)
 		result <<= 2;
 	return (result);
 }
 
-int				craft_instru(t_env *env,
-					t_list *current, int offset, int *in_off)
+intmax_t		craft_instru(t_env *env,
+					t_list *current, intmax_t offset, intmax_t *in_off)
 {
 	t_asm_token		*tok;
 	unsigned char	c;
@@ -64,54 +66,67 @@ int				craft_instru(t_env *env,
 }
 
 int				craft_labels(t_env *env,
-					t_asm_token *tok, int offset, int instr_offset)
+					t_asm_token *tok, intmax_t offset, intmax_t instr_offset)
 {
-	t_lab	*tmp;
-	short	result;
+	t_lab			*tmp;
+	unsigned char	result[IND_SIZE];
+	intmax_t		i;
 
+	i = 0;
 	if ((tmp = is_labelled(env, tok)))
 	{
-		if (tok->type == DIRECT_LABEL && !tok->option)
-			offset += write(env->fd, "\0\0", 2);
-		result = (short)(tmp->offset - instr_offset);
-		swap_endian(&(result), 2);
-		offset += write(env->fd, &result, 2);
+		while (i++ < IND_SIZE && tok->type == DIRECT_LABEL && !tok->option)
+			offset += write(env->fd, "\0", 1);
+		i = tmp->offset - instr_offset;
+		ft_memcpy(result, &i, IND_SIZE);
+		swap_endian(&(result), IND_SIZE);
+		offset += write(env->fd, &result, IND_SIZE);
 	}
 	else
 	{
-		if (tok->type == DIRECT_LABEL && !tok->option)
-			offset += write(env->fd, "\0\0", 2);
+		while (i++ < IND_SIZE && tok->type == DIRECT_LABEL && !tok->option)
+			offset += write(env->fd, "\0", 1);
 		tmp = new_t_lab(tok->raw, offset, instr_offset);
 		ft_lstinsert(&(env->to_do), tmp, sizeof(t_lab));
-		offset += write(env->fd, "aa", 2);
+		i = 0;
+		while (i++ < IND_SIZE)
+			offset += write(env->fd, "a", 1);
 	}
 	return (offset);
 }
 
-int				craft_values(t_env *env, t_asm_token *tok, int offset)
+intmax_t		craft_values(t_env *env, t_asm_token *tok, intmax_t offset)
 {
-	short	tmp;
+	unsigned char	tmpind[IND_SIZE];
+	unsigned char	tmpdir[DIR_SIZE];
+	unsigned char	tmpreg[REG_SIZE];
 
-	tmp = 0;
 	if (tok->option || tok->type == INDIRECT || tok->type == INDIRECT_LABEL)
 	{
-		tmp = (short)tok->data;
-		swap_endian(&tmp, 2);
-		offset += write(env->fd, &tmp, 2);
+		ft_memcpy(tmpind, &(tok->data), IND_SIZE);
+		swap_endian(tmpind, IND_SIZE);
+		offset += write(env->fd, tmpind, IND_SIZE);
+	}
+	else if (tok->type == DIRECT || tok->type == DIRECT_LABEL)
+	{
+		ft_memcpy(tmpdir, &(tok->data), DIR_SIZE);
+		swap_endian(tmpdir, DIR_SIZE);
+		offset += write(env->fd, tmpdir, DIR_SIZE);
 	}
 	else
 	{
-		swap_endian(&(tok->data), 4);
-		offset += write(env->fd, &(tok->data), 4);
+		ft_memcpy(tmpreg, &(tok->data), REG_SIZE);
+		swap_endian(tmpreg, REG_SIZE);
+		offset += write(env->fd, tmpreg, REG_SIZE);
 	}
 	return (offset);
 }
 
-int				craft_prog(t_env *env, t_list *tmp)
+intmax_t		craft_prog(t_env *env, t_list *tmp)
 {
-	t_asm_token		*tok;
-	int				offset;
-	int				instr_offset;
+	t_asm_token	*tok;
+	intmax_t	offset;
+	intmax_t	instr_offset;
 
 	offset = 0;
 	instr_offset = offset;

@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 19:55:57 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/04 14:47:02 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:42:17 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ size_t		is_instruction(const char *arg)
 	i = 0;
 	while (arg[i] && ft_strchr(LABEL_CHARS, arg[i]))
 		++i;
-	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]))
+	if (!arg[i] || ft_strchr(WHITESPACE, arg[i]) || arg[i] == DIRECT_CHAR)
 		return (i);
 	return (0);
 }

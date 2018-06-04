@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 17:57:39 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:00:01 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int				craft_file(t_env *env);
 /*
 ** @crafting.c
 */
-int				craft_prog(t_env *env, t_list *tmp);
+intmax_t		craft_prog(t_env *env, t_list *tmp);
 
 /*
 ** @crafting_tools.c

@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 14:50:05 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/04 16:56:10 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 #include "ft_string.h"
 #include "libft.h"
 #include "dlst.h"
-
-static void	init_header(t_env *env)
-{
-	env->header->magic = (int)COREWAR_EXEC_MAGIC;
-	swap_endian((void *)&env->header->magic, sizeof(env->header->magic));
-	ft_bzero(env->header->prog_name, PROG_NAME_LENGTH + 1);
-	env->header->prog_size = 0;
-	ft_bzero(env->header->comment, COMMENT_LENGTH + 1);
-}
 
 static void	init_env(t_env *env, char *input)
 {
@@ -38,6 +29,9 @@ static void	init_env(t_env *env, char *input)
 	env->lab_h = NULL;
 	env->to_do = NULL;
 	env->fd = -1;
+	ft_bzero(env->header, sizeof(t_header));
+	env->header->magic = (int)COREWAR_EXEC_MAGIC;
+	swap_endian((void *)&env->header->magic, sizeof(env->header->magic));
 }
 
 int			main(int argc, char **argv)
@@ -53,7 +47,6 @@ int			main(int argc, char **argv)
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
 		bug_err("Error while opening file\n");
 	init_env(&env, argv[1]);
-	init_header(&env);
 	if (!(env.tok_head = (t_list *)tokenize(fd)))
 		bug_err("");
 	env.tok_head = (t_list *)syntax_check((t_dlist *)env.tok_head);
