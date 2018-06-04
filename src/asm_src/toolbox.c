@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:50:37 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/01 18:33:42 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 19:27:33 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 void	bug_err(char *mess)
 {
-	perror(mess);
+	ft_fprintf(2, "./asm: ");
+	ft_fprintf(2, "%s", mess);
+	perror("./asm");
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 18:48:37 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 19:55:59 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ uint16_t		operator_tsize(void);
 /*
 ** @lexer.c
 */
-
 size_t			is_direct(const char *arg);
 size_t			is_indirect(const char *arg);
 size_t			is_label(const char *arg);
@@ -132,11 +131,7 @@ size_t			is_separator(const char *arg);
 /*
 ** @collision.c
 */
-
-t_bool			check_collisions(const char	*base,
-								const char	*labels,
-								const char	*n_cmd,
-								const char	*c_cmd);
+t_bool			check_collisions(const char	*base, const char	*labels);
 
 /*
 ** @tokenize.c

@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 16:56:10 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/04 19:54:47 by rbaraud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ int			main(int argc, char **argv)
 	t_env	env;
 	int		fd;
 
-	if (!check_collisions((const char*)BASE, (const char*)LABEL_CHARS,
-			(const char*)NAME_CMD_STRING,
-			(const char *)COMMENT_CMD_STRING)
+	if (!check_collisions((const char *)BASE, (const char *)LABEL_CHARS)
 		|| argc != 2)
 		bug_err("Wrong arguments format\n");
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
