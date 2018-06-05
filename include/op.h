@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/06/05 11:23:57 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/05 17:44:09 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
-# define COMMENT_CHAR			';'
+# define COMMENT_CHARS			"#;"
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','

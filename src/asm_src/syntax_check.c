@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 14:21:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/05 11:38:34 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/05 17:24:24 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,17 @@ static inline int		check_header2(
 									int status,
 									t_dlist **lst)
 {
-	if (status || !next || next->type != STRING)
+	size_t len;
+
+	if (status)
+		syntax_error("Command already present at token", get_token(*lst));
+	if (!next || next->type != STRING)
 		syntax_error("Expecting string at token", next);
+	len = ft_strlen(next->raw);
+	if (get_token(*lst)->type == COMMAND_NAME && len > PROG_NAME_LENGTH)
+		syntax_error("Name too long at token", next);
+	if (get_token(*lst)->type == COMMAND_COMMENT && len > COMMENT_LENGTH)
+		syntax_error("Comment too long at token", next);
 	*lst = (*lst)->next->next;
 	return (1);
 }

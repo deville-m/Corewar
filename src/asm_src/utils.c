@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 14:35:52 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/05 11:39:09 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/05 17:35:47 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				multiline_string(const char *line)
 	state = 0;
 	while (*line)
 	{
-		if (*line == COMMENT_CHAR && state == 0)
+		if (ft_strchr(COMMENT_CHARS, *line) && state == 0)
 			return (0);
 		else if (*line == STRING_CHAR && state == 0)
 			state = 1;
