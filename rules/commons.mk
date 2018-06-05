@@ -7,7 +7,7 @@ COMMONOBJ:= $(COMMONOBJ:.c=.o)
 CDEPS = $(COMMONOBJ:.o=.d)
 vpath %.h $(INCLUDES)
 
-all: $(ASM) $(COREWAR)
+all: $(COREWAR)
 	printf "\n$(LOG_U)$(OK_C)[LOVE COOKER]$(NO_C) Cooked targets: $(SILENT_C) %s %s 💖\n$(NO_C)" $(ASM) $(COREWAR)
 
 %.o: %.c $(HDEPS)

@@ -12,7 +12,7 @@ RULES      = rules
 include $(RULES)/env.mk
 include $(RULES)/utils.mk
 include $(RULES)/commons.mk
-include $(RULES)/asm.mk
+#include $(RULES)/asm.mk
 include $(RULES)/corewar.mk
 include $(RULES)/clean.mk
 include $(RULES)/warrior.mk
