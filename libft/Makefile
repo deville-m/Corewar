@@ -6,13 +6,13 @@
 #    By: tvallee <tvallee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/10 14:41:44 by tvallee           #+#    #+#              #
-#    Updated: 2018/05/11 18:09:45 by mdeville         ###   ########.fr        #
+#    Updated: 2018/06/05 11:15:44 by ctrouill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME            = libft.a
 CC              = gcc
-CFLAGS         += -Wall -Wextra -Werror
+CFLAGS          += -Wall -Wextra -Werror -g #-fsanitize=address
 SRCDIR          = srcs/
 OBJDIR          = .obj/
 INCDIR          = includes/
@@ -125,13 +125,13 @@ $(OBJDIRS) $(OBJDIR):
 	mkdir -p $@
 
 clean:
-	$(RM) -Rf $(OBJDIR)
+	@$(RM) -Rf $(OBJDIR)
 
 fclean: | clean
-	$(RM) -f $(NAME)
+	@$(RM) -f $(NAME)
 
 re:
-	$(MAKE) fclean
-	$(MAKE) -j8
+	@$(MAKE) fclean
+	@$(MAKE) -j8
 
 .PHONY: all clean fclean re

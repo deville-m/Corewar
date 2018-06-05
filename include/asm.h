@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/03 17:19:14 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 19:55:59 by rbaraud          ###   ########.fr       */
+/*   Created: 2018/05/04 10:14:20 by ctrouill          #+#    #+#             */
+/*   Updated: 2018/06/05 11:32:11 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_asm_token
 	int			column;
 	char		*raw;
 	intmax_t	data;
-	t_bool		option;
+	int			option;
 }				t_asm_token;
 
 /*
@@ -85,11 +85,11 @@ typedef struct	s_lab
 */
 
 char			is_instruct(const char *line);
-t_bool			is_empty(const char *line);
+int				is_empty(const char *line);
 unsigned char	craft_op_byte(
 							const char opcode,
 							const char *params,
-							t_bool *status);
+							int *status);
 
 /*
 ** @rules.c
@@ -101,7 +101,7 @@ void			transpose(
 							char opcode,
 							uint8_t i);
 t_tok			tokenize_args(const char *occur);
-t_bool			check_rules(
+int				check_rules(
 							const char opcode,
 							t_tok *transpose,
 							uint8_t i);
@@ -131,7 +131,7 @@ size_t			is_separator(const char *arg);
 /*
 ** @collision.c
 */
-t_bool			check_collisions(const char	*base, const char	*labels);
+int				check_collisions(const char	*base, const char	*labels);
 
 /*
 ** @tokenize.c
@@ -140,7 +140,7 @@ t_bool			check_collisions(const char	*base, const char	*labels);
 void			update_token(t_asm_token *token);
 void			print_tokens(t_dlist *elem);
 t_asm_token		*get_token(t_dlist *elem);
-t_bool			multiline_string(const char *line);
+int				multiline_string(const char *line);
 t_dlist			*tokenize(int fd);
 void			print_tokens(t_dlist *elem);
 

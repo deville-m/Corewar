@@ -6,7 +6,7 @@
 /*   By: zaz <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/06/04 19:58:07 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/05 11:23:57 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define IND_SIZE				2
 # define REG_SIZE				4
+
 # define DIR_SIZE				REG_SIZE
 
 # define REG_CODE				1
@@ -30,9 +31,10 @@
 # define MAX_PLAYERS			4
 # define MEM_SIZE				(4*1024)
 # define IDX_MOD				(MEM_SIZE / 8)
+
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
-# define COMMENT_CHAR			'#'
+# define COMMENT_CHAR			';'
 # define LABEL_CHAR				':'
 # define DIRECT_CHAR			'%'
 # define SEPARATOR_CHAR			','
@@ -91,6 +93,31 @@ typedef struct					s_header
 # define INSTRUCTION_SIZE		256
 # define DESC_SIZE				1024
 
+/*
+** No_token: COMMENT_CHAR -> EOL
+**
+** + STRING (")
+** + SEPARATOR (,)
+** + ENDLINE (\n)
+**
+** + DIRECT (%)
+** + DIRECT_LABEL (%:)
+** + REGISTER (REGISTER_CHAR + number inside BASE)
+**
+** + INDIRECT (suite chiffres appartenant a BASE)
+**
+** INDIRECT_LABEL (':' puis label_name)
+**
+** COMMAND_COMMENT (.comment)
+** COMMAND_NAME (.name)
+**
+** + LABEL (LABEL_CHARS termine par :)
+**
+** + INSTRUCTION (chaine de LABEL_CHARS)
+**
+** + END ((null)) serait juste une erreur ? Ou NULL representera end... PFFFF
+*/
+
 typedef struct					s_op
 {
 	char						name[INSTRUCTION_SIZE];
@@ -101,6 +128,7 @@ typedef struct					s_op
 	char						desc[DESC_SIZE];
 	int							coding_byte;
 	int							index;
+	int							carry;
 }								t_op;
 
 extern t_op						g_op_tab[INSTRUCTION_NBR];

@@ -6,13 +6,13 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 16:45:48 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/04 14:05:47 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/05 11:14:41 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "avltree.h"
 
-t_avltree	*rotate_left(t_avltree *x)
+t_avltree		*rotate_left(t_avltree *x)
 {
 	t_avltree	*z;
 
@@ -29,7 +29,7 @@ t_avltree	*rotate_left(t_avltree *x)
 	return (z);
 }
 
-t_avltree	*rotate_right(t_avltree *x)
+t_avltree		*rotate_right(t_avltree *x)
 {
 	t_avltree	*z;
 
@@ -46,13 +46,13 @@ t_avltree	*rotate_right(t_avltree *x)
 	return (z);
 }
 
-t_avltree	*rotate_right_left(t_avltree *x)
+t_avltree		*rotate_right_left(t_avltree *x)
 {
 	x->right = rotate_right(x->right);
 	return (rotate_left(x));
 }
 
-t_avltree	*rotate_left_right(t_avltree *x)
+t_avltree		*rotate_left_right(t_avltree *x)
 {
 	x->left = rotate_right(x->left);
 	return (rotate_right(x));

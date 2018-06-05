@@ -34,8 +34,7 @@
     ;;     our symmetrical offset.
     ;;   - recurse, for fun and profit.
 
-_stub:   #st     r1,6            ;.eh_frame_hdr
-         live   %42
+_stub:   live   %42             ;.eh_frame_hdr
          ld     %480,r10        ; const offset
          fork   %:0x02          ; ──────╮
          fork   %:0x04          ; ──────│─╮

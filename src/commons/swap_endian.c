@@ -6,14 +6,14 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 19:32:25 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/04 14:42:46 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/05 11:12:12 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <commons.h>
 
-void	swap_endian(void *data, size_t size)
+void		swap_endian(void *data, size_t size)
 {
 	char	tmpdata;
 	char	*tmp;

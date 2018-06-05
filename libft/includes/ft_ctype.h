@@ -6,7 +6,7 @@
 /*   By: mdeville <mdeville@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 15:06:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/04 14:20:31 by ctrouill         ###   ########.fr       */
+/*   Updated: 2018/06/05 11:17:44 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,5 @@ int				ft_isprint(int c);
 int				ft_isspace(int c);
 int				ft_isupper(int c);
 int				ft_isxdigit(int c);
-
-typedef enum	e_bool
-{
-	FALSE = 0,
-	TRUE
-}				t_bool;
 
 #endif

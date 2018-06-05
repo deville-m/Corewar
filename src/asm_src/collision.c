@@ -12,7 +12,7 @@
 
 #include <asm.h>
 
-static t_bool	sizes_check(void)
+static int	sizes_check(void)
 {
 	if (IND_SIZE < 1 || sizeof(intmax_t) < IND_SIZE)
 		bug_err("Wrong define value in op.h: IND_SIZE\n");
@@ -20,7 +20,7 @@ static t_bool	sizes_check(void)
 		bug_err("Wrong define value in op.h: DIR_SIZE\n");
 	if (REG_SIZE < 1 || sizeof(intmax_t) < REG_SIZE)
 		bug_err("Wrong define value in op.h: REG_SIZE\n");
-	return (TRUE);
+	return (1);
 }
 
 /*
@@ -30,7 +30,7 @@ static t_bool	sizes_check(void)
 ** @return Bool[Success];
 */
 
-static t_bool	labels_check(const char *labels,
+static int	labels_check(const char *labels,
 					uint_fast32_t i)
 {
 	while (labels[i] != '\0')
@@ -53,7 +53,7 @@ static t_bool	labels_check(const char *labels,
 			bug_err("Inconsistency in op.h between labels & STRING_CHAR\n");
 		i++;
 	}
-	return (TRUE);
+	return (1);
 }
 
 /*
@@ -63,7 +63,7 @@ static t_bool	labels_check(const char *labels,
 ** @return Bool[Success];
 */
 
-static t_bool	base_check(const char *base,
+static int	base_check(const char *base,
 					uint_fast32_t i)
 {
 	while (base[i] != '\0')
@@ -86,7 +86,7 @@ static t_bool	base_check(const char *base,
 			bug_err("Inconsistency in op.h between base & STRING_CHAR\n");
 		i++;
 	}
-	return (TRUE);
+	return (1);
 }
 
 /*
@@ -97,9 +97,9 @@ static t_bool	base_check(const char *base,
 ** @return Bool[Success];
 */
 
-t_bool			check_collisions(const char *base, const char *labels)
+int			check_collisions(const char *base, const char *labels)
 {
 	if (!(labels_check(labels, 0)) || !(base_check(base, 0)) || !sizes_check())
-		return (FALSE);
-	return (TRUE);
+		return (0);
+	return (1);
 }

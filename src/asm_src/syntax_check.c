@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 14:21:52 by mdeville          #+#    #+#             */
-/*   Updated: 2018/05/21 16:59:10 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/05 11:38:34 by ctrouill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,26 @@
 #include "lst.h"
 #include "ft_printf.h"
 
-static inline t_bool	check_header2(
+static inline int		check_header2(
 									t_asm_token *next,
-									t_bool status,
+									int status,
 									t_dlist **lst)
 {
 	if (status || !next || next->type != STRING)
 		syntax_error("Expecting string at token", next);
 	*lst = (*lst)->next->next;
-	return (TRUE);
+	return (1);
 }
 
 static t_dlist			*check_header(t_dlist *tokens)
 {
-	t_bool		comment;
-	t_bool		name;
-	t_asm_token	*curr;
-	t_asm_token	*next;
+	int					comment;
+	int					name;
+	t_asm_token			*curr;
+	t_asm_token			*next;
 
-	comment = FALSE;
-	name = FALSE;
+	comment = 0;
+	name = 0;
 	while ((curr = (t_asm_token *)tokens->content)->type == COMMAND_COMMENT
 			|| curr->type == COMMAND_NAME || curr->type == ENDLINE)
 	{

@@ -21,10 +21,10 @@ static void		check_param(t_asm_token *curr, size_t offset, char *msg, t_op o)
 	curr->data = ft_atoi_base(curr->raw + offset, BASE, WHITESPACE, MINUS);
 	if (curr->type == REGISTER && curr->data <= 0)
 		syntax_error(msg, curr);
-	if ((curr->type == DIRECT || curr->type == DIRECT_LABEL) && o.index == TRUE)
-		curr->option = TRUE;
+	if ((curr->type == DIRECT || curr->type == DIRECT_LABEL) && o.index == 1)
+		curr->option = 1;
 	else
-		curr->option = FALSE;
+		curr->option = 0;
 }
 
 static void		check_parameter(t_asm_token *curr, t_op op, size_t param)
