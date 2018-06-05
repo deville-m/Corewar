@@ -3,10 +3,14 @@
 RES        = resources
 CHAMPD     = champion
 ASM_SAMPLE = $(RES)/asm_sample
-CHAMPION   = $(CHAMPD)/dwarf.s
+CHAMPION   = $(addprefix $(CHAMPD) dwarf.s forkbomb.s)
 
 warrior_sample:
-	$(ASM_SAMPLE) $(CHAMPION)
+	for champ in $(CHAMPD)/*.s; do \
+		$(ASM_SAMPLE) $$champ; \
+	done
 
 warrior:
-	./$(ASM) $(CHAMPION)
+	for champ in $(CHAMPD)/*.s; do \
+		./$(ASM) $$champ; \
+	done
