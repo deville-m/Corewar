@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/05 17:35:18 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/05 19:07:26 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	get_next_lines(int fd, char **line)
 	int		ret;
 	char	*concat;
 	char	*tmp;
+	char	*tmp2;
 	char	eol[2];
 
 	eol[0] = EOL;
@@ -35,8 +36,10 @@ static int	get_next_lines(int fd, char **line)
 			concat = tmp;
 		else
 		{
+			tmp2 = concat;
 			concat = ft_strnjoin(3, concat, eol, tmp);
 			free(tmp);
+			free(tmp2);
 		}
 	}
 	if (!ret)

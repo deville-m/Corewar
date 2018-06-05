@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/04 19:54:47 by rbaraud          ###   ########.fr       */
+/*   Updated: 2018/06/05 19:08:54 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			main(int argc, char **argv)
 		bug_err("Error while opening file\n");
 	init_env(&env, argv[1]);
 	if (!(env.tok_head = (t_list *)tokenize(fd)))
-		bug_err("");
+		bug_err("Empty file");
 	env.tok_head = (t_list *)syntax_check((t_dlist *)env.tok_head);
 	craft_file(&env);
 	ft_printf("Writing output program to %s\n", env.input_name);
