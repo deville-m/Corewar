@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 17:14:33 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/05 17:40:29 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/06 19:14:25 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static int	labels_check(const char *labels,
 	{
 		if (labels[i] == LABEL_CHAR)
 			bug_err("Inconsistency in op.h between labels & LABEL_CHAR\n");
-//		if (ft_strchr(COMMENT_CHARS, labels[i]))
-//			bug_err("Inconsistency in op.h between labels & COMMENT_CHARS\n");
+		if (ft_strchr(COMMENT_CHARS, labels[i]))
+			bug_err("Inconsistency in op.h between labels & COMMENT_CHARS\n");
 		if (labels[i] == DIRECT_CHAR)
 			bug_err("Inconsistency in op.h between labels & DIRECt_CHAR\n");
 		if (labels[i] == SEPARATOR_CHAR)
@@ -70,8 +70,8 @@ static int	base_check(const char *base,
 	{
 		if (base[i] == LABEL_CHAR)
 			bug_err("Inconsistency in op.h between base & LABEL_CHAR\n");
-//		if (ft_strchr(COMMENT_CHARS, labels[i]))
-//			bug_err("Inconsistency in op.h between base & COMMENT_CHARS\n");
+		if (ft_strchr(COMMENT_CHARS, base[i]))
+			bug_err("Inconsistency in op.h between base & COMMENT_CHARS\n");
 		if (base[i] == DIRECT_CHAR)
 			bug_err("Inconsistency in op.h between base & DIRECT_CHAR\n");
 		if (base[i] == SEPARATOR_CHAR)

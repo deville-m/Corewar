@@ -6,7 +6,7 @@
 /*   By: mdeville <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 20:35:08 by mdeville          #+#    #+#             */
-/*   Updated: 2018/06/05 19:07:26 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/06 19:12:29 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,11 @@ static char	*parse_asm_token(t_dlist **res, char *input, t_asm_token *token)
 				token->line, token->column);
 		exit(42);
 	}
-	token->raw = ft_strndup(input, ret);
+	if (!(token->raw = ft_strndup(input, ret)))
+	{
+		ft_printf("Allocation Failure\n");
+		exit(EXIT_FAILURE);
+	}
 	ft_dlstprepend(res, ft_dlstnew(token, sizeof(t_asm_token)));
 	update_token(token);
 	return (input + ret);
