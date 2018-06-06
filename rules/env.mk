@@ -2,7 +2,7 @@
 NPROC          = $(shell sysctl -n hw.physicalcpu)
 LIB            = libft/libft.a
 MAKEFLAGS      += --silent -k -j$(NPROC) --no-print-directory
-CFLAGS         = -Wall -Wextra -Werror
+CFLAGS         = -Wall -Wextra -O2
 CCFLAGS        = -MD -MMD
 CFLAGS_ASM     = $(CFLAGS)
 CFLAGS_VM      = $(CFLAGS) -lncurses

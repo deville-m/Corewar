@@ -6,7 +6,7 @@
 /*   By: ctrouill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 09:16:38 by ctrouill          #+#    #+#             */
-/*   Updated: 2018/06/06 19:25:54 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/07 00:37:51 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int				kernel_gfx(struct s_option *options, t_arena *arena)
 		usleep(scene.speed);
 	}
 	print_winner_gfx(arena, 0, &scene, 0);
-	free(scene.memory);
-	free(scene.sidebar);
+	delwin(scene.memory);
+	delwin(scene.sidebar);
 	return (1);
 }
