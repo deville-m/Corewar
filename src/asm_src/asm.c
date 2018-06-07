@@ -6,7 +6,7 @@
 /*   By: rbaraud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 17:15:58 by rbaraud           #+#    #+#             */
-/*   Updated: 2018/06/05 19:08:54 by mdeville         ###   ########.fr       */
+/*   Updated: 2018/06/07 14:18:03 by mdeville         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@
 #include "ft_string.h"
 #include "libft.h"
 #include "dlst.h"
+
+static void	free_t_lab(void *content, size_t content_size)
+{
+	(void)content_size;
+	free(content);
+}
 
 static void	init_env(t_env *env, char *input)
 {
@@ -51,6 +57,10 @@ int			main(int argc, char **argv)
 	craft_file(&env);
 	ft_printf("Writing output program to %s\n", env.input_name);
 	ft_dlstdel((t_dlist **)&env.tok_head, del_token);
+	ft_dlstdel((t_dlist **)&env.lab_h, free_t_lab);
+	ft_dlstdel((t_dlist **)&env.to_do, free_t_lab);
+	free(env.header);
+	free(env.input_name);
 	close(fd);
 	return (0);
 }
